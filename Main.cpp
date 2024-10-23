@@ -1,7 +1,7 @@
 #include "bMath/Vector.hpp"
 
 int main() {
-    Vector vec;
+    Vector3 vec;
     vec.test();
 }
 
