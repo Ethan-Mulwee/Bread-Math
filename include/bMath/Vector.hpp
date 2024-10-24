@@ -64,6 +64,38 @@ namespace bMath {
             }
         }
     };
+
+    float dot(Vector3 a, Vector3 b) {
+        return  a.x*b.x+a.y*b.y+a.z*b.z;
+    }
+
+    Vector3 cross(Vector3 a, Vector3 b) {
+        return Vector3(
+                a.y*b.z-a.z*b.y,
+                a.z*b.x-a.x*b.z,
+                a.x*b.y-a.y*b.x
+        );
+    }
+
+    // TODO
+    Vector3 lerp(Vector3 a, Vector3 b) {
+        return Vector3();
+    }
+
+    //TODO
+    Vector3 min(Vector3 a, Vector3 b) {
+        return Vector3();
+    }
+    
+    //TODO
+    Vector3 max(Vector3 a, Vector3 b) {
+        return Vector3();
+    }
+
+    //TODO
+    Vector3 clamp(Vector3 a, Vector3 b) {
+        return Vector3();
+    }
 }
 
 #endif
