@@ -22,13 +22,18 @@ namespace bMath {
             return Quaternion();
         }
 
+        void rotate(const Vector3 &v) {
+            
+        }
+
         Matrix<3,3> ToMatrix() {
             return Matrix<3,3>();
         }
     };
 
-    Quaternion QuaternionFromAxisAngle(float theta, Vector3 axis) {
-        return Quaternion();
+    Quaternion QuaternionFromAxisAngle(float angle, Vector3 axis) {
+        float a = cos(angle);
+        return Quaternion(sin(angle), a*axis.x, a*axis.y, a*axis.z);
     }
 }
 

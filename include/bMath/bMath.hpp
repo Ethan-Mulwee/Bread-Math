@@ -4,5 +4,6 @@
 #include "Vector.hpp"
 #include "Matrix.hpp"
 #include "Quaternion.hpp"
+#include <math.h>
 
 #endif

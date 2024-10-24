@@ -40,4 +40,7 @@ int main() {
     mat7.log();
 
     Quaternion q(4,3,2,1);
+    
+    Quaternion q2 = QuaternionFromAxisAngle(3.14, Vector3(1,1,1));
+    std::cout << q2.x << std::endl;
 }
