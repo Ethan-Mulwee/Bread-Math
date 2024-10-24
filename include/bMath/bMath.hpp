@@ -3,5 +3,6 @@
 
 #include "Vector.hpp"
 #include "Matrix.hpp"
+#include "Quaternion.hpp"
 
 #endif

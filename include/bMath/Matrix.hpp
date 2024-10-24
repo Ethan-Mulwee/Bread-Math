@@ -12,6 +12,8 @@ namespace bMath {
 
         Matrix() {}
 
+        Matrix(float data[rows][cols]) : data(data) {}
+
         Matrix operator+(const Matrix &m) const {
             Matrix<rows,cols> newMat;
             for (int i = 0; i < rows; i++) {
@@ -21,6 +23,7 @@ namespace bMath {
             }
             return newMat;
         }
+
         template <typename T>
         auto operator*(const T &m) const {
             assert(cols == m.r);
@@ -37,11 +40,14 @@ namespace bMath {
             return newMat;
         }
 
+
+
         void log() const {
             for (int i = 0; i < rows; i++) {
                 for (int j = 0; j < cols; j++) {
-                    std::cout << data[i][j] << std::endl;
+                    std::cout << data[i][j] << ", ";
                 }
+                std:: cout << "\n";
             }
         }
     };
