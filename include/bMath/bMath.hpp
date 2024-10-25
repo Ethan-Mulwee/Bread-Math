@@ -4,6 +4,7 @@
 #include "Vector.hpp"
 #include "Matrix.hpp"
 #include "Quaternion.hpp"
+#include "Geometry.hpp"
 #include <math.h>
 
 namespace bMath {
@@ -31,6 +32,8 @@ namespace bMath {
 
         return m;
     }
+
+
 }
 
 #endif
