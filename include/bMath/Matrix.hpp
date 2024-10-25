@@ -51,6 +51,17 @@ namespace bMath {
             }
         }
     };
+
+    template <int rows, int cols>
+    std::ostream& operator<<(std::ostream& os, const Matrix<rows,cols> &m) {
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                os << m.data[i][j] << ", ";
+            }
+            os << "\n";
+        }
+        return os;
+    }    
 }
 
 #endif

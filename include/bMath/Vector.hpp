@@ -2,6 +2,7 @@
 #define BMATH_VECTOR
 
 #include <math.h>
+#include <iostream>
 
 namespace bMath {
     struct Vector3 {
@@ -32,11 +33,13 @@ namespace bMath {
         Vector3 operator-(const Vector3 &v) const {
             return Vector3(x-v.x,y-v.y,z-v.z);
         }
+
         void operator-=(const Vector3 &v) {
             x -= v.x;
             y -= v.y;
             z -= v.z;
         }
+
 
         Vector3 cross(const Vector3 &v) const {
             return Vector3(
@@ -63,7 +66,13 @@ namespace bMath {
                 (*this) *= ((float)1/length);
             }
         }
+
     };
+
+    std::ostream& operator<<(std::ostream& os, const Vector3 &v) {
+        os << "(" << v.x << ", " << v.y << ", " << v.z << ")";
+        return os;
+    }
 
     float dot(Vector3 a, Vector3 b) {
         return  a.x*b.x+a.y*b.y+a.z*b.z;

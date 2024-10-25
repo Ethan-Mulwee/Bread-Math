@@ -95,6 +95,11 @@ namespace bMath {
         float a = sin(angle/2);
         return Quaternion(cos(angle/2), a*axis.x, a*axis.y, a*axis.z);
     }
+
+    std::ostream& operator<<(std::ostream& os, const Quaternion &q) {
+        os << "(" << q.w << q.x << ", " << q.y << ", " << q.z << ")";
+        return os;
+    }
 }
 
 #endif
