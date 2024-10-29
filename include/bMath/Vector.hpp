@@ -3,6 +3,7 @@
 
 #include <math.h>
 #include <iostream>
+#include "Float.hpp"
 
 namespace bMath {
     struct Vector3 {
@@ -86,20 +87,32 @@ namespace bMath {
         );
     }
 
-    // TODO
-    Vector3 lerp(Vector3 a, Vector3 b) {
-        return Vector3();
+    Vector3 max(Vector3 a, Vector3 b) {
+        float x = std::max(a.x,b.x);
+        float y = std::max(a.y,b.y);
+        float z = std::max(a.z,b.z);
+        return Vector3(x,y,z);
     }
 
-    //TODO
     Vector3 min(Vector3 a, Vector3 b) {
-        return Vector3();
+        float x = std::min(a.x,b.x);
+        float y = std::min(a.y,b.y);
+        float z = std::min(a.z,b.z);
+        return Vector3(x,y,z);
     }
-    
-    //TODO
-    Vector3 max(Vector3 a, Vector3 b) {
-        return Vector3();
+
+    Vector3 lerp(Vector3 a, Vector3 b, float t) {
+        float x = lerp(a.x,b.x,t);
+        float y = lerp(a.y,b.y,t);
+        float z = lerp(a.z,b.z,t);
+        return Vector3(x,y,z);
     }
+
+    float distance(Vector3 a, Vector3 b) {
+        return std::abs((a-b).magnitude());
+    }
+
+
 
     //TODO
     Vector3 clamp(Vector3 a, Vector3 b) {
