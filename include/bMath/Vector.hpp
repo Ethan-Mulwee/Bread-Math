@@ -255,7 +255,15 @@ float3 rotate(const float3 &v, const float4 &q) {}
 
 // TODO
 // Rotate a quaternion by a vector
-float4 rotate(const float4 &q, const float3 &v) {}
+float4 rotate(const float4 &q, const float3 &v) {
+  float _w = (0.5) * (-v.x * q.x - v.y * q.y - v.z * q.z);
+  float _x = (0.5) * (v.x * q.w + v.y * q.z - v.z * q.y);
+  float _y = (0.5) * (v.y * q.w + v.z * q.x - v.x * q.z);
+  float _z = (0.5) * (v.z * q.w + v.x * q.y - v.y * q.x);
+  float4 result = q + float4(_w, _x, _y, _z);
+  result.normalize();
+  return result;
+}
 
 } // namespace bMath
 
