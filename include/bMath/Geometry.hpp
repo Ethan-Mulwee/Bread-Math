@@ -2,6 +2,7 @@
 #define BMATH_GEOMETRY
 
 #include "Vector.hpp"
+#include "Matrix.hpp"
 
 namespace bMath {
 
@@ -51,6 +52,14 @@ namespace bMath {
         else {
             return RayIntersection(false);
         }
+    }
+
+    Matrix<3,3> CubeInertiaTensor() {
+
+    }
+
+    Matrix<3,3> ConeInertiaTensor() {
+        
     }
 
     

@@ -23,6 +23,9 @@ namespace bMath {
             }
             return newMat;
         }
+        // TODO:
+
+        // Matrix operator[]
 
         template <typename T>
         auto operator*(const T &m) const {
