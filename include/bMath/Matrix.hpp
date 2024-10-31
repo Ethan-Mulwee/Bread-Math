@@ -31,20 +31,20 @@ template <typename T, int rows, int cols> struct Matrix {
 
   T operator[](const int i) const { return data[i]; }
 
-  template <typename T> auto operator*(const T &m) const {
-    assert(cols == m.r);
-    Matrix<rows, m.c> newMat;
-    for (int i = 0; i < rows; i++) {
-      for (int j = 0; j < m.c; j++) {
-        float total = 0;
-        for (int k = 0; k < cols; k++) {
-          total += data[i][k] * m.data[k][i];
-        }
-        newMat.data[i][j] = total;
-      }
-    }
-    return newMat;
-  }
+  // template <typename T> auto operator*(const T &m) const {
+  //  assert(cols == m.r);
+  //  Matrix<rows, m.c> newMat;
+  //  for (int i = 0; i < rows; i++) {
+  //    for (int j = 0; j < m.c; j++) {
+  //      float total = 0;
+  //      for (int k = 0; k < cols; k++) {
+  //        total += data[i][k] * m.data[k][i];
+  //      }
+  //      newMat.data[i][j] = total;
+  //    }
+  //  }
+  //  return newMat;
+  // }
 
   void log() const {
     for (int i = 0; i < rows; i++) {
@@ -56,16 +56,16 @@ template <typename T, int rows, int cols> struct Matrix {
   }
 };
 
-template <int rows, int cols>
-std::ostream &operator<<(std::ostream &os, const Matrix<rows, cols> &m) {
-  for (int i = 0; i < rows; i++) {
-    for (int j = 0; j < cols; j++) {
-      os << m.data[i][j] << ", ";
-    }
-    os << "\n";
-  }
-  return os;
-}
+// template <int rows, int cols>
+// std::ostream &operator<<(std::ostream &os, const Matrix<rows, cols> &m) {
+//   for (int i = 0; i < rows; i++) {
+//    for (int j = 0; j < cols; j++) {
+//       os << m.data[i][j] << ", ";
+//     }
+//    os << "\n";
+//   }
+//  return os;
+//}
 } // namespace bMath
 
 #endif

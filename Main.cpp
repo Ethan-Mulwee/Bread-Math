@@ -1,3 +1,4 @@
+#include "bMath/Matrix.hpp"
 #include "bMath/Vector.hpp"
 #include <iostream>
 
