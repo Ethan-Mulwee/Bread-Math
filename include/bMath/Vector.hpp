@@ -25,66 +25,13 @@ template <typename T, int n> struct Vector {
   }
 
   // TODO
-  Vector<T, n> normalize() {
+  // Normalize the vector
+  void normalize() {
     float mag = (*this).magnitude();
     for (int i = 0; i < n; i++) {
       data[i] = data[i] * (float)1 / mag;
     }
   }
-
-  // Vector3 operator+(const Vector3 &v) const {
-  //     return Vector3(x+v.x,y+v.y,z+v.z);
-  // }
-  // void operator+=(const Vector3 &v) {
-  //     x += v.x;
-  //     y += v.y;
-  //     z += v.z;
-  // }
-
-  // Vector3 operator*(const float s) const {
-  //     return Vector3(x*s,y*s,z*s);
-  // }
-  // void operator*=(const float s) {
-  //     x *= s;
-  //     y *= s;
-  //     z *= s;
-  // }
-
-  // Vector3 operator-(const Vector3 &v) const {
-  //     return Vector3(x-v.x,y-v.y,z-v.z);
-  // }
-
-  // void operator-=(const Vector3 &v) {
-  //     x -= v.x;
-  //     y -= v.y;
-  //     z -= v.z;
-  // }
-
-  // Vector3 cross(const Vector3 &v) const {
-  //     return Vector3(
-  //         y*v.z-z*v.y,
-  //         z*v.x-x*v.z,
-  //         x*v.y-y*v.x
-  //     );
-  // }
-
-  // float dot(const Vector3 &v) const {
-  //     return x*v.x+y*v.y+z*v.z;
-  // }
-
-  // float magnitude() const {
-  //     return sqrt(x*x+y*y+z*z);
-  // }
-  // float squareMagnitude() const {
-  //     return (x*x+y*y+z*z);
-  // }
-
-  // void normalize() {
-  //     float length = magnitude();
-  //     if (length > 0) {
-  //         (*this) *= ((float)1/length);
-  //     }
-  // }
 };
 
 template <> struct Vector<float, 2> {
@@ -101,12 +48,20 @@ template <> struct Vector<float, 2> {
 
   float operator[](int i) const { return data[i]; }
 
-  float magnitude() {
+  float magnitude() const {
     float total;
     for (int i = 0; i < 2; i++) {
       total += data[i] * data[i];
     }
     return sqrt(total);
+  }
+
+  // Normalize the vector
+  void normalize() {
+    float mag = (*this).magnitude();
+    for (int i = 0; i < 2; i++) {
+      data[i] = data[i] * (float)1 / mag;
+    }
   }
 };
 template <> struct Vector<float, 3> {
@@ -123,19 +78,27 @@ template <> struct Vector<float, 3> {
 
   float operator[](int i) const { return data[i]; }
 
-  float magnitude() {
+  float magnitude() const {
     float total;
     for (int i = 0; i < 3; i++) {
       total += data[i] * data[i];
     }
     return sqrt(total);
   }
+
+  // Normalize the vector
+  void normalize() {
+    float mag = (*this).magnitude();
+    for (int i = 0; i < 3; i++) {
+      data[i] = data[i] * (float)1 / mag;
+    }
+  }
 };
 template <> struct Vector<float, 4> {
   union {
     float data[4];
     struct {
-      float x, y, z, w;
+      float w, x, y, z;
     };
   };
 
@@ -145,12 +108,20 @@ template <> struct Vector<float, 4> {
 
   float operator[](int i) const { return data[i]; }
 
-  float magnitude() {
+  float magnitude() const {
     float total;
     for (int i = 0; i < 4; i++) {
       total += data[i] * data[i];
     }
     return sqrt(total);
+  }
+
+  // Normalize the vector
+  void normalize() {
+    float mag = (*this).magnitude();
+    for (int i = 0; i < 4; i++) {
+      data[i] = data[i] * (float)1 / mag;
+    }
   }
 };
 
@@ -242,6 +213,12 @@ Vector<T, n> lerp(const Vector<T, n> &a, const Vector<T, n> &b, const float t) {
 }
 
 // TODO
+// slerp between two quaternions
+float4 slerp(const float4 &a, const float4 &b, float t) {
+  // Do stuff
+}
+
+// TODO
 // Clamp length of vector
 template <typename T, int n>
 Vector<T, n> clamp(const Vector<T, n> &a, float b) {}
@@ -258,47 +235,28 @@ float distance(const Vector<T, n> &a, const Vector<T, n> &b) {
   return (a - b).magnitude();
 }
 
-// float dot(Vector3 a, Vector3 b) {
-//     return  a.x*b.x+a.y*b.y+a.z*b.z;
-// }
+template <typename T, int n> Vector<T, n> normalize(const Vector<T, n> &a) {
+  float mag = a.magnitude();
+  Vector<T, n> result;
+  for (int i = 0; i < n; i++) {
+    result[i] = a[i] * (float)1 / mag;
+  }
+  return result;
+}
+// TODO
+float4 QuaternionAxisAngle(const float angle, const float3 &axis) {
+  return float4(std::cos(angle * 0.5), std::sin(angle * 0.5) * axis.x,
+                std::sin(angle * 0.5) * axis.y, std::sin(angle * 0.5) * axis.z);
+}
 
-// Vector3 cross(Vector3 a, Vector3 b) {
-//     return Vector3(
-//             a.y*b.z-a.z*b.y,
-//             a.z*b.x-a.x*b.z,
-//             a.x*b.y-a.y*b.x
-//     );
-// }
+// TODO
+// Rotate a vector by a quaternion
+float3 rotate(const float3 &v, const float4 &q) {}
 
-// Vector3 max(Vector3 a, Vector3 b) {
-//     float x = std::max(a.x,b.x);
-//     float y = std::max(a.y,b.y);
-//     float z = std::max(a.z,b.z);
-//     return Vector3(x,y,z);
-// }
+// TODO
+// Rotate a quaternion by a vector
+float4 rotate(const float4 &q, const float3 &v) {}
 
-// Vector3 min(Vector3 a, Vector3 b) {
-//     float x = std::min(a.x,b.x);
-//     float y = std::min(a.y,b.y);
-//     float z = std::min(a.z,b.z);
-//     return Vector3(x,y,z);
-// }
-
-// Vector3 lerp(Vector3 a, Vector3 b, float t) {
-//     float x = lerp(a.x,b.x,t);
-//     float y = lerp(a.y,b.y,t);
-//     float z = lerp(a.z,b.z,t);
-//     return Vector3(x,y,z);
-// }
-
-// float distance(Vector3 a, Vector3 b) {
-//     return std::abs((a-b).magnitude());
-// }
-
-// //TODO
-// Vector3 clamp(Vector3 a, Vector3 b) {
-//     return Vector3();
-// }
 } // namespace bMath
 
 #endif
