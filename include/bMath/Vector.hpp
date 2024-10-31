@@ -21,6 +21,14 @@ namespace bMath {
             return data[i];
         }
 
+        float magnitude() {
+            float total;
+            for (int i = 0; i < n; i++) {
+                total += data[i]*data[i];
+            }
+            return sqrt(total);
+        }
+
         // Vector3 operator+(const Vector3 &v) const {
         //     return Vector3(x+v.x,y+v.y,z+v.z);
         // }
@@ -91,6 +99,14 @@ namespace bMath {
         float operator[](int i) const {
             return data[i];
         }
+
+        float magnitude() {
+            float total;
+            for (int i = 0; i < 2; i++) {
+                total += data[i]*data[i];
+            }
+            return sqrt(total);
+        }
     };
     template <> struct Vector<float, 3> { 
         union { float data[3]; struct { float x, y, z; };    };
@@ -105,6 +121,14 @@ namespace bMath {
         float operator[](int i) const {
             return data[i];
         }
+
+        float magnitude() {
+            float total;
+            for (int i = 0; i < 3; i++) {
+                total += data[i]*data[i];
+            }
+            return sqrt(total);
+        }
     };
     template <> struct Vector<float, 4> { 
         union { float data[4]; struct { float x, y, z, w; }; }; 
@@ -118,6 +142,14 @@ namespace bMath {
 
         float operator[](int i) const {
             return data[i];
+        }
+
+        float magnitude() {
+            float total;
+            for (int i = 0; i < 4; i++) {
+                total += data[i]*data[i];
+            }
+            return sqrt(total);
         }
     };
 
@@ -144,6 +176,15 @@ namespace bMath {
         Vector<T,n> result;
         for (int i = 0; i < n; i++) {
             result[i] = a[i]+b[i];
+        }
+        return result;
+    }
+
+    template<typename T, int n>
+    Vector<T,n> operator-(const Vector<T,n> &a, const Vector<T,n> &b) {
+        Vector<T,n> result;
+        for (int i = 0; i < n; i++) {
+            result[i] = a[i]-b[i];
         }
         return result;
     }
