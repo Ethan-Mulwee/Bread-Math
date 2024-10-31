@@ -140,10 +140,19 @@ namespace bMath {
     }
 
     template<typename T, int n>
-    Vector<T,n> operator+(Vector<T,n> &a, Vector<T,n> &b) {
+    Vector<T,n> operator+(const Vector<T,n> &a, const Vector<T,n> &b) {
         Vector<T,n> result;
         for (int i = 0; i < n; i++) {
             result[i] = a[i]+b[i];
+        }
+        return result;
+    }
+    
+    template<typename T, int n>
+    Vector<T,n> operator*(const Vector<T,n> &a, const float b) {
+        Vector<T,n> result;
+        for (int i = 0; i < n; i++) {
+            result[i] = a[i]*b;
         }
         return result;
     }

@@ -13,5 +13,5 @@ int main() {
 
     float3 test3(1,2,3);
     float3 test4(3,6,1);
-    std::cout << test3+test4 << "\n";
+    std::cout << ((test3+test4) * 3) << "\n";
 }
