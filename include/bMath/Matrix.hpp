@@ -5,66 +5,67 @@
 #include <iostream>
 
 namespace bMath {
-    template <int rows, int cols>
-    struct Matrix {
-        float data[rows][cols] = {};
-        const static int r = rows; const static int c = cols;
+template <typename T, int rows, int cols> struct Matrix {
+  T data[rows][cols] = {};
+  const static int r = rows;
+  const static int c = cols;
 
-        Matrix() {}
+  Matrix() {}
 
-        Matrix(float data[rows][cols]) : data(data) {}
+  Matrix(T data[rows][cols]) : data(data) {}
 
-        Matrix operator+(const Matrix &m) const {
-            Matrix<rows,cols> newMat;
-            for (int i = 0; i < rows; i++) {
-                for (int j = 0; j < cols; j++) {
-                    newMat.data[i][j] = data[i][j] + m.data[i][j];
-                }
-            }
-            return newMat;
+  template <typename... Args> Matrix(Args... args) : data{(T)args...} {}
+
+  Matrix<T, rows, cols> operator+(const Matrix<T, rows, cols> &m) const {
+    Matrix<T, rows, cols> newMat;
+    for (int i = 0; i < rows; i++) {
+      for (int j = 0; j < cols; j++) {
+        newMat.data[i][j] = data[i][j] + m.data[i][j];
+      }
+    }
+    return newMat;
+  }
+  // TODO:
+
+  T &operator[](const int i) { return data[i]; }
+
+  T operator[](const int i) const { return data[i]; }
+
+  template <typename T> auto operator*(const T &m) const {
+    assert(cols == m.r);
+    Matrix<rows, m.c> newMat;
+    for (int i = 0; i < rows; i++) {
+      for (int j = 0; j < m.c; j++) {
+        float total = 0;
+        for (int k = 0; k < cols; k++) {
+          total += data[i][k] * m.data[k][i];
         }
-        // TODO:
+        newMat.data[i][j] = total;
+      }
+    }
+    return newMat;
+  }
 
-        // Matrix operator[]
+  void log() const {
+    for (int i = 0; i < rows; i++) {
+      for (int j = 0; j < cols; j++) {
+        std::cout << data[i][j] << ", ";
+      }
+      std::cout << "\n";
+    }
+  }
+};
 
-        template <typename T>
-        auto operator*(const T &m) const {
-            assert(cols == m.r);
-            Matrix<rows,m.c> newMat;
-            for (int i = 0; i < rows; i++) {
-                for (int j = 0; j < m.c; j++) {
-                    float total = 0;
-                    for (int k = 0; k < cols; k++) {
-                        total += data[i][k]*m.data[k][i];
-                    }
-                    newMat.data[i][j] = total;
-                }
-            }
-            return newMat;
-        }
-
-
-
-        void log() const {
-            for (int i = 0; i < rows; i++) {
-                for (int j = 0; j < cols; j++) {
-                    std::cout << data[i][j] << ", ";
-                }
-                std:: cout << "\n";
-            }
-        }
-    };
-
-    template <int rows, int cols>
-    std::ostream& operator<<(std::ostream& os, const Matrix<rows,cols> &m) {
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < cols; j++) {
-                os << m.data[i][j] << ", ";
-            }
-            os << "\n";
-        }
-        return os;
-    }    
+template <int rows, int cols>
+std::ostream &operator<<(std::ostream &os, const Matrix<rows, cols> &m) {
+  for (int i = 0; i < rows; i++) {
+    for (int j = 0; j < cols; j++) {
+      os << m.data[i][j] << ", ";
+    }
+    os << "\n";
+  }
+  return os;
 }
+} // namespace bMath
 
 #endif
