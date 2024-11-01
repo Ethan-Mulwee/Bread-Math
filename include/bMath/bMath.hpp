@@ -3,7 +3,6 @@
 
 #include "Vector.hpp"
 #include "Matrix.hpp"
-#include "Quaternion.hpp"
 #include "Geometry.hpp"
 #include <math.h>
 
