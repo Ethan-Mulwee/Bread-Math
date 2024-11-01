@@ -51,15 +51,9 @@ template <typename T, int rows, int cols> struct Matrix {
     for (int i = 0; i < rows; i++) {
       for (int j = 0; j < Mcols; j++) {
         float sum = 0;
-        // std::cout << (*this)(i,j);
         for (int k = 0; k < cols; k++) {
-          //std::cout << (*this)(i,k);
-          //std::cout << m(k,i);
           sum += (*this)(i,k)*m(k,j);
-          std::cout << (*this)(i,k)*m(k,j) << " ";
-          std::cout << sum << " ";
         }
-        std::cout << sum;
         result(i,j) = sum;
       }
     }
