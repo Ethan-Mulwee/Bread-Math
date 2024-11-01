@@ -27,9 +27,11 @@ template <typename T, int rows, int cols> struct Matrix {
   }
   // TODO:
 
-  T* operator[](const int i) { return data[i]; }
+  T* operator[](const int i) const { return data[i]; }
 
-  T operator[](const int i) const { return data[i]; }
+  T& operator() (const int i, const int j) {return data[i][j];}
+
+  T operator() (const int i, const int j) const {return data[i][j];}
 
   // template <typename T> auto operator*(const T &m) const {
   //  assert(cols == m.r);
@@ -56,16 +58,17 @@ template <typename T, int rows, int cols> struct Matrix {
   }
 };
 
-// template <int rows, int cols>
-// std::ostream &operator<<(std::ostream &os, const Matrix<rows, cols> &m) {
-//   for (int i = 0; i < rows; i++) {
-//    for (int j = 0; j < cols; j++) {
-//       os << m.data[i][j] << ", ";
-//     }
-//    os << "\n";
-//   }
-//  return os;
-//}
+template <typename T, int rows, int cols>
+std::ostream &operator<<(std::ostream &os, const Matrix<T, rows, cols> &m) {
+  for (int i = 0; i < rows; i++) {
+    os << "|";
+   for (int j = 0; j < cols; j++) {
+      os << m(i,j) << ((j < cols-1) ? ", " : "");
+    }
+   os << "|" << "\n";
+  }
+ return os;
+}
 } // namespace bMath
 
 #endif
