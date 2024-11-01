@@ -7,8 +7,6 @@
 namespace bMath {
 template <typename T, int rows, int cols> struct Matrix {
   T data[rows][cols] = {};
-  const static int r = rows;
-  const static int c = cols;
 
   Matrix() {}
 
@@ -47,17 +45,22 @@ template <typename T, int rows, int cols> struct Matrix {
   //  }
   //  return newMat;
   // }
-
-  void log() const {
+  template<int Mrows, int Mcols>
+  Matrix<T, rows, Mcols> operator*(Matrix<T, Mrows, Mcols> &m) {
+    Matrix<T, rows, Mcols> result;
     for (int i = 0; i < rows; i++) {
-      for (int j = 0; j < cols; j++) {
-        std::cout << data[i][j] << ", ";
+      for (int j = 0; j < Mcols; j++) {
+        float sum = 0;
+        for (int k = 0; k < cols; k++) {
+          sum += (*this)(i,k)*m(k,i);
+        }
+        result(i,j) = sum;
       }
-      std::cout << "\n";
     }
+    return result;
   }
 };
-
+// TODO: Find the biggest number in the matrix and add spaces accordingly so all rows are of equal length
 template <typename T, int rows, int cols>
 std::ostream &operator<<(std::ostream &os, const Matrix<T, rows, cols> &m) {
   for (int i = 0; i < rows; i++) {
@@ -69,6 +72,8 @@ std::ostream &operator<<(std::ostream &os, const Matrix<T, rows, cols> &m) {
   }
  return os;
 }
+
+
 } // namespace bMath
 
 #endif
