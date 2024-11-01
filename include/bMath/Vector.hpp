@@ -243,8 +243,9 @@ template <typename T, int n> Vector<T, n> normalize(const Vector<T, n> &a) {
   }
   return result;
 }
-// TODO
-float4 QuaternionAxisAngle(const float angle, const float3 &axis) {
+
+float4 QuaternionAxisAngle(const float angle, float3 axis) {
+  axis.normalize();
   return float4(std::cos(angle * 0.5), std::sin(angle * 0.5) * axis.x,
                 std::sin(angle * 0.5) * axis.y, std::sin(angle * 0.5) * axis.z);
 }

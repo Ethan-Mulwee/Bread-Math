@@ -27,7 +27,7 @@ template <typename T, int rows, int cols> struct Matrix {
   }
   // TODO:
 
-  T &operator[](const int i) { return data[i]; }
+  T* operator[](const int i) { return data[i]; }
 
   T operator[](const int i) const { return data[i]; }
 
