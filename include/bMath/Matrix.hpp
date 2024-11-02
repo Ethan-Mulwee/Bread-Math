@@ -3,6 +3,8 @@
 
 #include <assert.h>
 #include <iostream>
+#include <string>
+#include <sstream>
 
 namespace bMath {
 template <typename T, int rows, int cols> struct Matrix {
@@ -31,20 +33,6 @@ template <typename T, int rows, int cols> struct Matrix {
 
   T operator() (const int i, const int j) const {return data[i][j];}
 
-  // template <typename T> auto operator*(const T &m) const {
-  //  assert(cols == m.r);
-  //  Matrix<rows, m.c> newMat;
-  //  for (int i = 0; i < rows; i++) {
-  //    for (int j = 0; j < m.c; j++) {
-  //      float total = 0;
-  //      for (int k = 0; k < cols; k++) {
-  //        total += data[i][k] * m.data[k][i];
-  //      }
-  //      newMat.data[i][j] = total;
-  //    }
-  //  }
-  //  return newMat;
-  // }
   template<int Mrows, int Mcols>
   Matrix<T, rows, Mcols> operator*(Matrix<T, Mrows, Mcols> &m) {
     Matrix<T, rows, Mcols> result;
@@ -60,12 +48,37 @@ template <typename T, int rows, int cols> struct Matrix {
     return result;
   }
 };
+
+typedef Matrix<float, 3, 3> Matrix3;
+typedef Matrix<float, 4, 4> Matirx4;
+
 // TODO: Find the biggest number in the matrix and add spaces accordingly so all rows are of equal length
 template <typename T, int rows, int cols>
 std::ostream &operator<<(std::ostream &os, const Matrix<T, rows, cols> &m) {
+  // find max length
+  // int maxlength = 0;
+  // for (int k = 0; k < rows; k++) {
+  //   for (int l = 0; l < cols; l++) {
+  //     std::stringstream temp;
+  //     temp << m(k,l);
+  //     if (maxlength < temp.str().length()) {
+  //        maxlength = temp.str().length();
+  //     }
+  //   }
+  // }
+  // std::cout << maxlength << "\n";
+  // print matrix
   for (int i = 0; i < rows; i++) {
     os << "|";
    for (int j = 0; j < cols; j++) {
+     // std::stringstream output;
+     // output << m(i,j);
+     // if (output.str().length() < maxlength) {
+       // int amount = maxlength-output.str().length();
+       // for (int p = 0; p < amount; p++) {
+       //   output.str() = " " + output.str();
+       // }
+     // }
       os << m(i,j) << ((j < cols-1) ? ", " : "");
     }
    os << "|" << "\n";

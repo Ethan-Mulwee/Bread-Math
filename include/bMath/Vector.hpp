@@ -215,13 +215,15 @@ Vector<T, n> lerp(const Vector<T, n> &a, const Vector<T, n> &b, const float t) {
 // TODO
 // slerp between two quaternions
 float4 slerp(const float4 &a, const float4 &b, float t) {
-  // Do stuff
+  return float4();
 }
 
 // TODO
 // Clamp length of vector
 template <typename T, int n>
-Vector<T, n> clamp(const Vector<T, n> &a, float b) {}
+Vector<T, n> clamp(const Vector<T, n> &a, float b) {
+  return Vector<T,n>();
+}
 
 // TODO
 // Clamp vector component wise
@@ -252,7 +254,9 @@ float4 QuaternionAxisAngle(const float angle, float3 axis) {
 
 // TODO
 // Rotate a vector by a quaternion
-float3 rotate(const float3 &v, const float4 &q) {}
+float3 rotate(const float3 &v, const float4 &q) {
+  return float3();
+}
 
 // TODO
 // Rotate a quaternion by a vector
