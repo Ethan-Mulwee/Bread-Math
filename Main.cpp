@@ -1,31 +1,48 @@
-#include "bMath/Geometry.hpp"
-#include "bMath/bMath.hpp"
 #include <iostream>
-#include <vector>
+#include "bMath/bMath.hpp"
+#include <raylib.h>
 
-//#include <raylib.h>
+Camera camera;
+const int axisLength = 4;
 
-using namespace bMath;
+Vector3 btr(bMath::float3 vec) {
+    return Vector3{vec.x,vec.y,vec.z};
+}
 
 int main() {
-  float3 a(2,3,4);
-  float3 b(5,3,1);
-  std::cout << dot(a,b) << "\n";
-  std::cout << cross(a,b) << "\n";
 
-  Matrix3 m(
-    4,5.5,6,
-    1,0,4.5,
-    20,123.3,2
-  );
-  std::vector<Triangle> tris;
-  Triangle tri(float3(1,0,-1), float3(1,2,2), float3(4,0,0));
-  tris.push_back(tri);
-  Ray ray(float3(-1,2,-2), float3(1,-0.5,1));
+    camera.position = Vector3{5,5,-5};
+    camera.target = Vector3{0,0,0};
+    camera.up = Vector3{0,1,0};
+    camera.fovy = 45;
+    camera.projection = CAMERA_PERSPECTIVE;
 
-  RayIntersection inter = Raycast(ray, tris);
+    bMath::Triangle triangle(bMath::float3(1,0,-1), bMath::float3(1,2,2), bMath::float3(4,0,0));
+    bMath::Ray ray(bMath::float3(-1,2,-2), bMath::float3(1,-0.5,1));
 
-  std::cout << inter.hit << "\n";
+    bMath::RayIntersection intersection = Raycast(ray, triangle);
+    std::cout << intersection.point << std::endl;
 
-  std::cout << m << "\n";
+    bMath::Matrix<float,3,3> m;
+    std::cout << m << std::endl;
+
+    //Raylib stuff
+    InitWindow(500,500,"test");
+
+    while(!WindowShouldClose()) {
+        UpdateCamera(&camera, CAMERA_PERSPECTIVE);
+        BeginDrawing();
+            ClearBackground(Color{35,35,35,255});
+            BeginMode3D(camera);
+                DrawGrid(5,1);
+                DrawLine3D(Vector3{-axisLength,0,0}, Vector3{axisLength,0,0}, RED);
+                DrawLine3D(Vector3{0,-axisLength,0}, Vector3{0,axisLength+0.5,0}, GREEN);
+                DrawLine3D(Vector3{0,0,-axisLength}, Vector3{0,0,axisLength}, BLUE);
+
+                DrawTriangle3D(btr(triangle.a),btr(triangle.b),btr(triangle.c), WHITE);
+                DrawRay(Ray{btr(ray.p),btr(ray.d)}, BLACK);
+                DrawSphere(btr(intersection.point), 0.1, RED);
+            EndMode3D();
+        EndDrawing();
+    }
 }
