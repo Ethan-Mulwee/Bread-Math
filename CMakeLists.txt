@@ -8,3 +8,4 @@ target_include_directories(bMath PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
 add_executable(Main Main.cpp)
 target_link_libraries(Main PUBLIC bMath)
+target_link_libraries(Main PUBLIC /usr/local/lib/libraylib.so)
