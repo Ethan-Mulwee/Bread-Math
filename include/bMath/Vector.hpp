@@ -153,12 +153,26 @@ Vector<T, n> operator+(const Vector<T, n> &a, const Vector<T, n> &b) {
 }
 
 template <typename T, int n>
+void operator+=(Vector<T, n> &a, const Vector<T, n> &b) {
+  for (int i = 0; i < n; i++) {
+    a[i] += b[i];
+  }
+}
+
+template <typename T, int n>
 Vector<T, n> operator-(const Vector<T, n> &a, const Vector<T, n> &b) {
   Vector<T, n> result;
   for (int i = 0; i < n; i++) {
     result[i] = a[i] - b[i];
   }
   return result;
+}
+
+template <typename T, int n>
+void operator-=(Vector<T, n> &a, const Vector<T, n> &b) {
+  for (int i = 0; i < n; i++) {
+    a[i] -= b[i];
+  }
 }
 
 template <typename T, int n>
@@ -246,19 +260,23 @@ template <typename T, int n> Vector<T, n> normalize(const Vector<T, n> &a) {
   return result;
 }
 
+// Create a vector from an angle (in radians) and an axis
 float4 QuaternionAxisAngle(const float angle, float3 axis) {
   axis.normalize();
   return float4(std::cos(angle * 0.5), std::sin(angle * 0.5) * axis.x,
                 std::sin(angle * 0.5) * axis.y, std::sin(angle * 0.5) * axis.z);
 }
 
-// TODO
 // Rotate a vector by a quaternion
 float3 rotate(const float3 &v, const float4 &q) {
-  return float3();
+  return float3(
+    v.x*(q.x*q.x-q.y*q.y-q.z*q.z+q.w*q.w)+v.y*(2*q.x*q.y-2*q.w*q.z)+v.z*(2*q.x*q.z+2*q.w*q.y),
+    v.x*(2*q.w*q.z+2*q.x*q.y)+v.y*(q.w*q.w-q.x*q.x+q.y*q.y-q.z*q.z)+v.z*(2*q.y*q.z-2*q.w*q.x),
+    v.x*(2*q.x*q.z-2*q.w*q.y)+v.y*(2*q.w*q.x+2*q.y*q.z)+v.z*(q.w*q.w-q.x*q.x-q.y*q.y+q.z*q.z)
+  );
 }
 
-// TODO
+// TODO: testing
 // Rotate a quaternion by a vector
 float4 rotate(const float4 &q, const float3 &v) {
   float _w = (0.5) * (-v.x * q.x - v.y * q.y - v.z * q.z);
