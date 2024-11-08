@@ -81,7 +81,8 @@ std::ostream &operator<<(std::ostream &os, const Matrix<T, rows, cols> &m) {
        //   output.str() = " " + output.str();
        // }
      // }
-      os << m(i,j) << ((j < cols-1) ? ", " : "");
+      os << m(i,j); 
+      os << ((j < cols-1) ? ", " : "");
     }
    os << "|" << "\n";
   }

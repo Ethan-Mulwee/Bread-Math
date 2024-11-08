@@ -2,9 +2,15 @@
 #define BMATH_GEOMETRY
 
 #include "Vector.hpp"
+#include "Matrix.hpp"
 #include <vector>
 
 namespace bMath {
+    // Returns vector transformed by matrix (will shrink dimension of vector of transformation does so)
+    template <typename T, int n, int cols>
+    Vector<T, cols> Transform(const Vector<T,n> &v, const Matrix<T,n,cols> &m) {
+
+    }
 
     struct Triangle {
         float3 a,b,c;

@@ -137,7 +137,8 @@ template <typename T, int n>
 std::ostream &operator<<(std::ostream &os, const Vector<T, n> &v) {
   os << "(";
   for (int i = 0; i < n; i++) {
-    os << v[i] << ((i != n - 1) ? ", " : "");
+    os << v[i];
+    os << ((i != n - 1) ? ", " : "");
   }
   os << ")";
   return os;
@@ -174,14 +175,6 @@ void operator-=(Vector<T, n> &a, const Vector<T, n> &b) {
     a[i] -= b[i];
   }
 }
-
-template <typename T, int n>
-void operator-=(Vector<T, n> &a, const Vector<T, n> &b) {
-  for (int i = 0; i < n; i++) {
-    a[i] -= b[i];
-  }
-}
-
 
 // Returns vector scaled by scalar
 template <typename T, int n>
@@ -221,8 +214,7 @@ float dot(const Vector<T, n> &a, const Vector<T, n> &b) {
 
 template <typename T>
 Vector<T, 3> cross(const Vector<T, 3> &a, const Vector<T, 3> &b) {
-  return Vector<T, 3>(a.y * b.z - a.z * b.y, a.z * b.x - a.x * b.z,
-                      a.x * b.y - a.y * b.x);
+  return Vector<T, 3>(a.y * b.z - a.z * b.y, a.z * b.x - a.x * b.z, a.x * b.y - a.y * b.x);
 }
 
 template <typename T, int n>
@@ -289,8 +281,7 @@ template <typename T, int n> Vector<T, n> normalize(const Vector<T, n> &a) {
 // Create a vector from an angle (in radians) and an axis
 float4 QuaternionAxisAngle(const float angle, float3 axis) {
   axis.normalize();
-  return float4(std::cos(angle * 0.5), std::sin(angle * 0.5) * axis.x,
-                std::sin(angle * 0.5) * axis.y, std::sin(angle * 0.5) * axis.z);
+  return float4(std::cos(angle * 0.5), std::sin(angle * 0.5) * axis.x, std::sin(angle * 0.5) * axis.y, std::sin(angle * 0.5) * axis.z);
 }
 
 // Rotate a vector by a quaternion
@@ -303,13 +294,14 @@ float3 rotate(const float3 &v, const float4 &q) {
 }
 
 // TODO: testing
-// Rotate a quaternion by a vector
+// Rotate a quaternion by a vector (result = q + (1/2)*float4(0,v.x,v.y,v.z)*q)
 float4 rotate(const float4 &q, const float3 &v) {
-  float _w = (0.5) * (-v.x * q.x - v.y * q.y - v.z * q.z);
-  float _x = (0.5) * (v.x * q.w + v.y * q.z - v.z * q.y);
-  float _y = (0.5) * (v.y * q.w + v.z * q.x - v.x * q.z);
-  float _z = (0.5) * (v.z * q.w + v.x * q.y - v.y * q.x);
-  float4 result = q + float4(_w, _x, _y, _z);
+  float4 result(
+    (0.5) * (-v.x * q.x - v.y * q.y - v.z * q.z),
+    (0.5) * (v.x * q.w + v.y * q.z - v.z * q.y),
+    (0.5) * (v.y * q.w + v.z * q.x - v.x * q.z),
+    (0.5) * (v.z * q.w + v.x * q.y - v.y * q.x)
+  );
   result.normalize();
   return result;
 }
