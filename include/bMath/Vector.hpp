@@ -176,12 +176,38 @@ void operator-=(Vector<T, n> &a, const Vector<T, n> &b) {
 }
 
 template <typename T, int n>
+void operator-=(Vector<T, n> &a, const Vector<T, n> &b) {
+  for (int i = 0; i < n; i++) {
+    a[i] -= b[i];
+  }
+}
+
+
+// Returns vector scaled by scalar
+template <typename T, int n>
 Vector<T, n> operator*(const Vector<T, n> &a, const float b) {
   Vector<T, n> result;
   for (int i = 0; i < n; i++) {
     result[i] = a[i] * b;
   }
   return result;
+}
+
+// Returns vector multipled component wise
+template <typename T, int n>
+Vector<T, n> operator*(const Vector<T,n> &a, const Vector<T,n> &b) {
+  Vector<T,n> result;
+  for (int i = 0; i < n; i++) {
+    result[i] = a[i]*b[i];
+  }
+}
+
+// Multiples vector component wise by another vector
+template <typename T, int n>
+Vector<T, n> operator*=(Vector<T,n> &a, const Vector<T,n> &b) {
+  for (int i = 0; i < n; i++) {
+    a[i] *= b[i];
+  }
 }
 
 template <typename T, int n>
