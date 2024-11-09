@@ -79,7 +79,7 @@ template <> struct Vector<float, 3> {
   float operator[](int i) const { return data[i]; }
 
   float magnitude() const {
-    float total;
+    float total = 0;
     for (int i = 0; i < 3; i++) {
       total += data[i] * data[i];
     }
@@ -205,7 +205,7 @@ Vector<T, n> operator*=(Vector<T,n> &a, const Vector<T,n> &b) {
 
 template <typename T, int n>
 float dot(const Vector<T, n> &a, const Vector<T, n> &b) {
-  float result;
+  float result = 0;
   for (int i = 0; i < n; i++) {
     result += a[i] * b[i];
   }
