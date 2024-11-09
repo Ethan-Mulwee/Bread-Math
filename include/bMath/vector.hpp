@@ -1,9 +1,8 @@
 #ifndef BMATH_VECTOR
 #define BMATH_VECTOR
 
-#include "Float.hpp"
+#include "float.hpp"
 #include <algorithm>
-#include <iostream>
 #include <math.h>
 
 namespace bMath {
@@ -42,6 +41,8 @@ template <> struct Vector<float, 2> {
     };
   };
 
+  // TODO: Add a marco to automatically create these duplicate defs
+
   template <typename... Args> Vector(Args... args) : data{(float)args...} {}
 
   float &operator[](int i) { return data[i]; }
@@ -64,12 +65,15 @@ template <> struct Vector<float, 2> {
     }
   }
 };
+
+// TODO: template specialization includes other types
 template <> struct Vector<float, 3> {
   union {
     float data[3];
     struct {
       float x, y, z;
     };
+    Vector<float, 2> xy;
   };
 
   template <typename... Args> Vector(Args... args) : data{(float)args...} {}
@@ -132,17 +136,6 @@ typedef Vector<float, 4> float4;
 typedef Vector<int, 2> int2;
 typedef Vector<int, 3> int3;
 typedef Vector<int, 4> int4;
-
-template <typename T, int n>
-std::ostream &operator<<(std::ostream &os, const Vector<T, n> &v) {
-  os << "(";
-  for (int i = 0; i < n; i++) {
-    os << v[i];
-    os << ((i != n - 1) ? ", " : "");
-  }
-  os << ")";
-  return os;
-}
 
 template <typename T, int n>
 Vector<T, n> operator+(const Vector<T, n> &a, const Vector<T, n> &b) {

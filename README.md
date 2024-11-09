@@ -1,2 +1,2 @@
 # Bread Math
- A C++ Math library including vectors, matrices, quaternions, and raycasting
+A C++ header only template library which is not particularly good, but it's mine 

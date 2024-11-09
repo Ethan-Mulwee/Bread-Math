@@ -1,8 +1,8 @@
 #ifndef BMATH_GEOMETRY
 #define BMATH_GEOMETRY
 
-#include "Vector.hpp"
-#include "Matrix.hpp"
+#include "vector.hpp"
+#include "matrix.hpp"
 #include <vector>
 
 namespace bMath {

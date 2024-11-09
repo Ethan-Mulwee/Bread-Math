@@ -1,5 +1,6 @@
 #include <iostream>
 #include "bMath/bMath.hpp"
+#include "bMath/iostream.hpp"
 #include <raylib.h>
 
 Camera camera;
