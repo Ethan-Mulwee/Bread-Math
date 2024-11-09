@@ -103,7 +103,7 @@ template <> struct Vector<float, 4> {
   union {
     float data[4];
     struct {
-      float w, x, y, z;
+      float x, y, z, w;
     };
   };
 
