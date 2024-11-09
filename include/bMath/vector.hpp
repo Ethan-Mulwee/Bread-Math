@@ -209,6 +209,23 @@ Vector<T, rows> operator*(const Vector<T,n> &v, const Matrix<T,rows,n> &m) {
   return result;
 }
 
+// TODO: make this less slow?
+// Transforms vector by a matrix (assuming column vector)
+template <typename T, int n, int cols, int rows>
+Vector<T, n> operator*(const Vector<T,n> &v, const Matrix<T,rows,cols> &m) {
+  Vector<T, n> result;
+  for (int i = 0; i < rows; i++) {
+    for (int j = 0; j < cols; j++) {
+      if (i >= n) return result;
+      T cord;
+      if (j < n) cord = v[j];
+      else cord = 1;
+      result[i] += cord*m(i,j);
+    }
+  }
+  return result;
+}
+
 // Returns vector transformed by matrix (will shrink dimension of vector of transformation does so)
 template <typename T, int n, int cols>
 Vector<T, cols> Transform(const Vector<T,n> &v, const Matrix<T,n,cols> &m) {
