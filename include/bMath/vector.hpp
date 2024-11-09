@@ -2,6 +2,7 @@
 #define BMATH_VECTOR
 
 #include "float.hpp"
+#include "fwd.hpp"
 #include <algorithm>
 #include <math.h>
 
@@ -196,6 +197,24 @@ Vector<T, n> operator*=(Vector<T,n> &a, const Vector<T,n> &b) {
   }
 }
 
+// Transforms vector by a matrix (assuming column vector)
+template <typename T, int n, int rows>
+Vector<T, rows> operator*(const Vector<T,n> &v, const Matrix<T,rows,n> &m) {
+  Vector<T, rows> result;
+  for (int i = 0; i < rows; i++) {
+    for (int j = 0; j < n; j++) {
+      result[i] += v[j]*m(i,j);
+    }
+  }
+  return result;
+}
+
+// Returns vector transformed by matrix (will shrink dimension of vector of transformation does so)
+template <typename T, int n, int cols>
+Vector<T, cols> Transform(const Vector<T,n> &v, const Matrix<T,n,cols> &m) {
+  Vector<T, cols> result;
+}
+
 template <typename T, int n>
 float dot(const Vector<T, n> &a, const Vector<T, n> &b) {
   float result = 0;
@@ -298,7 +317,6 @@ float4 rotate(const float4 &q, const float3 &v) {
   result.normalize();
   return result;
 }
-
 } // namespace bMath
 
 #endif

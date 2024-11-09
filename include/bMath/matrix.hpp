@@ -13,8 +13,6 @@ template <typename T, int rows, int cols> struct Matrix {
 
   template <typename... Args> Matrix(Args... args) : data{(T)args...} {}
 
-  // TODO:
-
   T* operator[](const int i) const { return data[i]; }
 
   T& operator() (const int i, const int j) {return data[i][j];}
@@ -50,8 +48,9 @@ template <typename T, int rows, int cols> struct Matrix {
 
 typedef Matrix<float, 3, 3> Matrix3;
 typedef Matrix<float, 4, 4> Matrix4;
+typedef Matrix<float, 3, 3> float3x3;
+typedef Matrix<float, 4, 4> float4x4;
 
-// TODO: temp function for inversion look into how blender does matrix inversion on n size matriices
 Matrix3 invert(Matrix3 &m) {
 
 }
@@ -59,6 +58,16 @@ Matrix3 invert(Matrix3 &m) {
 Matrix4 invert(Matrix4 &m) {
 
 }
+
+Matrix3 transpose(Matrix3 &m) {
+
+}
+
+Matrix4 transpose(Matrix4 &m) {
+
+}
+
+
 
 
 } // namespace bMath

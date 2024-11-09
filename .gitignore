@@ -12,3 +12,4 @@ _deps
 /build
 *.idx
 /.vscode
+demo/a.out
