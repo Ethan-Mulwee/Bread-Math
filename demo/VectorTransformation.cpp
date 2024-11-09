@@ -1,5 +1,6 @@
 #include "bMath/bMath.hpp"
 #include "bMath/iostream.hpp"
+#include <chrono>
 
 using namespace bMath;
 
@@ -30,4 +31,14 @@ int main() {
   std::cout << "Matrix: \n" << m2 << "\n";
   std::cout << "Vector: " << v2 << "\n"; 
   std::cout << "Transformed Vector: " << (v2*m2) << "\n";
+
+  auto start = std::chrono::high_resolution_clock::now();
+
+  for (int i = 0; i < 100000; i++) {
+    v1*m1;
+  }
+
+  auto end = std::chrono::high_resolution_clock::now();
+  std::chrono::duration<double> elapsed = end - start;
+  std::cout << "Elapsed time: " << elapsed.count() << " seconds" << std::endl;
 }
