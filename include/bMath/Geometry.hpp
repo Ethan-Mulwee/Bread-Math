@@ -19,7 +19,9 @@ namespace bMath {
         : a(a), b(b), c(c) {}
 
         float3 getNormal() const {
-            return cross(b-a,c-a);
+            float3 crossProduct = cross(b-a,c-a);
+            crossProduct.normalize();
+            return crossProduct;
         }
     };
 
