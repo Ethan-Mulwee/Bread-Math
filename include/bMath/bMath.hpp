@@ -5,6 +5,7 @@
 #include "matrix.hpp"
 #include "geometry.hpp"
 #include "float.hpp"
+#include "functions.hpp"
 #include <math.h>
 
 // Matrix<3,3> QuaternionToMatrix(const Quaternion &q) {
