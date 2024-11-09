@@ -17,7 +17,7 @@ template <typename T, int n> struct Vector {
   T operator[](int i) const { return data[i]; }
 
   float magnitude() {
-    float total;
+    float total = 0;
     for (int i = 0; i < n; i++) {
       total += data[i] * data[i];
     }
@@ -49,7 +49,7 @@ template <> struct Vector<float, 2> {
   float operator[](int i) const { return data[i]; }
 
   float magnitude() const {
-    float total;
+    float total = 0;
     for (int i = 0; i < 2; i++) {
       total += data[i] * data[i];
     }
@@ -109,7 +109,7 @@ template <> struct Vector<float, 4> {
   float operator[](int i) const { return data[i]; }
 
   float magnitude() const {
-    float total;
+    float total = 0;
     for (int i = 0; i < 4; i++) {
       total += data[i] * data[i];
     }
