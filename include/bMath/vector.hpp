@@ -310,7 +310,7 @@ template <typename T, int n> Vector<T, n> normalize(const Vector<T, n> &a) {
 // Create a vector from an angle (in radians) and an axis
 float4 QuaternionAxisAngle(const float angle, float3 axis) {
   axis.normalize();
-  return float4(std::cos(angle * 0.5), std::sin(angle * 0.5) * axis.x, std::sin(angle * 0.5) * axis.y, std::sin(angle * 0.5) * axis.z);
+  return float4(std::sin(angle * 0.5) * axis.x, std::sin(angle * 0.5) * axis.y, std::sin(angle * 0.5) * axis.z, std::cos(angle * 0.5));
 }
 
 // Rotate a vector by a quaternion
@@ -326,10 +326,10 @@ float3 rotate(const float3 &v, const float4 &q) {
 // Rotate a quaternion by a vector (result = q + (1/2)*float4(0,v.x,v.y,v.z)*q)
 float4 rotate(const float4 &q, const float3 &v) {
   float4 result(
-    (0.5) * (-v.x * q.x - v.y * q.y - v.z * q.z),
     (0.5) * (v.x * q.w + v.y * q.z - v.z * q.y),
     (0.5) * (v.y * q.w + v.z * q.x - v.x * q.z),
-    (0.5) * (v.z * q.w + v.x * q.y - v.y * q.x)
+    (0.5) * (v.z * q.w + v.x * q.y - v.y * q.x),
+    (0.5) * (-v.x * q.x - v.y * q.y - v.z * q.z)
   );
   result.normalize();
   return result;
