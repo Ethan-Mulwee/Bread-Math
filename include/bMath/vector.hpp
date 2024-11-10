@@ -340,7 +340,7 @@ float4 rotate(const float4 &q, const float3 &v) {
 // Returns vector rotated some degrees along the x axis
 float3 rotateX(const float3 &v, const float angle) {
   return float3(
-    v.x, v.y*cos(angle)-v.z*sin(angle), v.y*sin(angle)-v.z*cos(angle)
+    v.x, v.y*cos(angle)-v.z*sin(angle), v.y*sin(angle)+v.z*cos(angle)
   );
 }
 

@@ -3,6 +3,8 @@
 #include "bMath/iostream.hpp"
 #include <raylib.h>
 
+// g++ Main.cpp -lraylib -I../include
+
 Camera camera;
 const int axisLength = 4;
 
