@@ -1,9 +1,0 @@
-cmake_minimum_required(VERSION 3.10)
-
-project(Bread-Math)
-
-# file(GLOB_RECURSE SRC_FILES src/*.cpp)
-
-add_executable(Main demo/Main.cpp)
-target_include_directories(Main PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
-target_link_libraries(Main PUBLIC /usr/local/lib/libraylib.so)
