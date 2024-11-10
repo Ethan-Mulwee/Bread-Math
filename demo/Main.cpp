@@ -1,6 +1,6 @@
 #include <iostream>
 #include "bMath/bMath.hpp"
-#include "bMath/iostream.hpp"
+#include "bMath/ext/iostream.hpp"
 #include <raylib.h>
 
 // g++ Main.cpp -lraylib -I../include

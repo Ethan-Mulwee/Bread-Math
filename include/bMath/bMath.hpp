@@ -1,7 +1,7 @@
 #ifndef BMATH_BMATH
 #define BMATH_BMATH
 
-// includes all bMath functions except for integrations with other libraries like iostream or raylib
+// includes all bMath functions except for integrations with external libraries like iostream or raylib
 
 #include <math.h>
 #include "vector.hpp"
