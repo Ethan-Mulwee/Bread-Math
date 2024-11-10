@@ -132,6 +132,14 @@ template <> struct Vector<float, 4> {
   }
 };
 
+typedef Vector<float, 2> Vector2;
+typedef Vector<float, 3> Vector3;
+typedef Vector<float, 4> Vector4;
+
+typedef Vector<double, 2> double2;
+typedef Vector<double, 3> double3;
+typedef Vector<double, 4> double4;
+
 typedef Vector<float, 2> float2;
 typedef Vector<float, 3> float3;
 typedef Vector<float, 4> float4;
