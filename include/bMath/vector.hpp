@@ -43,6 +43,8 @@ template <> struct Vector<float, 2> {
   };
 
   // TODO: Add a marco to automatically create these duplicate defs
+  
+  // TODO: Constructor to create vectors from smaller vectors like a vec3 from a vec2
 
   template <typename... Args> Vector(Args... args) : data{(float)args...} {}
 
@@ -333,6 +335,27 @@ float4 rotate(const float4 &q, const float3 &v) {
   );
   result.normalize();
   return result;
+}
+
+// Returns vector rotated some degrees along the x axis
+float3 rotateX(const float3 &v, const float angle) {
+  return float3(
+    v.x, v.y*cos(angle)-v.z*sin(angle), v.y*sin(angle)-v.z*cos(angle)
+  );
+}
+
+// Returns vector rotated some degrees along the y axis
+float3 rotateY(const float3 &v, const float angle) {
+  return float3(
+    v.x*cos(angle)+v.z*sin(angle), v.y, v.z*cos(angle)-v.x*sin(angle)
+  );
+}
+
+// Returns vector rotated some degrees along the z axis
+float3 rotateZ(const float3 &v, const float angle) {
+  return float3(
+    v.x*cos(angle)-v.y*sin(angle), v.x*sin(angle)+v.y*cos(angle), v.z
+  );
 }
 } // namespace bMath
 

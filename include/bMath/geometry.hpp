@@ -6,6 +6,11 @@
 #include <vector>
 
 namespace bMath {
+    // TODO: Redo basically all of this
+    // Use a more preformant algorthim and reduce the amount of structure;
+    // this is meant as a math library it shouldn't have it's own mesh data types
+    // that is left up to the user to make
+
     struct Triangle {
         float3 a,b,c;
 
@@ -20,7 +25,7 @@ namespace bMath {
     };
 
     struct RayIntersection {
-        unsigned int hits;
+        unsigned int hits = 0;
         float3 point;
         float3 normal;
 

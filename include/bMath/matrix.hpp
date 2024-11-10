@@ -11,6 +11,8 @@ template <typename T, int rows, int cols> struct Matrix {
 
   Matrix(T data[rows][cols]) : data(data) {}
 
+  // TODO: Constructor for creating matrices from vectors
+
   template <typename... Args> Matrix(Args... args) : data{(T)args...} {}
 
   T* operator[](const int i) const { return data[i]; }
@@ -64,6 +66,11 @@ Matrix3 transpose(Matrix3 &m) {
 }
 
 Matrix4 transpose(Matrix4 &m) {
+
+}
+
+// TODO: Creates a rotation matrix from euler angles in the order of xyz
+Matrix3 rotationMatrix(float x, float y, float z) {
 
 }
 

@@ -34,6 +34,24 @@ namespace bMath {
       v.x*m(3,0)+v.y*m(3,1)+v.z*m(3,2)+v.w*m(3,3)
     );
   }
+
+  Matrix3 QuaternionToMatrix(const float4 &q) {
+      Matrix3 m;
+      // i hat
+      m.data[0][0] = q.x*q.x-q.y*q.y-q.z*q.z+q.w*q.w;
+      m.data[1][0] = 2*q.w*q.z+2*q.x*q.y;
+      m.data[2][0] = 2*q.x*q.z-2*q.w*q.y;
+      // j hat
+      m.data[0][1] = 2*q.x*q.y-2*q.w*q.z;
+      m.data[1][1] = q.w*q.w-q.x*q.x+q.y*q.y-q.z*q.z;
+      m.data[2][1] = 2*q.w*q.x+2*q.y*q.z;
+      // k hat
+      m.data[0][2] = 2*q.x*q.z+2*q.w*q.y;
+      m.data[1][2] = 2*q.y*q.z-2*q.w*q.x;
+      m.data[2][2] = q.w*q.w-q.x*q.x-q.y*q.y+q.z*q.z;
+
+      return m;
+  }
 }
 
 #endif
