@@ -52,7 +52,19 @@ namespace bMath {
   // m - mass, h - height, ro - outer radius, ri inner radius
   Matrix3 InertiaTensorTube(float m, float h, float ro, float ri) {
     return Matrix3(
+      (1/12.0f)*m*h*h+(1/4.0f)*m*(ro*ro+ri*ri),0,0,
+      0,(1/2.0f)*m*(ro*ro+ri*ri),0,
+      0,0,(1/12.0f)*m*h*h+(1/4.0f)*m*(ro*ro+ri*ri)
+    );
+  }
 
+  // Returns the inertia tensor of a cone from the center of mass
+  // m - mass, h - height, r - radius
+  Matrix3 InertiaTensorCone(float m, float h, float r) {
+    return Matrix3(
+      (3/80.0f)*m*h*h+(3/20.0f)*m*r*r,0,0,
+      0,(3/10.0f)*m*r*r,0,
+      0,0,(3/5.0f)*m*h*h+(3/20.0f)*m*r*r
     );
   }
 } // namespace bMath
