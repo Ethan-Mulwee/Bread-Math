@@ -73,11 +73,20 @@ Matrix4 transpose(Matrix4 &m) {
 
 // TODO: add determiant functions
 float determinant(Matrix3 &m) {
-
+  return 0;
 }
 
 float determinant(Matrix4 &m) {
-  
+  return 0;
+}
+
+// TODO:
+// B^-1MB
+// B is the transformation of the object aka the transformation that takes the coords from world space ot local space
+Matrix4 ChangeBasis(const Matrix4 &m, const Matrix4 &b) {
+  return Matrix4(
+    
+  );
 }
 
 // TODO: Creates a rotation matrix from euler angles in the order of xyz
