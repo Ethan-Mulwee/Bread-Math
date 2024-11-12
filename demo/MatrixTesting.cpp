@@ -27,6 +27,8 @@ int main() {
   std::cout << deterimant << "\n";
   std::cout << cof(m1) << "\n";
   std::cout << inverse(m1) << "\n";
+  Matrix3 m1i = inverse(m1);
+  std::cout << m1*m1i << "\n";
 
   // Matrix3 m2(
   //   2,0,0,
