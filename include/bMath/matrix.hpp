@@ -67,6 +67,28 @@ Matrix<T, rows, cols> transpose(Matrix<T, rows, cols> &m) {
   return result;
 }
 
+template<typename T, int rows, int cols>
+Matrix<T,rows,cols> operator*(const Matrix<T,rows,cols> &m, const float s) {
+  Matrix<T,rows,cols> result;
+  for (int j = 0; j < cols; j++) {
+    for (int i = 0; i < rows; i++) {
+      result(i,j) = m(i,j) * s;
+    }
+  }
+  return result;
+}
+
+template<typename T, int rows, int cols>
+Matrix<T,rows,cols> operator*(const float s, const Matrix<T,rows,cols> &m) {
+  Matrix<T,rows,cols> result;
+  for (int j = 0; j < cols; j++) {
+    for (int i = 0; i < rows; i++) {
+      result(i,j) = m(i,j) * s;
+    }
+  }
+  return result;
+}
+
 Matrix3 transpose(const Matrix3 &m) {
   return Matrix3(
     m(0,0), m(1,0), m(2,0),
