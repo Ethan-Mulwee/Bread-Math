@@ -8,7 +8,7 @@ namespace bMath {
   // Following inertia tensor function's math for common shapes comes from: Game Physics Engine Development p.493-495
 
   // Returns the inertia tensor of a cuboid from the center of mass
-  Matrix3 IntertiaTensorCuboid(float m, float dx, float dy, float dz) {
+  Matrix3 InertiaTensorCuboid(float m, float dx, float dy, float dz) {
     float c = m*((float)1/12);
     return Matrix3(
       c*(dy*dy+dz*dz), 0, 0,
@@ -18,7 +18,7 @@ namespace bMath {
   }
 
   // Returns the inertia tensor of a sphere from the center of mass 
-  Matrix3 IntertiaTensorSphere(float m, float r) {
+  Matrix3 InertiaTensorSphere(float m, float r) {
     float c = ((float)2/3)*m*r*r;
     return Matrix3(
       c,0,0,
@@ -27,9 +27,9 @@ namespace bMath {
     );
   }
 
-  // Returns the intertia tensor of a ellipsoid from the center of mass
+  // Returns the inertia tensor of a ellipsoid from the center of mass
   // m - mass, r - radii
-  Matrix3 IntertiaTensorEllipsoid(float m, float3 r) {
+  Matrix3 InertiaTensorEllipsoid(float m, float3 r) {
     float c = ((float)1/5)*m;
     return Matrix3(
       c*(r.y*r.y+r.z*r.z),0,0,
