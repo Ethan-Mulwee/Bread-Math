@@ -216,7 +216,7 @@ Vector<T, rows> operator*(const Vector<T,n> &v, const Matrix<T,rows,n> &m) {
 }
 
 // TODO: make this less slow?
-// Transforms vector by a matrix (assuming column vector)
+// Transforms vector by a matrix bigger than the source vector (just fills 1s) (assuming column vector)
 template <typename T, int n, int cols, int rows>
 Vector<T, n> operator*(const Vector<T,n> &v, const Matrix<T,rows,cols> &m) {
   Vector<T, n> result;
