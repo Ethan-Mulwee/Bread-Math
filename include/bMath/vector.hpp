@@ -186,7 +186,7 @@ Vector<T, n> operator*(const Vector<T, n> &a, const float b) {
   return result;
 }
 
-// Returns vector multipled component wise
+// Returns vector multipled component wise (hadamard product)
 template <typename T, int n>
 Vector<T, n> operator*(const Vector<T,n> &a, const Vector<T,n> &b) {
   Vector<T,n> result;
@@ -238,6 +238,7 @@ Vector<T, n> operator*(const Vector<T,n> &v, const Matrix<T,rows,cols> &m) {
 //   Vector<T, cols> result;
 // }
 
+
 template <typename T, int n>
 float dot(const Vector<T, n> &a, const Vector<T, n> &b) {
   float result = 0;
@@ -245,6 +246,24 @@ float dot(const Vector<T, n> &a, const Vector<T, n> &b) {
     result += a[i] * b[i];
   }
   return result;
+}
+
+// TODO: general wedge product
+template<typename T>
+Vector<T,3> wedgeProduct(const Vector<T,3> &a, const Vector<T,3> &b) {
+  return Vector<T,3>();
+}
+
+// Just does geometric product for vectors of size 3 for now
+// TODO: figure out how to generalize to any dim
+template <typename T>
+Vector<T,4> geometricProduct(const Vector<T,3> &a, const Vector<T,3> &b) {
+  return Vector<T,4>(
+    a.y*b.z-a.z*b.z,
+    a.z*b.x-a.x*b.z,
+    a.x*b.y-a.y*b.x,
+    a.x*b.x+a.y*b.y+a.z*b.z
+  );
 }
 
 template <typename T>

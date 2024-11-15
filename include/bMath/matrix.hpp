@@ -168,6 +168,13 @@ inline Matrix3 cof(const Matrix3 &m) {
     minor(m,2,0), -minor(m,2,1), minor(m,2,2)
   );
 }
+
+inline Matrix4 cof(const Matrix4 &m) {
+  return Matrix4(
+    
+  );
+}
+
 // What if I created a function that takes in a function pointer and performs opts on all the elements like this
 
 // transpose of the cofactor matrix
@@ -189,9 +196,11 @@ inline Matrix3 inverse(const Matrix3 &m) {
   return (1/det(m))*cofactor;
 }
 
-inline Matrix4 inverse(const Matrix4 &m) {
-  return m;
-}
+// inline Matrix4 inverse(const Matrix4 &m) {
+//   Matrix4 cofactor = cof(m);
+//   cofactor = transpose(cofactor);
+//   return (1/det(m))*cofactor;
+// }
 
 // TODO:
 // B^-1MB

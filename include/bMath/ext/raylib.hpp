@@ -35,4 +35,20 @@ inline bMath::Matrix4 toBread(const Matrix &m) {
   );
 }
 
+inline void drawVector(const bMath::float3 &v) {
+  DrawLine3D(Vector3{0,0,0}, toRay(v), WHITE);
+}
+
+inline void drawVector(const bMath::float3 &v, Color color) {
+  DrawLine3D(Vector3{0,0,0}, toRay(v), color);
+}
+
+inline void drawVector(const bMath::float3 &start, const bMath::float3 &v) {
+  DrawLine3D(toRay(start), toRay(v), WHITE);
+}
+
+inline void drawVector(const bMath::float3 &start, const bMath::float3 &v, Color color) {
+  DrawLine3D(toRay(start), toRay(v), color);
+}
+
 #endif
