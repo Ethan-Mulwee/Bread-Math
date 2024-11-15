@@ -238,6 +238,14 @@ Vector<T, n> operator*(const Vector<T,n> &v, const Matrix<T,rows,cols> &m) {
 //   Vector<T, cols> result;
 // }
 
+template <typename T, int n>
+float lengthSquared(const Vector<T,n> &v) {
+  float total;
+  for (int i = 0; i < n; i++) {
+    total += v[i]*v[i];
+  }
+  return total;
+} 
 
 template <typename T, int n>
 float dot(const Vector<T, n> &a, const Vector<T, n> &b) {
@@ -264,6 +272,15 @@ Vector<T,4> geometricProduct(const Vector<T,3> &a, const Vector<T,3> &b) {
     a.x*b.y-a.y*b.x,
     a.x*b.x+a.y*b.y+a.z*b.z
   );
+}
+
+template <typename T>
+Vector<T,4> rotationBetween(const Vector<T,3> &a, const Vector<T,3> &b) {
+  Vector<T,3> axis = cross(a,b);
+  Vector<T,4> Quaternion(
+    axis.x,axis.y,axis.z, dot(a,b)+1
+  );
+  return normalize(Quaternion);
 }
 
 template <typename T>
@@ -358,6 +375,10 @@ inline float4 rotate(const float4 &q, const float3 &v) {
   );
   result.normalize();
   return result;
+}
+
+inline float QuaternionAngle(const float4 &q) {
+  return std::acos(q.w);
 }
 
 // Returns vector rotated some degrees along the x axis

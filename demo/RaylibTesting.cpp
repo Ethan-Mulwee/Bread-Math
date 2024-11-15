@@ -33,11 +33,12 @@ int main() {
     // b = rotate(b, bMath::QuaternionAxisAngle(0.001, bMath::float3(0,1,0)));
     a.normalize();
     b.normalize();
-    bMath::float4 q = bMath::geometricProduct(a,b);
+    bMath::float4 q = bMath::rotationBetween(a,b);
     q.normalize();
     // TODO: a*q should work as well
     // q*a implicitly converts to a transform matrix?
     bMath::float3 c = rotate(a,q);
+    std::cout << bMath::QuaternionAngle(q) << "\n";
 
     BeginDrawing();
     ClearBackground(Color{35,35,35,255});
@@ -45,7 +46,6 @@ int main() {
         DrawAxes();
         drawVector(a, ORANGE);
         drawVector(b, PURPLE);
-        drawVector(bMath::float3(q.x,q.y,q.z), BROWN);
         drawVector(c, WHITE);
       EndMode3D();
     EndDrawing();
