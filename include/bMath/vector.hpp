@@ -274,6 +274,7 @@ Vector<T,4> geometricProduct(const Vector<T,3> &a, const Vector<T,3> &b) {
   );
 }
 
+// TODO: test on non unit vectors
 template <typename T>
 Vector<T,4> rotationBetween(const Vector<T,3> &a, const Vector<T,3> &b) {
   Vector<T,3> axis = cross(a,b);
