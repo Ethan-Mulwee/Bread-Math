@@ -8,39 +8,24 @@
 using namespace bMath;
 
 int main() {
-  // Performance testing
-  Matrix3 m1(
-    2,4,3,
-    5,2,3,
-    5,4,2
+  Matrix4 m(
+    5,4,3,1,
+    2,6,2,4,
+    7,8,9,10,
+    1,2,3,4
   );
 
-  Matrix2 m2(
-    1,2,
-    3,4
+  std::cout << det(m) << "\n";
+
+  Matrix<float,5,5> m5(
+    5,4,3,2,34,
+    4,34,5,8,9,
+    56,4,2,10,3,
+    7,8,9,10,3,
+    1,2,3,4,10
   );
 
-  Matrix2 m3 = submatrix(m1,0,0);
-  float deterimant = det(m3);
-
-  std::cout << m3 << "\n";
-  std::cout << deterimant << "\n";
-  std::cout << cof(m1) << "\n";
-  std::cout << inverse(m1) << "\n";
-  Matrix3 m1i = inverse(m1);
-  std::cout << m1*m1i << "\n";
-
-  // Matrix3 m2(
-  //   2,0,0,
-  //   0,2,0,
-  //   0,0,2
-  // );
-
-  // Matrix3 m3 = inverse(m1);
-
-  // std::cout << m1 << "\n";
-  // std::cout << m3 << "\n";
-  // std::cout << m3*m1 << "\n";
+  std::cout << det(m5) << "\n";
 
   // auto start = std::chrono::high_resolution_clock::now();
 

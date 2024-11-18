@@ -121,10 +121,6 @@ inline float det(const Matrix3 &m) {
   return m(0,0)*(m(1,1)*m(2,2)-m(1,2)*m(2,1))-m(0,1)*(m(1,0)*m(2,2)-m(1,2)*m(2,0))+m(0,2)*(m(1,0)*m(2,1)-m(1,1)*m(2,0));
 }
 
-inline float det(const Matrix4 &m) {
-  return 0;
-}
-
 // NOTE: this implmentation is rather inefficent but it works for the moment
 template<typename T, int rows, int cols>
 Matrix<T, rows-1, cols-1> submatrix(const Matrix<T,rows,cols> &m, const int row, const int col) {
@@ -150,6 +146,19 @@ Matrix<T, rows-1, cols-1> submatrix(const Matrix<T,rows,cols> &m, const int row,
 template <typename T, int rows, int cols>
 float minor(const Matrix<T,rows,cols> &m, const int row, const int col) {
   return det(submatrix(m, row, col));
+}
+
+// TODO: recursive cofactor expansion to get determinant of any matrix
+template<typename T, int rows, int cols>
+T det(const Matrix<T,rows,cols> &m) {
+  T total;
+  for (int i = 0; i < cols; i++) {
+    if (i%2)
+      total -= m(0,i)*minor(m,0,i);
+    else
+      total += m(0,i)*minor(m,0,i);
+  }
+  return total;
 }
 
 // cofactor matrix made by taking the deterimants of all minor matrices that compose the matrix 
