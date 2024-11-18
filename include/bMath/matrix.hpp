@@ -152,7 +152,7 @@ float minor(const Matrix<T,rows,cols> &m, const int row, const int col) {
 template<typename T, int size>
 T det(const Matrix<T,size,size> &m) {
   T total;
-  for (int i = 0; i < cols; i++) {
+  for (int i = 0; i < size; i++) {
     if (i%2)
       total -= m(0,i)*minor(m,0,i);
     else

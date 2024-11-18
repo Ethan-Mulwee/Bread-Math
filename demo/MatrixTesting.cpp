@@ -33,15 +33,15 @@ int main() {
     3,4
   );
 
-  std::cout << det(weirdMatrix) << "\n";
+  // std::cout << det(weirdMatrix) << "\n";
 
-  // auto start = std::chrono::high_resolution_clock::now();
+  auto start = std::chrono::high_resolution_clock::now();
 
-  // for (int i = 0; i < 1000000; i++) {
-  //   transpose(m1);
-  // }
+  for (int i = 0; i < 100000; i++) {
+    det(m5);
+  }
 
-  // auto end = std::chrono::high_resolution_clock::now();
-  // std::chrono::duration<double> elapsed = end - start;
-  // std::cout << "Elapsed time: " << elapsed.count() << " seconds" << std::endl;
+  auto end = std::chrono::high_resolution_clock::now();
+  std::chrono::duration<double> elapsed = end - start;
+  std::cout << "Elapsed time: " << elapsed.count() << " seconds" << std::endl;
 }
