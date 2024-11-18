@@ -25,7 +25,7 @@ int main() {
     1,2,3,4,10
   );
 
-  std::cout << det(m5) << "\n";
+  std::cout << cof(m5) << "\n";
 
   Matrix<float,3,2> weirdMatrix(
     4,2,

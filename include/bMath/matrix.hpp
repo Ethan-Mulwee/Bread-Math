@@ -184,6 +184,20 @@ inline Matrix4 cof(const Matrix4 &m) {
   );
 }
 
+template <typename T, int size>
+Matrix<T, size, size> cof(const Matrix<T, size, size> &m) {
+  Matrix<T, size, size> result;
+  for (int i = 0; i < size; i++) {
+    for (int j = 0; j < size; j++) {
+      if ((i+j)%2)
+        result(i,j) = -minor(m,i,j);
+      else
+        result(i,j) = minor(m,i,j);
+    }
+  }
+  return result;
+}
+
 // What if I created a function that takes in a function pointer and performs opts on all the elements like this
 
 // transpose of the cofactor matrix
