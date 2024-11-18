@@ -27,6 +27,14 @@ int main() {
 
   std::cout << det(m5) << "\n";
 
+  Matrix<float,3,2> weirdMatrix(
+    4,2,
+    5,1,
+    3,4
+  );
+
+  std::cout << det(weirdMatrix) << "\n";
+
   // auto start = std::chrono::high_resolution_clock::now();
 
   // for (int i = 0; i < 1000000; i++) {

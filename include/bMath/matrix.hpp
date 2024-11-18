@@ -148,9 +148,9 @@ float minor(const Matrix<T,rows,cols> &m, const int row, const int col) {
   return det(submatrix(m, row, col));
 }
 
-// TODO: recursive cofactor expansion to get determinant of any matrix
-template<typename T, int rows, int cols>
-T det(const Matrix<T,rows,cols> &m) {
+// TODO: recursive cofactor expansion to get determinant of any square matrix
+template<typename T, int size>
+T det(const Matrix<T,size,size> &m) {
   T total;
   for (int i = 0; i < cols; i++) {
     if (i%2)
