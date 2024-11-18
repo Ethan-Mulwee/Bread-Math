@@ -201,8 +201,10 @@ Matrix<T, size, size> cof(const Matrix<T, size, size> &m) {
 // What if I created a function that takes in a function pointer and performs opts on all the elements like this
 
 // transpose of the cofactor matrix
-inline Matrix3 adjugate(const Matrix3 &m) {
-  return Matrix3();
+template <typename T, int size>
+Matrix<T, size, size> adjugate(const Matrix<T, size, size> &m) {
+  Matrix<T,size,size> cofMatrix = cof(m);
+  return transpose(cofMatrix);
 }
 
 
@@ -224,6 +226,14 @@ inline Matrix3 inverse(const Matrix3 &m) {
 //   cofactor = transpose(cofactor);
 //   return (1/det(m))*cofactor;
 // }
+
+template<typename T, int size>
+Matrix<T,size,size> inverse(const Matrix<T,size,size> &m) {
+  Matrix<T,size,size> result;
+  result = (1/det(m))*adjugate(m);
+
+  return result;
+}
 
 // TODO:
 // B^-1MB

@@ -27,11 +27,11 @@ int main() {
 
   std::cout << cof(m5) << "\n";
 
-  Matrix<float,3,2> weirdMatrix(
-    4,2,
-    5,1,
-    3,4
-  );
+  std::cout << inverse(m5) << "\n";
+
+  Matrix<float, 5, 5> inversem5 = inverse(m5);
+
+  std::cout << m5*inversem5 << "\n";
 
   // std::cout << det(weirdMatrix) << "\n";
 
