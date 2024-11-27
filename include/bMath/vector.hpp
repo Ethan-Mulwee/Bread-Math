@@ -186,6 +186,16 @@ Vector<T, n> operator*(const Vector<T, n> &a, const float b) {
   return result;
 }
 
+// Returns vector divided by scalar component wise
+template <typename T, int n>
+Vector<T, n> operator/(const Vector<T, n> &a, const float b) {
+  Vector<T, n> result;
+  for (int i = 0; i < n; i++) {
+    result[i] = a[i] / b;
+  }
+  return result;
+} 
+
 // Returns vector multipled component wise (hadamard product)
 template <typename T, int n>
 Vector<T, n> operator*(const Vector<T,n> &a, const Vector<T,n> &b) {
