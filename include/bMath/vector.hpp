@@ -186,6 +186,16 @@ Vector<T, n> operator*(const Vector<T, n> &a, const float b) {
   return result;
 }
 
+// Returns vector scaled by scalar
+template <typename T, int n>
+Vector<T, n> operator*(const float a, const Vector<T, n> &b) {
+  Vector<T, n> result;
+  for (int i = 0; i < n; i++) {
+    result[i] = a * b[i];
+  }
+  return result;
+}
+
 // Returns vector divided by scalar component wise
 template <typename T, int n>
 Vector<T, n> operator/(const Vector<T, n> &a, const float b) {
