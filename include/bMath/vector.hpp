@@ -309,6 +309,16 @@ Vector<T, 3> cross(const Vector<T, 3> &a, const Vector<T, 3> &b) {
   return Vector<T, 3>(a.y * b.z - a.z * b.y, a.z * b.x - a.x * b.z, a.x * b.y - a.y * b.x);
 }
 
+template <typename T>
+Vector<T, 3> project(const Vector<T, 3> &a, const Vector<T, 3> &b) {
+  return (dot(a,b)/dot(b,b))*b;
+}
+
+template <typename T>
+Vector<T, 3> projectOnPlane(const Vector<T, 3> &v, const Vector<T, 3> &n) {
+  return v-project(v,n);
+}
+
 template <typename T, int n>
 Vector<T, n> max(const Vector<T, n> &a, const Vector<T, n> &b) {
   Vector<T, n> result;

@@ -26,7 +26,7 @@ int main() {
   camera.projection = CAMERA_PERSPECTIVE;
 
     bMath::float3 b(1,0.5,0);
-    bMath::float3 a(1,1,0);
+    bMath::float3 a(1,1,1);
 
   while(!WindowShouldClose()) {
     UpdateCamera(&camera, CAMERA_ORBITAL);
@@ -37,7 +37,7 @@ int main() {
     q.normalize();
     // TODO: a*q should work as well
     // q*a implicitly converts to a transform matrix?
-    bMath::float3 c = rotate(a,q);
+    bMath::float3 c = bMath::projectOnPlane(a,bMath::float3(0,1,0));
     std::cout << bMath::QuaternionAngle(q) << "\n";
 
     BeginDrawing();
