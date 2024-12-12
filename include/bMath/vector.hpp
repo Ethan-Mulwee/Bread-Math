@@ -109,6 +109,9 @@ template <> struct Vector<float, 4> {
     };
   };
 
+  // TODO implict conversion
+  // Vector(Quaternion<float> q) : data(q.data) {}
+
   template <typename... Args> Vector(Args... args) : data{(float)args...} {}
 
   float &operator[](int i) { return data[i]; }
