@@ -2,7 +2,7 @@
 #define BMATH_FWD
 
 namespace bMath {
-  template <typename T, int n> struct Vector;
+  template <typename T, std::size_t N> struct Vector;
   template <typename T, int rows, int cols> struct Matrix;
 }
 

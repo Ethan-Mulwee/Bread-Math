@@ -7,8 +7,8 @@
 #include <math.h>
 
 namespace bMath {
-template <typename T, int n> struct Vector {
-  T data[n];
+template <typename T, std::size_t N> struct Vector {
+  T data[N];
 
   template <typename... Args> Vector(Args... args) : data{(T)args...} {}
 
@@ -18,7 +18,7 @@ template <typename T, int n> struct Vector {
 
   float magnitude() {
     float total = 0;
-    for (int i = 0; i < n; i++) {
+    for (int i = 0; i < N; i++) {
       total += data[i] * data[i];
     }
     return sqrt(total);
@@ -28,7 +28,7 @@ template <typename T, int n> struct Vector {
   // Normalize the vector
   void normalize() {
     float mag = (*this).magnitude();
-    for (int i = 0; i < n; i++) {
+    for (int i = 0; i < N; i++) {
       data[i] = data[i] * (float)1 / mag;
     }
   }
@@ -144,91 +144,91 @@ typedef Vector<int, 2> int2;
 typedef Vector<int, 3> int3;
 typedef Vector<int, 4> int4;
 
-template <typename T, int n>
-Vector<T, n> operator+(const Vector<T, n> &a, const Vector<T, n> &b) {
-  Vector<T, n> result;
-  for (int i = 0; i < n; i++) {
+template <typename T, std::size_t N>
+Vector<T, N> operator+(const Vector<T, N> &a, const Vector<T, N> &b) {
+  Vector<T, N> result;
+  for (int i = 0; i < N; i++) {
     result[i] = a[i] + b[i];
   }
   return result;
 }
 
-template <typename T, int n>
-void operator+=(Vector<T, n> &a, const Vector<T, n> &b) {
-  for (int i = 0; i < n; i++) {
+template <typename T, std::size_t N>
+void operator+=(Vector<T, N> &a, const Vector<T, N> &b) {
+  for (int i = 0; i < N; i++) {
     a[i] += b[i];
   }
 }
 
-template <typename T, int n>
-Vector<T, n> operator-(const Vector<T, n> &a, const Vector<T, n> &b) {
-  Vector<T, n> result;
-  for (int i = 0; i < n; i++) {
+template <typename T, std::size_t N>
+Vector<T, N> operator-(const Vector<T, N> &a, const Vector<T, N> &b) {
+  Vector<T, N> result;
+  for (int i = 0; i < N; i++) {
     result[i] = a[i] - b[i];
   }
   return result;
 }
 
-template <typename T, int n>
-void operator-=(Vector<T, n> &a, const Vector<T, n> &b) {
-  for (int i = 0; i < n; i++) {
+template <typename T, std::size_t N>
+void operator-=(Vector<T, N> &a, const Vector<T, N> &b) {
+  for (int i = 0; i < N; i++) {
     a[i] -= b[i];
   }
 }
 
 // Returns vector scaled by scalar
-template <typename T, int n>
-Vector<T, n> operator*(const Vector<T, n> &a, const float b) {
-  Vector<T, n> result;
-  for (int i = 0; i < n; i++) {
+template <typename T, std::size_t N>
+Vector<T, N> operator*(const Vector<T, N> &a, const float b) {
+  Vector<T, N> result;
+  for (int i = 0; i < N; i++) {
     result[i] = a[i] * b;
   }
   return result;
 }
 
 // Returns vector scaled by scalar
-template <typename T, int n>
-Vector<T, n> operator*(const float a, const Vector<T, n> &b) {
-  Vector<T, n> result;
-  for (int i = 0; i < n; i++) {
+template <typename T, std::size_t N>
+Vector<T, N> operator*(const float a, const Vector<T, N> &b) {
+  Vector<T, N> result;
+  for (int i = 0; i < N; i++) {
     result[i] = a * b[i];
   }
   return result;
 }
 
 // Returns vector divided by scalar component wise
-template <typename T, int n>
-Vector<T, n> operator/(const Vector<T, n> &a, const float b) {
-  Vector<T, n> result;
-  for (int i = 0; i < n; i++) {
+template <typename T, std::size_t N>
+Vector<T, N> operator/(const Vector<T, N> &a, const float b) {
+  Vector<T, N> result;
+  for (int i = 0; i < N; i++) {
     result[i] = a[i] / b;
   }
   return result;
 } 
 
 // Returns vector multipled component wise (hadamard product)
-template <typename T, int n>
-Vector<T, n> operator*(const Vector<T,n> &a, const Vector<T,n> &b) {
-  Vector<T,n> result;
-  for (int i = 0; i < n; i++) {
+template <typename T, std::size_t N>
+Vector<T, N> operator*(const Vector<T,N> &a, const Vector<T,N> &b) {
+  Vector<T,N> result;
+  for (int i = 0; i < N; i++) {
     result[i] = a[i]*b[i];
   }
 }
 
 // Multiples vector component wise by another vector
-template <typename T, int n>
-Vector<T, n> operator*=(Vector<T,n> &a, const Vector<T,n> &b) {
-  for (int i = 0; i < n; i++) {
+template <typename T, std::size_t N>
+Vector<T, N> operator*=(Vector<T,N> &a, const Vector<T,N> &b) {
+  for (int i = 0; i < N; i++) {
     a[i] *= b[i];
   }
 }
 
 // Transforms vector by a matrix (assuming column vector)
-template <typename T, int n, int rows>
-Vector<T, rows> operator*(const Vector<T,n> &v, const Matrix<T,rows,n> &m) {
+template <typename T, std::size_t N, int rows>
+Vector<T, rows> operator*(const Vector<T,N> &v, const Matrix<T,rows,N> &m) {
   Vector<T, rows> result;
   for (int i = 0; i < rows; i++) {
-    for (int j = 0; j < n; j++) {
+    for (int j = 0; j < N; j++) {
       result[i] += v[j]*m(i,j);
     }
   }
@@ -237,14 +237,14 @@ Vector<T, rows> operator*(const Vector<T,n> &v, const Matrix<T,rows,n> &m) {
 
 // TODO: make this less slow?
 // Transforms vector by a matrix bigger than the source vector (just fills 1s) (assuming column vector)
-template <typename T, int n, int cols, int rows>
-Vector<T, n> operator*(const Vector<T,n> &v, const Matrix<T,rows,cols> &m) {
-  Vector<T, n> result;
+template <typename T, std::size_t N, int cols, int rows>
+Vector<T, N> operator*(const Vector<T,N> &v, const Matrix<T,rows,cols> &m) {
+  Vector<T, N> result;
   for (int i = 0; i < rows; i++) {
     for (int j = 0; j < cols; j++) {
-      if (i >= n) return result;
+      if (i >= N) return result;
       T cord;
-      if (j < n) cord = v[j];
+      if (j < N) cord = v[j];
       else cord = 1;
       result[i] += cord*m(i,j);
     }
@@ -253,24 +253,24 @@ Vector<T, n> operator*(const Vector<T,n> &v, const Matrix<T,rows,cols> &m) {
 }
 
 // Returns vector transformed by matrix (will shrink dimension of vector of transformation does so)
-// template <typename T, int n, int cols>
+// template <typename T, std::size_t n, int cols>
 // Vector<T, cols> transform(const Vector<T,n> &v, const Matrix<T,n,cols> &m) {
 //   Vector<T, cols> result;
 // }
 
-template <typename T, int n>
-float lengthSquared(const Vector<T,n> &v) {
+template <typename T, std::size_t N>
+float lengthSquared(const Vector<T,N> &v) {
   float total;
-  for (int i = 0; i < n; i++) {
+  for (int i = 0; i < N; i++) {
     total += v[i]*v[i];
   }
   return total;
 } 
 
-template <typename T, int n>
-float dot(const Vector<T, n> &a, const Vector<T, n> &b) {
+template <typename T, std::size_t N>
+float dot(const Vector<T, N> &a, const Vector<T, N> &b) {
   float result = 0;
-  for (int i = 0; i < n; i++) {
+  for (int i = 0; i < N; i++) {
     result += a[i] * b[i];
   }
   return result;
@@ -319,28 +319,28 @@ Vector<T, 3> projectOnPlane(const Vector<T, 3> &v, const Vector<T, 3> &n) {
   return v-project(v,n);
 }
 
-template <typename T, int n>
-Vector<T, n> max(const Vector<T, n> &a, const Vector<T, n> &b) {
-  Vector<T, n> result;
-  for (int i = 0; i < n; i++) {
+template <typename T, std::size_t N>
+Vector<T, N> max(const Vector<T, N> &a, const Vector<T, N> &b) {
+  Vector<T, N> result;
+  for (int i = 0; i < N; i++) {
     result[i] = std::max(a[i], b[i]);
   }
   return result;
 }
 
-template <typename T, int n>
-Vector<T, n> min(const Vector<T, n> &a, const Vector<T, n> &b) {
-  Vector<T, n> result;
-  for (int i = 0; i < n; i++) {
+template <typename T, std::size_t N>
+Vector<T, N> min(const Vector<T, N> &a, const Vector<T, N> &b) {
+  Vector<T, N> result;
+  for (int i = 0; i < N; i++) {
     result[i] = std::min(a[i], b[i]);
   }
   return result;
 }
 
-template <typename T, int n>
-Vector<T, n> lerp(const Vector<T, n> &a, const Vector<T, n> &b, const float t) {
-  Vector<T, n> result;
-  for (int i = 0; i < n; i++) {
+template <typename T, std::size_t N>
+Vector<T, N> lerp(const Vector<T, N> &a, const Vector<T, N> &b, const float t) {
+  Vector<T, N> result;
+  for (int i = 0; i < N; i++) {
     result[i] = lerp(a[i], b[i], t);
   }
   return result;
@@ -354,27 +354,27 @@ inline float4 slerp(const float4 &a, const float4 &b, float t) {
 
 // TODO
 // Clamp length of vector
-template <typename T, int n>
-Vector<T, n> clamp(const Vector<T, n> &a, float b) {
-  return Vector<T,n>();
+template <typename T, std::size_t N>
+Vector<T, N> clamp(const Vector<T, N> &a, float b) {
+  return Vector<T,N>();
 }
 
 // TODO
 // Clamp vector component wise
-template <typename T, int n>
-Vector<T, n> clamp(const Vector<T, n> &a, const Vector<T, n>) {
+template <typename T, std::size_t N>
+Vector<T, N> clamp(const Vector<T, N> &a, const Vector<T, N>) {
   // std::clamp()
 }
 
-template <typename T, int n>
-float distance(const Vector<T, n> &a, const Vector<T, n> &b) {
+template <typename T, std::size_t N>
+float distance(const Vector<T, N> &a, const Vector<T, N> &b) {
   return (a - b).magnitude();
 }
 
-template <typename T, int n> Vector<T, n> normalize(const Vector<T, n> &a) {
+template <typename T, std::size_t N> Vector<T, N> normalize(const Vector<T, N> &a) {
   float mag = a.magnitude();
-  Vector<T, n> result;
-  for (int i = 0; i < n; i++) {
+  Vector<T, N> result;
+  for (int i = 0; i < N; i++) {
     result[i] = a[i] * (float)1 / mag;
   }
   return result;

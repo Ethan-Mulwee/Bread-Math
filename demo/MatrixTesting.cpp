@@ -15,33 +15,39 @@ int main() {
     1,2,3,4
   );
 
-  std::cout << det(m) << "\n";
+  std::cout << m;
 
-  Matrix<float,5,5> m5(
-    5,4,3,2,34,
-    4,34,5,8,9,
-    56,4,2,10,3,
-    7,8,9,10,3,
-    1,2,3,4,10
-  );
+  auto test = getCol(m,2);
 
-  std::cout << cof(m5) << "\n";
+  std::cout << test << "\n";
 
-  std::cout << inverse(m5) << "\n";
+  // std::cout << det(m) << "\n";
 
-  Matrix<float, 5, 5> inversem5 = inverse(m5);
+  // Matrix<float,5,5> m5(
+  //   5,4,3,2,34,
+  //   4,34,5,8,9,
+  //   56,4,2,10,3,
+  //   7,8,9,10,3,
+  //   1,2,3,4,10
+  // );
 
-  std::cout << m5*inversem5 << "\n";
+  // std::cout << cof(m5) << "\n";
 
-  // std::cout << det(weirdMatrix) << "\n";
+  // std::cout << inverse(m5) << "\n";
 
-  auto start = std::chrono::high_resolution_clock::now();
+  // Matrix<float, 5, 5> inversem5 = inverse(m5);
 
-  for (int i = 0; i < 100000; i++) {
-    det(m5);
-  }
+  // std::cout << m5*inversem5 << "\n";
 
-  auto end = std::chrono::high_resolution_clock::now();
-  std::chrono::duration<double> elapsed = end - start;
-  std::cout << "Elapsed time: " << elapsed.count() << " seconds" << std::endl;
+  // // std::cout << det(weirdMatrix) << "\n";
+
+  // auto start = std::chrono::high_resolution_clock::now();
+
+  // for (int i = 0; i < 100000; i++) {
+  //   det(m5);
+  // }
+
+  // auto end = std::chrono::high_resolution_clock::now();
+  // std::chrono::duration<double> elapsed = end - start;
+  // std::cout << "Elapsed time: " << elapsed.count() << " seconds" << std::endl;
 }

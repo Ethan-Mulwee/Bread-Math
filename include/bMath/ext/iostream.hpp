@@ -42,12 +42,12 @@ std::ostream &operator<<(std::ostream &os, const Matrix<T, rows, cols> &m) {
  return os;
 }
 
-template <typename T, int n>
-std::ostream &operator<<(std::ostream &os, const Vector<T, n> &v) {
+template <typename T, std::size_t N>
+std::ostream &operator<<(std::ostream &os, const Vector<T, N> &v) {
   os << "(";
-  for (int i = 0; i < n; i++) {
+  for (int i = 0; i < N; i++) {
     os << v[i];
-    os << ((i != n - 1) ? ", " : "");
+    os << ((i != N - 1) ? ", " : "");
   }
   os << ")";
   return os;

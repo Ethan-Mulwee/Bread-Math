@@ -2,6 +2,7 @@
 #define BMATH_MATRIX
 
 #include <assert.h>
+#include "vector.hpp"
 
 namespace bMath {
 template <typename T, int rows, int cols> struct Matrix {
@@ -249,6 +250,15 @@ inline Matrix3 rotationMatrix(float x, float y, float z) {
   return Matrix3();
 }
 
+// TODO: optimize
+template<typename T, int rows, int cols>
+Vector<T,rows> getCol(const Matrix<T, rows, cols> &m, int c) {
+  Vector<T,rows> result;
+  for (int i = 0; i < rows; i++) {
+    result[i] = m(i,c);
+  }
+  return result;
+}
 
 
 
