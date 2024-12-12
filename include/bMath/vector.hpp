@@ -301,7 +301,7 @@ Vector<T,4> rotationBetween(const Vector<T,3> &a, const Vector<T,3> &b) {
   Vector<T,4> Quaternion(
     axis.x,axis.y,axis.z, dot(a,b)+1
   );
-  return normalize(Quaternion);
+  return normalized(Quaternion);
 }
 
 template <typename T>
@@ -371,7 +371,7 @@ float distance(const Vector<T, N> &a, const Vector<T, N> &b) {
   return (a - b).length();
 }
 
-template <typename T, std::size_t N> Vector<T, N> normalize(const Vector<T, N> &a) {
+template <typename T, std::size_t N> Vector<T, N> normalized(const Vector<T, N> &a) {
   float mag = a.length();
   Vector<T, N> result;
   for (int i = 0; i < N; i++) {
