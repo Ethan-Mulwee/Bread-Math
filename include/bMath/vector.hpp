@@ -372,18 +372,12 @@ float distance(const Vector<T, N> &a, const Vector<T, N> &b) {
 }
 
 template <typename T, std::size_t N> Vector<T, N> normalized(const Vector<T, N> &a) {
-  float mag = a.length();
+  float len = a.length();
   Vector<T, N> result;
   for (int i = 0; i < N; i++) {
-    result[i] = a[i] * (float)1 / mag;
+    result[i] = a[i] * (float)1 / len;
   }
   return result;
-}
-
-// Create a vector from an angle (in radians) and an axis
-inline float4 QuaternionAxisAngle(const float angle, float3 axis) {
-  axis.normalize();
-  return float4(std::sin(angle * 0.5) * axis.x, std::sin(angle * 0.5) * axis.y, std::sin(angle * 0.5) * axis.z, std::cos(angle * 0.5));
 }
 
 // Rotate a vector by a quaternion
@@ -406,10 +400,6 @@ inline float4 rotate(const float4 &q, const float3 &v) {
   );
   result.normalize();
   return result;
-}
-
-inline float QuaternionAngle(const float4 &q) {
-  return std::acos(q.w);
 }
 
 // Returns vector rotated some degrees along the x axis

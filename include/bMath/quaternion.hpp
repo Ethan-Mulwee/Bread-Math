@@ -13,13 +13,20 @@ namespace bMath {
     }
 
     Quaternion(T angle, Vector<T,3> axis) {
+      axis.normalize();
       data.w = cos(angle/2);
       auto s = sin(angle/2);
       data.x = s*axis.x;
       data.y = s*axis.y;
       data.z = s*axis.z;
     }
+
+    float Angle() {
+      return std::acos(data.w);
+    }
   };
+
+
 }
 
 #endif
