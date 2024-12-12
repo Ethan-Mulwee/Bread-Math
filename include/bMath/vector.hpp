@@ -16,7 +16,7 @@ template <typename T, std::size_t N> struct Vector {
 
   T operator[](int i) const { return data[i]; }
 
-  float magnitude() {
+  float length() {
     float total = 0;
     for (int i = 0; i < N; i++) {
       total += data[i] * data[i];
@@ -27,7 +27,7 @@ template <typename T, std::size_t N> struct Vector {
   // TODO
   // Normalize the vector
   void normalize() {
-    float mag = (*this).magnitude();
+    float mag = (*this).length();
     for (int i = 0; i < N; i++) {
       data[i] = data[i] * (float)1 / mag;
     }
@@ -52,7 +52,7 @@ template <> struct Vector<float, 2> {
 
   float operator[](int i) const { return data[i]; }
 
-  float magnitude() const {
+  float length() const {
     float total = 0;
     for (int i = 0; i < 2; i++) {
       total += data[i] * data[i];
@@ -62,7 +62,7 @@ template <> struct Vector<float, 2> {
 
   // Normalize the vector
   void normalize() {
-    float mag = (*this).magnitude();
+    float mag = (*this).length();
     for (int i = 0; i < 2; i++) {
       data[i] = data[i] * (float)1 / mag;
     }
@@ -85,7 +85,7 @@ template <> struct Vector<float, 3> {
 
   float operator[](int i) const { return data[i]; }
 
-  float magnitude() const {
+  float length() const {
     float total = 0;
     for (int i = 0; i < 3; i++) {
       total += data[i] * data[i];
@@ -95,7 +95,7 @@ template <> struct Vector<float, 3> {
 
   // Normalize the vector
   void normalize() {
-    float mag = (*this).magnitude();
+    float mag = (*this).length();
     for (int i = 0; i < 3; i++) {
       data[i] = data[i] * (float)1 / mag;
     }
@@ -115,7 +115,7 @@ template <> struct Vector<float, 4> {
 
   float operator[](int i) const { return data[i]; }
 
-  float magnitude() const {
+  float length() const {
     float total = 0;
     for (int i = 0; i < 4; i++) {
       total += data[i] * data[i];
@@ -125,7 +125,7 @@ template <> struct Vector<float, 4> {
 
   // Normalize the vector
   void normalize() {
-    float mag = (*this).magnitude();
+    float mag = (*this).length();
     for (int i = 0; i < 4; i++) {
       data[i] = data[i] * (float)1 / mag;
     }
@@ -368,11 +368,11 @@ Vector<T, N> clamp(const Vector<T, N> &a, const Vector<T, N>) {
 
 template <typename T, std::size_t N>
 float distance(const Vector<T, N> &a, const Vector<T, N> &b) {
-  return (a - b).magnitude();
+  return (a - b).length();
 }
 
 template <typename T, std::size_t N> Vector<T, N> normalize(const Vector<T, N> &a) {
-  float mag = a.magnitude();
+  float mag = a.length();
   Vector<T, N> result;
   for (int i = 0; i < N; i++) {
     result[i] = a[i] * (float)1 / mag;
