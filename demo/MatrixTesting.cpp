@@ -17,7 +17,7 @@ int main() {
 
   std::cout << m;
 
-  auto test = getCol(m,2);
+  float3 test = getColumnVector(m,2);
 
   std::cout << test << "\n";
 

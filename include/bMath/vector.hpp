@@ -69,38 +69,6 @@ template <> struct Vector<float, 2> {
   }
 };
 
-// TODO: template specialization includes other types
-template <> struct Vector<float, 3> {
-  union {
-    float data[3];
-    struct {
-      float x, y, z;
-    };
-    Vector<float, 2> xy;
-  };
-
-  template <typename... Args> Vector(Args... args) : data{(float)args...} {}
-
-  float &operator[](int i) { return data[i]; }
-
-  float operator[](int i) const { return data[i]; }
-
-  float length() const {
-    float total = 0;
-    for (int i = 0; i < 3; i++) {
-      total += data[i] * data[i];
-    }
-    return sqrt(total);
-  }
-
-  // Normalize the vector
-  void normalize() {
-    float mag = (*this).length();
-    for (int i = 0; i < 3; i++) {
-      data[i] = data[i] * (float)1 / mag;
-    }
-  }
-};
 template <> struct Vector<float, 4> {
   union {
     float data[4];
@@ -130,6 +98,42 @@ template <> struct Vector<float, 4> {
   void normalize() {
     float mag = (*this).length();
     for (int i = 0; i < 4; i++) {
+      data[i] = data[i] * (float)1 / mag;
+    }
+  }
+};
+
+// TODO: template specialization includes other types
+template <> struct Vector<float, 3> {
+  union {
+    float data[3];
+    struct {
+      float x, y, z;
+    };
+    Vector<float, 2> xy;
+  };
+
+  template <typename... Args> Vector(Args... args) : data{(float)args...} {}
+
+  // TODO: Add support for converting bigger vector types to smaller vector types
+  Vector(Vector<float,4> vec) : data{vec.data[0],vec.data[1],vec.data[2]} {}
+
+  float &operator[](int i) { return data[i]; }
+
+  float operator[](int i) const { return data[i]; }
+
+  float length() const {
+    float total = 0;
+    for (int i = 0; i < 3; i++) {
+      total += data[i] * data[i];
+    }
+    return sqrt(total);
+  }
+
+  // Normalize the vector
+  void normalize() {
+    float mag = (*this).length();
+    for (int i = 0; i < 3; i++) {
       data[i] = data[i] * (float)1 / mag;
     }
   }
