@@ -252,7 +252,7 @@ inline Matrix3 rotationMatrix(float x, float y, float z) {
 
 // TODO: optimize
 template<typename T, int rows, int cols>
-Vector<T,rows> getCol(const Matrix<T, rows, cols> &m, int c) {
+Vector<T,rows> getColumnVector(const Matrix<T, rows, cols> &m, int c) {
   Vector<T,rows> result;
   for (int i = 0; i < rows; i++) {
     result[i] = m(i,c);
