@@ -35,7 +35,7 @@ namespace bm {
     );
   }
 
-  template<typename T> matrix3 QuaternionToMatrix(const quaternion<T> &q) {
+  template<typename T> matrix3 quaternionToMatrix(const quaternion<T> &q) {
       matrix3 m;
       // i hat
       m.data[0][0] = q.x*q.x-q.y*q.y-q.z*q.z+q.w*q.w;

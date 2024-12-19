@@ -26,9 +26,9 @@ template <typename T, std::size_t N> struct vector {
 
   // Normalize the vector
   void normalize() {
-    float mag = (*this).length();
+    float len = (*this).length();
     for (int i = 0; i < N; i++) {
-      data[i] = data[i] * (float)1 / mag;
+      data[i] = data[i] * (float)1 / len;
     }
   }
 };

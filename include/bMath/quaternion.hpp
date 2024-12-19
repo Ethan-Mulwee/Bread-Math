@@ -7,7 +7,7 @@ namespace bm {
   template<typename T>
   struct quaternion {
     union {
-      vector<T,4> data;
+      vector<T,4> vec;
       struct {
         T x, y, z, w;
       };
@@ -16,30 +16,38 @@ namespace bm {
     quaternion() {}
 
     quaternion(T w, T x, T y, T z) {
-      data.x = x; data.y = y; data.z = z; data.w = w;
+      vec.x = x; vec.y = y; vec.z = z; vec.w = w;
     }
 
     quaternion(T angle, vector<T,3> axis) {
       axis.normalize();
-      data.w = cos(angle/2);
+      vec.w = cos(angle/2);
       auto s = sin(angle/2);
-      data.x = s*axis.x;
-      data.y = s*axis.y;
-      data.z = s*axis.z;
+      vec.x = s*axis.x;
+      vec.y = s*axis.y;
+      vec.z = s*axis.z;
     }
 
-    quaternion(vector<T,4> v) : data(v) {}
+    quaternion(vector<T,4> v) : vec(v) {}
 
     // TODO: testing not sure if that really should be *2
     T Angle() {
-      return std::acos(data.w)*2;
+      return std::acos(vec.w)*2;
     }
 
     // TODO: testing
     vector<T,3> Axis() {
       T angle = (*this).Angle();
       T s = sin(angle/2);
-      return vector<T,3>(data.x/s,data.y/s,data.z/s);
+      return vector<T,3>(vec.x/s,vec.y/s,vec.z/s);
+    }
+
+    T length() {
+      return sqrt(x*x+y*y+z*z+w*w);
+    }
+
+    void normalize() {
+      vec.normalize();
     }
   };
 
