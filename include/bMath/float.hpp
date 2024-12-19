@@ -3,7 +3,7 @@
 
 #include <math.h>
 
-namespace bMath {
+namespace bm {
     inline float lerp(float a, float b, float t) {
         return a + (b-a) * t;
     }

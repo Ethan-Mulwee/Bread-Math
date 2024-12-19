@@ -25,20 +25,20 @@ int main() {
   camera.fovy = 45;
   camera.projection = CAMERA_PERSPECTIVE;
 
-    bMath::float3 b(1,0.5,0);
-    bMath::float3 a(1,1,1);
+    bm::float3 b(1,0.5,0);
+    bm::float3 a(1,1,1);
 
   while(!WindowShouldClose()) {
     UpdateCamera(&camera, CAMERA_ORBITAL);
     // b = rotate(b, bMath::QuaternionAxisAngle(0.001, bMath::float3(0,1,0)));
     a.normalize();
     b.normalize();
-    bMath::float4 q = bMath::rotationBetween(a,b);
+    bm::float4 q = bm::rotationBetween(a,b);
     q.normalize();
     // TODO: a*q should work as well
     // q*a implicitly converts to a transform matrix?
-    bMath::float3 c = bMath::projectOnPlane(a,bMath::float3(0,1,0));
-    std::cout << bMath::QuaternionAngle(q) << "\n";
+    bm::float3 c = bm::projectOnPlane(a,bm::float3(0,1,0));
+    std::cout << bm::QuaternionAngle(q) << "\n";
 
     BeginDrawing();
     ClearBackground(Color{35,35,35,255});

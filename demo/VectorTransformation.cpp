@@ -2,7 +2,7 @@
 #include "bMath/ext/iostream.hpp"
 #include <chrono>
 
-using namespace bMath;
+using namespace bm;
 
 // g++ VectorTransformation.cpp -I../include
 

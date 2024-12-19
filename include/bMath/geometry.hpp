@@ -5,7 +5,7 @@
 #include "matrix.hpp"
 #include <vector>
 
-namespace bMath {
+namespace bm {
     // TODO: Redo basically all of this
     // Use a more preformant algorthim and reduce the amount of structure;
     // this is meant as a math library it shouldn't have it's own mesh data types
@@ -107,8 +107,8 @@ namespace bMath {
             if (ATest && BTest && CTest) {
                 hits++;
                 if (result.hits) {
-                    float currentDist = bMath::distance(ray.p, result.point);
-                    float newDist = bMath::distance(ray.p, point);
+                    float currentDist = bm::distance(ray.p, result.point);
+                    float newDist = bm::distance(ray.p, point);
                     if (newDist < currentDist) {result = RayIntersection(point, tri.getNormal());}
                     else {result.hits = hits;}
                 }
