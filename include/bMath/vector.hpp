@@ -7,10 +7,10 @@
 #include <math.h>
 
 namespace bm {
-template <typename T, std::size_t N> struct Vector {
+template <typename T, std::size_t N> struct vector {
   T data[N];
 
-  template <typename... Args> Vector(Args... args) : data{(T)args...} {}
+  template <typename... Args> vector(Args... args) : data{(T)args...} {}
 
   T &operator[](int i) { return data[i]; }
 
@@ -34,7 +34,7 @@ template <typename T, std::size_t N> struct Vector {
   }
 };
 
-template <> struct Vector<float, 2> {
+template <> struct vector<float, 2> {
   union {
     float data[2];
     struct {
@@ -46,7 +46,7 @@ template <> struct Vector<float, 2> {
   
   // TODO: Constructor to create vectors from smaller vectors like a vec3 from a vec2
 
-  template <typename... Args> Vector(Args... args) : data{(float)args...} {}
+  template <typename... Args> vector(Args... args) : data{(float)args...} {}
 
   float &operator[](int i) { return data[i]; }
 
@@ -69,7 +69,7 @@ template <> struct Vector<float, 2> {
   }
 };
 
-template <> struct Vector<float, 4> {
+template <> struct vector<float, 4> {
   union {
     float data[4];
     struct {
@@ -80,7 +80,7 @@ template <> struct Vector<float, 4> {
   // TODO implict conversion
   // Vector(Quaternion<float> q) : data(q.data) {}
 
-  template <typename... Args> Vector(Args... args) : data{(float)args...} {}
+  template <typename... Args> vector(Args... args) : data{(float)args...} {}
 
   float &operator[](int i) { return data[i]; }
 
@@ -104,19 +104,19 @@ template <> struct Vector<float, 4> {
 };
 
 // TODO: template specialization includes other types
-template <> struct Vector<float, 3> {
+template <> struct vector<float, 3> {
   union {
     float data[3];
     struct {
       float x, y, z;
     };
-    Vector<float, 2> xy;
+    vector<float, 2> xy;
   };
 
-  template <typename... Args> Vector(Args... args) : data{(float)args...} {}
+  template <typename... Args> vector(Args... args) : data{(float)args...} {}
 
   // TODO: Add support for converting bigger vector types to smaller vector types
-  Vector(Vector<float,4> vec) : data{vec.data[0],vec.data[1],vec.data[2]} {}
+  vector(vector<float,4> vec) : data{vec.data[0],vec.data[1],vec.data[2]} {}
 
   float &operator[](int i) { return data[i]; }
 
@@ -139,21 +139,21 @@ template <> struct Vector<float, 3> {
   }
 };
 
-typedef Vector<double, 2> double2;
-typedef Vector<double, 3> double3;
-typedef Vector<double, 4> double4;
+typedef vector<double, 2> double2;
+typedef vector<double, 3> double3;
+typedef vector<double, 4> double4;
 
-typedef Vector<float, 2> float2;
-typedef Vector<float, 3> float3;
-typedef Vector<float, 4> float4;
+typedef vector<float, 2> float2;
+typedef vector<float, 3> float3;
+typedef vector<float, 4> float4;
 
-typedef Vector<int, 2> int2;
-typedef Vector<int, 3> int3;
-typedef Vector<int, 4> int4;
+typedef vector<int, 2> int2;
+typedef vector<int, 3> int3;
+typedef vector<int, 4> int4;
 
 template <typename T, std::size_t N>
-Vector<T, N> operator+(const Vector<T, N> &a, const Vector<T, N> &b) {
-  Vector<T, N> result;
+vector<T, N> operator+(const vector<T, N> &a, const vector<T, N> &b) {
+  vector<T, N> result;
   for (int i = 0; i < N; i++) {
     result[i] = a[i] + b[i];
   }
@@ -161,15 +161,15 @@ Vector<T, N> operator+(const Vector<T, N> &a, const Vector<T, N> &b) {
 }
 
 template <typename T, std::size_t N>
-void operator+=(Vector<T, N> &a, const Vector<T, N> &b) {
+void operator+=(vector<T, N> &a, const vector<T, N> &b) {
   for (int i = 0; i < N; i++) {
     a[i] += b[i];
   }
 }
 
 template <typename T, std::size_t N>
-Vector<T, N> operator-(const Vector<T, N> &a, const Vector<T, N> &b) {
-  Vector<T, N> result;
+vector<T, N> operator-(const vector<T, N> &a, const vector<T, N> &b) {
+  vector<T, N> result;
   for (int i = 0; i < N; i++) {
     result[i] = a[i] - b[i];
   }
@@ -177,7 +177,7 @@ Vector<T, N> operator-(const Vector<T, N> &a, const Vector<T, N> &b) {
 }
 
 template <typename T, std::size_t N>
-void operator-=(Vector<T, N> &a, const Vector<T, N> &b) {
+void operator-=(vector<T, N> &a, const vector<T, N> &b) {
   for (int i = 0; i < N; i++) {
     a[i] -= b[i];
   }
@@ -185,8 +185,8 @@ void operator-=(Vector<T, N> &a, const Vector<T, N> &b) {
 
 // Returns vector scaled by scalar
 template <typename T, std::size_t N>
-Vector<T, N> operator*(const Vector<T, N> &a, const float b) {
-  Vector<T, N> result;
+vector<T, N> operator*(const vector<T, N> &a, const float b) {
+  vector<T, N> result;
   for (int i = 0; i < N; i++) {
     result[i] = a[i] * b;
   }
@@ -195,8 +195,8 @@ Vector<T, N> operator*(const Vector<T, N> &a, const float b) {
 
 // Returns vector scaled by scalar
 template <typename T, std::size_t N>
-Vector<T, N> operator*(const float a, const Vector<T, N> &b) {
-  Vector<T, N> result;
+vector<T, N> operator*(const float a, const vector<T, N> &b) {
+  vector<T, N> result;
   for (int i = 0; i < N; i++) {
     result[i] = a * b[i];
   }
@@ -205,8 +205,8 @@ Vector<T, N> operator*(const float a, const Vector<T, N> &b) {
 
 // Returns vector divided by scalar component wise
 template <typename T, std::size_t N>
-Vector<T, N> operator/(const Vector<T, N> &a, const float b) {
-  Vector<T, N> result;
+vector<T, N> operator/(const vector<T, N> &a, const float b) {
+  vector<T, N> result;
   for (int i = 0; i < N; i++) {
     result[i] = a[i] / b;
   }
@@ -215,8 +215,8 @@ Vector<T, N> operator/(const Vector<T, N> &a, const float b) {
 
 // Returns vector multipled component wise (hadamard product)
 template <typename T, std::size_t N>
-Vector<T, N> operator*(const Vector<T,N> &a, const Vector<T,N> &b) {
-  Vector<T,N> result;
+vector<T, N> operator*(const vector<T,N> &a, const vector<T,N> &b) {
+  vector<T,N> result;
   for (int i = 0; i < N; i++) {
     result[i] = a[i]*b[i];
   }
@@ -224,7 +224,7 @@ Vector<T, N> operator*(const Vector<T,N> &a, const Vector<T,N> &b) {
 
 // Multiples vector component wise by another vector
 template <typename T, std::size_t N>
-Vector<T, N> operator*=(Vector<T,N> &a, const Vector<T,N> &b) {
+vector<T, N> operator*=(vector<T,N> &a, const vector<T,N> &b) {
   for (int i = 0; i < N; i++) {
     a[i] *= b[i];
   }
@@ -232,8 +232,8 @@ Vector<T, N> operator*=(Vector<T,N> &a, const Vector<T,N> &b) {
 
 // Transforms vector by a matrix (assuming column vector)
 template <typename T, std::size_t N, int rows>
-Vector<T, rows> operator*(const Vector<T,N> &v, const Matrix<T,rows,N> &m) {
-  Vector<T, rows> result;
+vector<T, rows> operator*(const vector<T,N> &v, const matrix<T,rows,N> &m) {
+  vector<T, rows> result;
   for (int i = 0; i < rows; i++) {
     for (int j = 0; j < N; j++) {
       result[i] += v[j]*m(i,j);
@@ -245,8 +245,8 @@ Vector<T, rows> operator*(const Vector<T,N> &v, const Matrix<T,rows,N> &m) {
 // TODO: make this less slow?
 // Transforms vector by a matrix bigger than the source vector (just fills 1s) (assuming column vector)
 template <typename T, std::size_t N, int cols, int rows>
-Vector<T, N> operator*(const Vector<T,N> &v, const Matrix<T,rows,cols> &m) {
-  Vector<T, N> result;
+vector<T, N> operator*(const vector<T,N> &v, const matrix<T,rows,cols> &m) {
+  vector<T, N> result;
   for (int i = 0; i < rows; i++) {
     for (int j = 0; j < cols; j++) {
       if (i >= N) return result;
@@ -266,7 +266,7 @@ Vector<T, N> operator*(const Vector<T,N> &v, const Matrix<T,rows,cols> &m) {
 // }
 
 template <typename T, std::size_t N>
-float lengthSquared(const Vector<T,N> &v) {
+float lengthSquared(const vector<T,N> &v) {
   float total;
   for (int i = 0; i < N; i++) {
     total += v[i]*v[i];
@@ -275,7 +275,7 @@ float lengthSquared(const Vector<T,N> &v) {
 } 
 
 template <typename T, std::size_t N>
-float dot(const Vector<T, N> &a, const Vector<T, N> &b) {
+float dot(const vector<T, N> &a, const vector<T, N> &b) {
   float result = 0;
   for (int i = 0; i < N; i++) {
     result += a[i] * b[i];
@@ -285,15 +285,15 @@ float dot(const Vector<T, N> &a, const Vector<T, N> &b) {
 
 // TODO: general wedge product
 template<typename T>
-Vector<T,3> wedgeProduct(const Vector<T,3> &a, const Vector<T,3> &b) {
-  return Vector<T,3>();
+vector<T,3> wedgeProduct(const vector<T,3> &a, const vector<T,3> &b) {
+  return vector<T,3>();
 }
 
 // Just does geometric product for vectors of size 3 for now
 // TODO: figure out how to generalize to any dim
 template <typename T>
-Vector<T,4> geometricProduct(const Vector<T,3> &a, const Vector<T,3> &b) {
-  return Vector<T,4>(
+vector<T,4> geometricProduct(const vector<T,3> &a, const vector<T,3> &b) {
+  return vector<T,4>(
     a.y*b.z-a.z*b.z,
     a.z*b.x-a.x*b.z,
     a.x*b.y-a.y*b.x,
@@ -303,32 +303,32 @@ Vector<T,4> geometricProduct(const Vector<T,3> &a, const Vector<T,3> &b) {
 
 // TODO: test on non unit vectors
 template <typename T>
-Vector<T,4> rotationBetween(const Vector<T,3> &a, const Vector<T,3> &b) {
-  Vector<T,3> axis = cross(a,b);
-  Vector<T,4> Quaternion(
+vector<T,4> rotationBetween(const vector<T,3> &a, const vector<T,3> &b) {
+  vector<T,3> axis = cross(a,b);
+  vector<T,4> Quaternion(
     axis.x,axis.y,axis.z, dot(a,b)+1
   );
   return normalized(Quaternion);
 }
 
 template <typename T>
-Vector<T, 3> cross(const Vector<T, 3> &a, const Vector<T, 3> &b) {
-  return Vector<T, 3>(a.y * b.z - a.z * b.y, a.z * b.x - a.x * b.z, a.x * b.y - a.y * b.x);
+vector<T, 3> cross(const vector<T, 3> &a, const vector<T, 3> &b) {
+  return vector<T, 3>(a.y * b.z - a.z * b.y, a.z * b.x - a.x * b.z, a.x * b.y - a.y * b.x);
 }
 
 template <typename T>
-Vector<T, 3> project(const Vector<T, 3> &a, const Vector<T, 3> &b) {
+vector<T, 3> project(const vector<T, 3> &a, const vector<T, 3> &b) {
   return (dot(a,b)/dot(b,b))*b;
 }
 
 template <typename T>
-Vector<T, 3> projectOnPlane(const Vector<T, 3> &v, const Vector<T, 3> &n) {
+vector<T, 3> projectOnPlane(const vector<T, 3> &v, const vector<T, 3> &n) {
   return v-project(v,n);
 }
 
 template <typename T, std::size_t N>
-Vector<T, N> max(const Vector<T, N> &a, const Vector<T, N> &b) {
-  Vector<T, N> result;
+vector<T, N> max(const vector<T, N> &a, const vector<T, N> &b) {
+  vector<T, N> result;
   for (int i = 0; i < N; i++) {
     result[i] = std::max(a[i], b[i]);
   }
@@ -336,8 +336,8 @@ Vector<T, N> max(const Vector<T, N> &a, const Vector<T, N> &b) {
 }
 
 template <typename T, std::size_t N>
-Vector<T, N> min(const Vector<T, N> &a, const Vector<T, N> &b) {
-  Vector<T, N> result;
+vector<T, N> min(const vector<T, N> &a, const vector<T, N> &b) {
+  vector<T, N> result;
   for (int i = 0; i < N; i++) {
     result[i] = std::min(a[i], b[i]);
   }
@@ -345,8 +345,8 @@ Vector<T, N> min(const Vector<T, N> &a, const Vector<T, N> &b) {
 }
 
 template <typename T, std::size_t N>
-Vector<T, N> lerp(const Vector<T, N> &a, const Vector<T, N> &b, const float t) {
-  Vector<T, N> result;
+vector<T, N> lerp(const vector<T, N> &a, const vector<T, N> &b, const float t) {
+  vector<T, N> result;
   for (int i = 0; i < N; i++) {
     result[i] = lerp(a[i], b[i], t);
   }
@@ -362,25 +362,25 @@ inline float4 slerp(const float4 &a, const float4 &b, float t) {
 // TODO
 // Clamp length of vector
 template <typename T, std::size_t N>
-Vector<T, N> clamp(const Vector<T, N> &a, float b) {
-  return Vector<T,N>();
+vector<T, N> clamp(const vector<T, N> &a, float b) {
+  return vector<T,N>();
 }
 
 // TODO
 // Clamp vector component wise
 template <typename T, std::size_t N>
-Vector<T, N> clamp(const Vector<T, N> &a, const Vector<T, N>) {
+vector<T, N> clamp(const vector<T, N> &a, const vector<T, N>) {
   // std::clamp()
 }
 
 template <typename T, std::size_t N>
-float distance(const Vector<T, N> &a, const Vector<T, N> &b) {
+float distance(const vector<T, N> &a, const vector<T, N> &b) {
   return (a - b).length();
 }
 
-template <typename T, std::size_t N> Vector<T, N> normalized(const Vector<T, N> &a) {
+template <typename T, std::size_t N> vector<T, N> normalized(const vector<T, N> &a) {
   float len = a.length();
-  Vector<T, N> result;
+  vector<T, N> result;
   for (int i = 0; i < N; i++) {
     result[i] = a[i] * (float)1 / len;
   }

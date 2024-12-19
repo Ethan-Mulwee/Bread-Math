@@ -8,7 +8,7 @@
 using namespace bm;
 
 int main() {
-  Matrix4 m(
+  matrix4 m(
     5,4,3,1,
     2,6,2,4,
     7,8,9,10,

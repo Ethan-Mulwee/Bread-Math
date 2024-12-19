@@ -4,9 +4,9 @@
 #include <math.h>
 
 namespace bm {
-  template <typename T, std::size_t N> struct Vector;
-  template<typename T> struct Quaternion;
-  template <typename T, int rows, int cols> struct Matrix;
+  template <typename T, std::size_t N> struct vector;
+  template<typename T> struct quaternion;
+  template <typename T, int rows, int cols> struct matrix;
 }
 
 #endif

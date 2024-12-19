@@ -6,6 +6,6 @@
 using namespace bm;
 
 int main() {
-  Matrix3 cylTensor = InertiaTensorCylinder(1,1,1);
+  matrix3 cylTensor = InertiaTensorCylinder(1,1,1);
   std::cout << cylTensor << "\n";
 }

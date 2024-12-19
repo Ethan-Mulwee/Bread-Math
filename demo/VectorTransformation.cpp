@@ -9,7 +9,7 @@ using namespace bm;
 int main() {
   // Test for transforming a vector3 by a matrix 3x3
   
-  Matrix3 m1(
+  matrix3 m1(
     2,0,0,
     0,2,0,
     0,0,2
@@ -23,7 +23,7 @@ int main() {
 
   // Test for transforming a vector3 by a matrix 4x4
 
-  Matrix4 m2(
+  matrix4 m2(
     2,0,0,1,
     0,2,0,1,
     0,0,2,1,
@@ -38,7 +38,7 @@ int main() {
 
   // Test for transforming a vector4 by a matrix 4x4
   
-  Matrix4 m3(
+  matrix4 m3(
     2,0,0,1,
     0,2,0,1,
     0,0,2,1,

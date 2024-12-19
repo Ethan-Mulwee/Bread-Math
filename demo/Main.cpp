@@ -26,7 +26,7 @@ int main() {
     bm::RayIntersection intersection = Raycast(ray, triangle);
     std::cout << intersection.point << std::endl;
 
-    bm::Matrix<float,3,3> m;
+    bm::matrix<float,3,3> m;
     std::cout << m << std::endl;
 
     //Raylib stuff
