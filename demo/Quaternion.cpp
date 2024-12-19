@@ -6,13 +6,8 @@ using namespace bm;
 // g++ Quaternion.cpp -I../include
 
 int main() {
-  quaternion<float> q(0.5,0.2,0.1,2);
+  quaternion q((float)M_PI*0.5f, float3(0,1,0));
   std::cout << q << "\n";
-  std::cout << q.w << "\n";
-
-  q.normalize();
-
-  std::cout << q << "\n";
-
-  std::cout << quaternionToMatrix(q) << "\n";
+  std::cout << "Rotation angle: " << q.angle() << "\n";
+  std::cout << "Rotation axis: " << q.axis() << "\n";
 }

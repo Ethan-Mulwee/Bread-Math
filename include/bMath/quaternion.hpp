@@ -4,7 +4,7 @@
 #include "vector.hpp"
 
 namespace bm {
-  template<typename T>
+  template<typename T = float>
   struct quaternion {
     union {
       vector<T,4> vec;
@@ -30,14 +30,13 @@ namespace bm {
 
     quaternion(vector<T,4> v) : vec(v) {}
 
-    // TODO: testing not sure if that really should be *2
-    T Angle() {
+    // Returns angle of rotation in radians
+    T angle() {
       return std::acos(vec.w)*2;
     }
 
-    // TODO: testing
-    vector<T,3> Axis() {
-      T angle = (*this).Angle();
+    vector<T,3> axis() {
+      T angle = (*this).angle();
       T s = sin(angle/2);
       return vector<T,3>(vec.x/s,vec.y/s,vec.z/s);
     }
@@ -50,8 +49,6 @@ namespace bm {
       vec.normalize();
     }
   };
-
-
 }
 
 #endif
