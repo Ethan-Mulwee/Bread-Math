@@ -34,11 +34,11 @@ template <typename T, std::size_t N> struct vector {
   }
 };
 
-template <> struct vector<float, 2> {
+template <typename T> struct vector<T, 2> {
   union {
-    float data[2];
+    T data[2];
     struct {
-      float x, y;
+      T x, y;
     };
   };
 
@@ -46,95 +46,95 @@ template <> struct vector<float, 2> {
   
   // TODO: Constructor to create vectors from smaller vectors like a vec3 from a vec2
 
-  template <typename... Args> vector(Args... args) : data{(float)args...} {}
+  template <typename... Args> vector(Args... args) : data{(T)args...} {}
 
-  float &operator[](int i) { return data[i]; }
+  T &operator[](int i) { return data[i]; }
 
-  float operator[](int i) const { return data[i]; }
+  T operator[](int i) const { return data[i]; }
 
-  float length() const {
-    float total = 0;
+  T length() const {
+    T total = 0;
     for (int i = 0; i < 2; i++) {
       total += data[i] * data[i];
     }
-    return sqrt(total);
+    return (T)sqrt(total);
   }
 
   // Normalize the vector
   void normalize() {
-    float mag = (*this).length();
+    float len = (*this).length();
     for (int i = 0; i < 2; i++) {
-      data[i] = data[i] * (float)1 / mag;
+      data[i] = (T)(data[i] * (float)1 / len);
     }
   }
 };
 
-template <> struct vector<float, 4> {
+template <typename T> struct vector<T, 4> {
   union {
-    float data[4];
+    T data[4];
     struct {
-      float x, y, z, w;
+      T x, y, z, w;
     };
   };
 
   // TODO implict conversion
   // Vector(Quaternion<float> q) : data(q.data) {}
 
-  template <typename... Args> vector(Args... args) : data{(float)args...} {}
+  template <typename... Args> vector(Args... args) : data{(T)args...} {}
 
-  float &operator[](int i) { return data[i]; }
+  T &operator[](int i) { return data[i]; }
 
-  float operator[](int i) const { return data[i]; }
+  T operator[](int i) const { return data[i]; }
 
-  float length() const {
-    float total = 0;
+  T length() const {
+    T total = 0;
     for (int i = 0; i < 4; i++) {
       total += data[i] * data[i];
     }
-    return sqrt(total);
+    return (T)sqrt(total);
   }
 
   // Normalize the vector
   void normalize() {
-    float mag = (*this).length();
+    T len = (*this).length();
     for (int i = 0; i < 4; i++) {
-      data[i] = data[i] * (float)1 / mag;
+      data[i] = data[i] * (T)1 / len;
     }
   }
 };
 
 // TODO: template specialization includes other types
-template <> struct vector<float, 3> {
+template <typename T> struct vector<T, 3> {
   union {
-    float data[3];
+    T data[3];
     struct {
-      float x, y, z;
+      T x, y, z;
     };
     vector<float, 2> xy;
   };
 
-  template <typename... Args> vector(Args... args) : data{(float)args...} {}
+  template <typename... Args> vector(Args... args) : data{(T)args...} {}
 
   // TODO: Add support for converting bigger vector types to smaller vector types
-  vector(vector<float,4> vec) : data{vec.data[0],vec.data[1],vec.data[2]} {}
+  vector(vector<T,4> vec) : data{vec.data[0],vec.data[1],vec.data[2]} {}
 
-  float &operator[](int i) { return data[i]; }
+  T &operator[](int i) { return data[i]; }
 
-  float operator[](int i) const { return data[i]; }
+  T operator[](int i) const { return data[i]; }
 
-  float length() const {
-    float total = 0;
+  T length() const {
+    T total = 0;
     for (int i = 0; i < 3; i++) {
       total += data[i] * data[i];
     }
-    return sqrt(total);
+    return (T)sqrt(total);
   }
 
   // Normalize the vector
   void normalize() {
-    float mag = (*this).length();
+    T len = (*this).length();
     for (int i = 0; i < 3; i++) {
-      data[i] = data[i] * (float)1 / mag;
+      data[i] = data[i] * (T)1 / len;
     }
   }
 };
@@ -379,10 +379,10 @@ float distance(const vector<T, N> &a, const vector<T, N> &b) {
 }
 
 template <typename T, std::size_t N> vector<T, N> normalized(const vector<T, N> &a) {
-  float len = a.length();
+  T len = a.length();
   vector<T, N> result;
   for (int i = 0; i < N; i++) {
-    result[i] = a[i] * (float)1 / len;
+    result[i] = a[i] * (T)1 / len;
   }
   return result;
 }
