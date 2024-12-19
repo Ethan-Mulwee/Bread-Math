@@ -24,7 +24,6 @@ template <typename T, std::size_t N> struct vector {
     return sqrt(total);
   }
 
-  // TODO
   // Normalize the vector
   void normalize() {
     float mag = (*this).length();

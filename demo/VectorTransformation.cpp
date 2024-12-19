@@ -4,7 +4,7 @@
 
 using namespace bm;
 
-// g++ VectorTransformation.cpp -I../include
+// g++ VectorTransformation.cpp -I../include -O2
 
 int main() {
   // Test for transforming a vector3 by a matrix 3x3
@@ -56,7 +56,7 @@ int main() {
   auto start = std::chrono::high_resolution_clock::now();
 
   for (int i = 0; i < 1000000; i++) {
-    v2*m2;
+    v3*m2;
   }
 
   auto end = std::chrono::high_resolution_clock::now();
