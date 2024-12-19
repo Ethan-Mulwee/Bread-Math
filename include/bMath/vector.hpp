@@ -34,6 +34,68 @@ template <typename T, std::size_t N> struct vector {
   }
 };
 
+template <typename T> struct vector<T, 4> {
+  union {
+    T data[4];
+    struct {
+      T x, y, z, w;
+    };
+  };
+
+  template <typename... Args> vector(Args... args) : data{(T)args...} {}
+
+  T &operator[](int i) { return data[i]; }
+
+  T operator[](int i) const { return data[i]; }
+
+  T length() const {
+    T total = 0;
+    for (int i = 0; i < 4; i++) {
+      total += data[i] * data[i];
+    }
+    return (T)sqrt(total);
+  }
+
+  // Normalize the vector
+  void normalize() {
+    T len = (*this).length();
+    for (int i = 0; i < 4; i++) {
+      data[i] = data[i] * (T)1 / len;
+    }
+  }
+};
+
+template <typename T> struct vector<T, 3> {
+  union {
+    T data[3];
+    struct {
+      T x, y, z;
+    };
+  };
+
+  template <typename... Args> vector(Args... args) : data{(T)args...} {}
+
+  T &operator[](int i) { return data[i]; }
+
+  T operator[](int i) const { return data[i]; }
+
+  T length() const {
+    T total = 0;
+    for (int i = 0; i < 3; i++) {
+      total += data[i] * data[i];
+    }
+    return (T)sqrt(total);
+  }
+
+  // Normalize the vector
+  void normalize() {
+    T len = (*this).length();
+    for (int i = 0; i < 3; i++) {
+      data[i] = data[i] * (T)1 / len;
+    }
+  }
+};
+
 template <typename T> struct vector<T, 2> {
   union {
     T data[2];
@@ -65,76 +127,6 @@ template <typename T> struct vector<T, 2> {
     float len = (*this).length();
     for (int i = 0; i < 2; i++) {
       data[i] = (T)(data[i] * (float)1 / len);
-    }
-  }
-};
-
-template <typename T> struct vector<T, 4> {
-  union {
-    T data[4];
-    struct {
-      T x, y, z, w;
-    };
-  };
-
-  // TODO implict conversion
-  // Vector(Quaternion<float> q) : data(q.data) {}
-
-  template <typename... Args> vector(Args... args) : data{(T)args...} {}
-
-  T &operator[](int i) { return data[i]; }
-
-  T operator[](int i) const { return data[i]; }
-
-  T length() const {
-    T total = 0;
-    for (int i = 0; i < 4; i++) {
-      total += data[i] * data[i];
-    }
-    return (T)sqrt(total);
-  }
-
-  // Normalize the vector
-  void normalize() {
-    T len = (*this).length();
-    for (int i = 0; i < 4; i++) {
-      data[i] = data[i] * (T)1 / len;
-    }
-  }
-};
-
-// TODO: template specialization includes other types
-template <typename T> struct vector<T, 3> {
-  union {
-    T data[3];
-    struct {
-      T x, y, z;
-    };
-    vector<float, 2> xy;
-  };
-
-  template <typename... Args> vector(Args... args) : data{(T)args...} {}
-
-  // TODO: Add support for converting bigger vector types to smaller vector types
-  vector(vector<T,4> vec) : data{vec.data[0],vec.data[1],vec.data[2]} {}
-
-  T &operator[](int i) { return data[i]; }
-
-  T operator[](int i) const { return data[i]; }
-
-  T length() const {
-    T total = 0;
-    for (int i = 0; i < 3; i++) {
-      total += data[i] * data[i];
-    }
-    return (T)sqrt(total);
-  }
-
-  // Normalize the vector
-  void normalize() {
-    T len = (*this).length();
-    for (int i = 0; i < 3; i++) {
-      data[i] = data[i] * (T)1 / len;
     }
   }
 };

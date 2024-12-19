@@ -18,5 +18,4 @@ int main() {
   std::cout << normalized(intvec2) << "\n";
 
   std::cout << intvec1.x << "\n";
-  std::cout << intvec1.xy << "\n";
 }
