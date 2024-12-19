@@ -6,7 +6,12 @@
 namespace bm {
   template<typename T>
   struct quaternion {
-    vector<T,4> data;
+    union {
+      vector<T,4> data;
+      struct {
+        T x, y, z, w;
+      };
+    };
 
     quaternion() {}
 

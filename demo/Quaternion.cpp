@@ -6,6 +6,7 @@ using namespace bm;
 // g++ Quaternion.cpp -I../include
 
 int main() {
-  quaternion<float> q;
-  // std::cout << q << "\n";
+  quaternion<float> q(0.5,0.2,0.1,2);
+  std::cout << q << "\n";
+  std::cout << q.w << "\n";
 }
