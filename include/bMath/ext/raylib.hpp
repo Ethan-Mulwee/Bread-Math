@@ -5,11 +5,11 @@
 #include "../vector.hpp"
 #include "../matrix.hpp"
 
-inline Vector3 toRay(const bm::Vector<float,3> &v) {
+inline Vector3 toRay(const bMath::Vector<float,3> &v) {
   return Vector3{v.x,v.y,v.z};
 }
 
-inline Matrix toRay(const bm::matrix4 &m) {
+inline Matrix toRay(const bMath::matrix4 &m) {
   return Matrix{
     m(0,0), m(0,1), m(0,2), m(0,3),
     m(1,0), m(1,1), m(1,2), m(1,3),
@@ -18,16 +18,16 @@ inline Matrix toRay(const bm::matrix4 &m) {
   };
 }
 
-inline bm::float2 toBread(const Vector2 &v) {
-  return bm::float2(v.x,v.y);
+inline bMath::float2 toBread(const Vector2 &v) {
+  return bMath::float2(v.x,v.y);
 }
 
-inline bm::float3 toBread(const Vector3 &v) {
-  return bm::float3(v.x,v.y,v.z);
+inline bMath::float3 toBread(const Vector3 &v) {
+  return bMath::float3(v.x,v.y,v.z);
 }
 
-inline bm::matrix4 toBread(const Matrix &m) {
-  return bm::matrix4(
+inline bMath::matrix4 toBread(const Matrix &m) {
+  return bMath::matrix4(
     m.m0, m.m4, m.m8, m.m12,
     m.m1, m.m5, m.m9, m.m13,
     m.m2, m.m6, m.m10, m.m14,
@@ -35,19 +35,19 @@ inline bm::matrix4 toBread(const Matrix &m) {
   );
 }
 
-inline void drawVector(const bm::float3 &v) {
+inline void drawVector(const bMath::float3 &v) {
   DrawLine3D(Vector3{0,0,0}, toRay(v), WHITE);
 }
 
-inline void drawVector(const bm::float3 &v, Color color) {
+inline void drawVector(const bMath::float3 &v, Color color) {
   DrawLine3D(Vector3{0,0,0}, toRay(v), color);
 }
 
-inline void drawVector(const bm::float3 &start, const bm::float3 &v) {
+inline void drawVector(const bMath::float3 &start, const bMath::float3 &v) {
   DrawLine3D(toRay(start), toRay(v), WHITE);
 }
 
-inline void drawVector(const bm::float3 &start, const bm::float3 &v, Color color) {
+inline void drawVector(const bMath::float3 &start, const bMath::float3 &v, Color color) {
   DrawLine3D(toRay(start), toRay(v), color);
 }
 

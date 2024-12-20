@@ -6,7 +6,7 @@
 #include <string>
 #include <sstream>
 
-namespace bm {
+namespace bMath {
   // TODO: Find the biggest number in the matrix and add spaces accordingly so all rows are of equal length
   template <typename T, int rows, int cols>
   std::ostream &operator<<(std::ostream &os, const Matrix<T, rows, cols> &m) {

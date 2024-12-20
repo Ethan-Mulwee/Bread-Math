@@ -25,8 +25,8 @@ int main() {
   camera.fovy = 45;
   camera.projection = CAMERA_PERSPECTIVE;
 
-  bm::float3 a(1,1,1);
-  bm::quaternion q(M_PI, bm::float3(0,1,0));
+  bMath::float3 a(1,1,1);
+  bMath::quaternion q(M_PI, bMath::float3(0,1,0));
 
   while(!WindowShouldClose()) {
     UpdateCamera(&camera, CAMERA_ORBITAL);

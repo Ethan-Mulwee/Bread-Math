@@ -6,7 +6,7 @@
 #include <algorithm>
 #include <math.h>
 
-namespace bm {
+namespace bMath {
 template <typename T, std::size_t N> struct Vector {
   T data[N];
 

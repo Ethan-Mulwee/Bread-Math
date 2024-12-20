@@ -5,7 +5,7 @@
 #include "quaternion.hpp"
 #include "matrix.hpp"
 
-namespace bm {
+namespace bMath {
   // TODO: Generalize vector transformation operations to any type not just floats
 
   // optimized 3x3 vector3 transformation

@@ -5,7 +5,7 @@
 
 // g++ MatrixTesting.cpp -I../include
 
-using namespace bm;
+using namespace bMath;
 
 int main() {
   matrix4 m(

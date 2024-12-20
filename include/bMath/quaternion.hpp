@@ -3,7 +3,7 @@
 
 #include "vector.hpp"
 
-namespace bm {
+namespace bMath {
   template<typename T>
   struct Quaternion {
     union {

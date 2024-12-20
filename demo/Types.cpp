@@ -3,7 +3,7 @@
 
 // g++ Types.cpp -I../include
 
-using namespace bm;
+using namespace bMath;
 
 int main() {
   Vector<int, 3> intvec1(1,2,3);

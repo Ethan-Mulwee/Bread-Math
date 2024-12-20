@@ -4,7 +4,7 @@
 #include "matrix.hpp"
 #include "vector.hpp"
 
-namespace bm {
+namespace bMath {
   // Following inertia tensor function's math for common shapes comes from: Game Physics Engine Development p.493-495
 
   // Returns the inertia tensor of a cuboid from the center of mass

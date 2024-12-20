@@ -3,7 +3,7 @@
 
 #include <math.h>
 
-namespace bm {
+namespace bMath {
   template <typename T, std::size_t N> struct Vector;
   template<typename T> struct Quaternion;
   template <typename T, int rows, int cols> struct Matrix;

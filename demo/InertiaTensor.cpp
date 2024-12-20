@@ -3,7 +3,7 @@
 
 // g++ InertiaTensor.cpp -I../include
 
-using namespace bm;
+using namespace bMath;
 
 int main() {
   matrix3 cylTensor = InertiaTensorCylinder(1,1,1);

@@ -3,7 +3,7 @@
 
 // g++ MemoryTesting.cpp -I../include -g
 
-using namespace bm;
+using namespace bMath;
 
 int main() {
   int test = 9;

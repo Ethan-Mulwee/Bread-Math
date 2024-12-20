@@ -2,7 +2,7 @@
 #include "bMath/ext/iostream.hpp"
 #include <chrono>
 
-using namespace bm;
+using namespace bMath;
 
 // g++ VectorTesting.cpp -I../include
 

@@ -3,7 +3,7 @@
 
 // g++ TypeConversion.cpp -I../include
 
-using namespace bm;
+using namespace bMath;
 
 int main() {
   Vector<int, 3> intVec3 (1,2,3);

@@ -1,7 +1,7 @@
 #include "bMath/matrix.hpp"
 #include "bMath/ext/iostream.hpp"
 
-using namespace bm;
+using namespace bMath;
 
 int main() {
     Matrix<float,3,1> m1(

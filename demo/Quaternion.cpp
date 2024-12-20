@@ -1,7 +1,7 @@
 #include "bMath/bMath.hpp"
 #include "bMath/ext/iostream.hpp"
 
-using namespace bm;
+using namespace bMath;
 
 // g++ Quaternion.cpp -I../include
 

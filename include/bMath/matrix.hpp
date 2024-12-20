@@ -4,7 +4,7 @@
 #include <assert.h>
 #include "vector.hpp"
 
-namespace bm {
+namespace bMath {
 template <typename T, int rows, int cols> struct Matrix {
   T data[rows][cols] = {};
 
