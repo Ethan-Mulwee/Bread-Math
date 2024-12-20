@@ -15,9 +15,7 @@ namespace bm {
 
     Quaternion() {}
 
-    Quaternion(T w, T x, T y, T z) {
-      vec.x = x; vec.y = y; vec.z = z; vec.w = w;
-    }
+    Quaternion(T w, T x, T y, T z) : w(w), x(x), y(y), z(z) {}
 
     Quaternion(T angle, Vector<T,3> axis) {
       axis.normalize();

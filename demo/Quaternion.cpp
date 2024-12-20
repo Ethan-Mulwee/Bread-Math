@@ -7,6 +7,7 @@ using namespace bm;
 
 int main() {
   quaternion q((float)M_PI*0.5f, float3(0,1,0));
+  quaternion b(0,1,2,3);
   std::cout << q << "\n";
   std::cout << "Rotation angle: " << q.angle() << "\n";
   std::cout << "Rotation axis: " << q.axis() << "\n";
