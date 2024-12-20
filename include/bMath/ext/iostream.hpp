@@ -10,6 +10,7 @@ namespace bm {
   // TODO: Find the biggest number in the matrix and add spaces accordingly so all rows are of equal length
   template <typename T, int rows, int cols>
   std::ostream &operator<<(std::ostream &os, const Matrix<T, rows, cols> &m) {
+    os << "\n";
     // find max length
     // int maxlength = 0;
     // for (int k = 0; k < rows; k++) {

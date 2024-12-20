@@ -4,7 +4,7 @@
 #include "vector.hpp"
 
 namespace bm {
-  template<typename T = float>
+  template<typename T>
   struct Quaternion {
     union {
       Vector<T,4> vec;
