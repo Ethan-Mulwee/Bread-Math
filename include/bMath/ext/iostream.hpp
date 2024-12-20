@@ -9,7 +9,7 @@
 namespace bm {
   // TODO: Find the biggest number in the matrix and add spaces accordingly so all rows are of equal length
   template <typename T, int rows, int cols>
-  std::ostream &operator<<(std::ostream &os, const matrix<T, rows, cols> &m) {
+  std::ostream &operator<<(std::ostream &os, const Matrix<T, rows, cols> &m) {
     // find max length
     // int maxlength = 0;
     // for (int k = 0; k < rows; k++) {
@@ -43,7 +43,7 @@ namespace bm {
   }
 
   template <typename T, std::size_t N>
-  std::ostream &operator<<(std::ostream &os, const vector<T, N> &v) {
+  std::ostream &operator<<(std::ostream &os, const Vector<T, N> &v) {
     os << "(";
     for (int i = 0; i < N; i++) {
       os << v[i];
@@ -54,7 +54,7 @@ namespace bm {
   }
 
   template <typename T>
-  std::ostream &operator<<(std::ostream &os, const quaternion<T> &q) {
+  std::ostream &operator<<(std::ostream &os, const Quaternion<T> &q) {
     os << "(";
     os << q.w << ", " << q.x << ", " << q.y << ", " << q.z;
     os << ")";

@@ -2,6 +2,7 @@
 #define BMATH_FUNCTIONS
 
 #include "vector.hpp"
+#include "quaternion.hpp"
 #include "matrix.hpp"
 
 namespace bm {
@@ -35,7 +36,29 @@ namespace bm {
     );
   }
 
-  template<typename T> matrix3 quaternionToMatrix(const quaternion<T> &q) {
+  // Rotate a vector by a quaternion
+  inline float3 rotate(const float3 &v, const quaternion &q) {
+    return float3(
+      v.x*(q.x*q.x-q.y*q.y-q.z*q.z+q.w*q.w)+v.y*(2*q.x*q.y-2*q.w*q.z)+v.z*(2*q.x*q.z+2*q.w*q.y),
+      v.x*(2*q.w*q.z+2*q.x*q.y)+v.y*(q.w*q.w-q.x*q.x+q.y*q.y-q.z*q.z)+v.z*(2*q.y*q.z-2*q.w*q.x),
+      v.x*(2*q.x*q.z-2*q.w*q.y)+v.y*(2*q.w*q.x+2*q.y*q.z)+v.z*(q.w*q.w-q.x*q.x-q.y*q.y+q.z*q.z)
+    );
+  }
+
+  // TODO: testing
+  // Rotate a quaternion by a vector (result = q + (1/2)*float4(0,v.x,v.y,v.z)*q)
+  inline float4 rotate(const quaternion &q, const float3 &v) {
+    float4 result(
+      q.x + (0.5) * (v.x * q.w + v.y * q.z - v.z * q.y),
+      q.y + (0.5) * (v.y * q.w + v.z * q.x - v.x * q.z),
+      q.z + (0.5) * (v.z * q.w + v.x * q.y - v.y * q.x),
+      q.w + (0.5) * (-v.x * q.x - v.y * q.y - v.z * q.z)
+    );
+    result.normalize();
+    return result;
+  }
+
+  template<typename T> matrix3 quaternionToMatrix(const Quaternion<T> &q) {
       matrix3 m;
       // i hat
       m.data[0][0] = q.x*q.x-q.y*q.y-q.z*q.z+q.w*q.w;

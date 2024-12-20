@@ -17,7 +17,7 @@ int main() {
 
   std::cout << m;
 
-  float3 test = getColumnVector(m,2);
+  float4 test = getColumnVector(m,2);
 
   std::cout << test << "\n";
 

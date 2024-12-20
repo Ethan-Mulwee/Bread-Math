@@ -6,9 +6,9 @@
 using namespace bm;
 
 int main() {
-  vector<int, 3> intvec1(1,2,3);
+  Vector<int, 3> intvec1(1,2,3);
   std::cout << intvec1 << "\n";
-  vector<int, 3> intvec2(3,4,5);
+  Vector<int, 3> intvec2(3,4,5);
   std::cout << intvec2 << "\n";
 
   std::cout << intvec1 + intvec2 << "\n";

@@ -5,21 +5,21 @@
 
 namespace bm {
   template<typename T = float>
-  struct quaternion {
+  struct Quaternion {
     union {
-      vector<T,4> vec;
+      Vector<T,4> vec;
       struct {
         T x, y, z, w;
       };
     };
 
-    quaternion() {}
+    Quaternion() {}
 
-    quaternion(T w, T x, T y, T z) {
+    Quaternion(T w, T x, T y, T z) {
       vec.x = x; vec.y = y; vec.z = z; vec.w = w;
     }
 
-    quaternion(T angle, vector<T,3> axis) {
+    Quaternion(T angle, Vector<T,3> axis) {
       axis.normalize();
       vec.w = cos(angle/2);
       auto s = sin(angle/2);
@@ -28,17 +28,17 @@ namespace bm {
       vec.z = s*axis.z;
     }
 
-    quaternion(vector<T,4> v) : vec(v) {}
+    Quaternion(Vector<T,4> v) : vec(v) {}
 
     // Returns angle of rotation in radians
     T angle() {
       return std::acos(vec.w)*2;
     }
 
-    vector<T,3> axis() {
+    Vector<T,3> axis() {
       T angle = (*this).angle();
       T s = sin(angle/2);
-      return vector<T,3>(vec.x/s,vec.y/s,vec.z/s);
+      return Vector<T,3>(vec.x/s,vec.y/s,vec.z/s);
     }
 
     T length() {
@@ -49,6 +49,8 @@ namespace bm {
       vec.normalize();
     }
   };
+
+  typedef Quaternion<float> quaternion;
 }
 
 #endif

@@ -5,7 +5,7 @@
 #include "../vector.hpp"
 #include "../matrix.hpp"
 
-inline Vector3 toRay(const bm::vector<float,3> &v) {
+inline Vector3 toRay(const bm::Vector<float,3> &v) {
   return Vector3{v.x,v.y,v.z};
 }
 

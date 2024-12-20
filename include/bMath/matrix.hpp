@@ -5,16 +5,16 @@
 #include "vector.hpp"
 
 namespace bm {
-template <typename T, int rows, int cols> struct matrix {
+template <typename T, int rows, int cols> struct Matrix {
   T data[rows][cols] = {};
 
-  matrix() {}
+  Matrix() {}
 
-  matrix(T data[rows][cols]) : data(data) {}
+  Matrix(T data[rows][cols]) : data(data) {}
 
   // TODO: Constructor for creating matrices from vectors
 
-  template <typename... Args> matrix(Args... args) : data{(T)args...} {}
+  template <typename... Args> Matrix(Args... args) : data{(T)args...} {}
 
   T* operator[](const int i) const { return data[i]; }
 
@@ -23,8 +23,8 @@ template <typename T, int rows, int cols> struct matrix {
   T operator() (const int i, const int j) const {return data[i][j];}
 
   // Return component wise addition of two matrices
-  matrix<T, rows, cols> operator+(const matrix<T, rows, cols> &m) const {
-    matrix<T, rows, cols> newMat;
+  Matrix<T, rows, cols> operator+(const Matrix<T, rows, cols> &m) const {
+    Matrix<T, rows, cols> newMat;
     for (int j = 0; j < cols; j++) {
       for (int i = 0; i < rows; i++) {
         newMat.data[i][j] = data[i][j] + m.data[i][j];
@@ -34,8 +34,8 @@ template <typename T, int rows, int cols> struct matrix {
   }
 
   template<int Mrows, int Mcols>
-  matrix<T, rows, Mcols> operator*(matrix<T, Mrows, Mcols> &m) {
-    matrix<T, rows, Mcols> result;
+  Matrix<T, rows, Mcols> operator*(Matrix<T, Mrows, Mcols> &m) {
+    Matrix<T, rows, Mcols> result;
     for (int i = 0; i < rows; i++) {
       for (int j = 0; j < Mcols; j++) {
         float sum = 0;
@@ -49,17 +49,17 @@ template <typename T, int rows, int cols> struct matrix {
   }
 };
 
-typedef matrix<float, 2, 2> matrix2;
-typedef matrix<float, 3, 3> matrix3;
-typedef matrix<float, 4, 4> matrix4;
-typedef matrix<float, 2, 2> float2x2;
-typedef matrix<float, 3, 3> float3x3;
-typedef matrix<float, 4, 4> float4x4;
+typedef Matrix<float, 2, 2> matrix2;
+typedef Matrix<float, 3, 3> matrix3;
+typedef Matrix<float, 4, 4> matrix4;
+typedef Matrix<float, 2, 2> float2x2;
+typedef Matrix<float, 3, 3> float3x3;
+typedef Matrix<float, 4, 4> float4x4;
 
 // TODO: figure out how to make this for loop logic happen at compile time
 template<typename T, int rows, int cols>
-matrix<T, rows, cols> transpose(matrix<T, rows, cols> &m) {
-  matrix<T, rows, cols> result;
+Matrix<T, rows, cols> transpose(Matrix<T, rows, cols> &m) {
+  Matrix<T, rows, cols> result;
   for (int j = 0; j < cols; j++) {
     for (int i = 0; i < rows; i++) {
       result(j,i) = m(i,j);
@@ -69,8 +69,8 @@ matrix<T, rows, cols> transpose(matrix<T, rows, cols> &m) {
 }
 
 template<typename T, int rows, int cols>
-matrix<T,rows,cols> operator*(const matrix<T,rows,cols> &m, const float s) {
-  matrix<T,rows,cols> result;
+Matrix<T,rows,cols> operator*(const Matrix<T,rows,cols> &m, const float s) {
+  Matrix<T,rows,cols> result;
   for (int j = 0; j < cols; j++) {
     for (int i = 0; i < rows; i++) {
       result(i,j) = m(i,j) * s;
@@ -80,8 +80,8 @@ matrix<T,rows,cols> operator*(const matrix<T,rows,cols> &m, const float s) {
 }
 
 template<typename T, int rows, int cols>
-matrix<T,rows,cols> operator*(const float s, const matrix<T,rows,cols> &m) {
-  matrix<T,rows,cols> result;
+Matrix<T,rows,cols> operator*(const float s, const Matrix<T,rows,cols> &m) {
+  Matrix<T,rows,cols> result;
   for (int j = 0; j < cols; j++) {
     for (int i = 0; i < rows; i++) {
       result(i,j) = m(i,j) * s;
@@ -109,7 +109,7 @@ inline matrix4 transpose(const matrix4 &m) {
 
 // TODO: add determiant functions
 
-inline float det(const matrix<float, 1,1> &m) {
+inline float det(const Matrix<float, 1,1> &m) {
   return m(0,0);
 }
 
@@ -124,8 +124,8 @@ inline float det(const matrix3 &m) {
 
 // NOTE: this implmentation is rather inefficent but it works for the moment
 template<typename T, int rows, int cols>
-matrix<T, rows-1, cols-1> submatrix(const matrix<T,rows,cols> &m, const int row, const int col) {
-  matrix<T, rows-1, cols-1> result;
+Matrix<T, rows-1, cols-1> submatrix(const Matrix<T,rows,cols> &m, const int row, const int col) {
+  Matrix<T, rows-1, cols-1> result;
   int rowIndex = 0;
   int colIndex = 0;
   for (int i = 0; i < rows; i++) {
@@ -145,13 +145,13 @@ matrix<T, rows-1, cols-1> submatrix(const matrix<T,rows,cols> &m, const int row,
 
 // Returns det of a submatrix of m
 template <typename T, int rows, int cols>
-float minor(const matrix<T,rows,cols> &m, const int row, const int col) {
+float minor(const Matrix<T,rows,cols> &m, const int row, const int col) {
   return det(submatrix(m, row, col));
 }
 
 // TODO: recursive cofactor expansion to get determinant of any square matrix
 template<typename T, int size>
-T det(const matrix<T,size,size> &m) {
+T det(const Matrix<T,size,size> &m) {
   T total;
   for (int i = 0; i < size; i++) {
     if (i%2)
@@ -186,8 +186,8 @@ inline matrix4 cof(const matrix4 &m) {
 }
 
 template <typename T, int size>
-matrix<T, size, size> cof(const matrix<T, size, size> &m) {
-  matrix<T, size, size> result;
+Matrix<T, size, size> cof(const Matrix<T, size, size> &m) {
+  Matrix<T, size, size> result;
   for (int i = 0; i < size; i++) {
     for (int j = 0; j < size; j++) {
       if ((i+j)%2)
@@ -203,8 +203,8 @@ matrix<T, size, size> cof(const matrix<T, size, size> &m) {
 
 // transpose of the cofactor matrix
 template <typename T, int size>
-matrix<T, size, size> adjugate(const matrix<T, size, size> &m) {
-  matrix<T,size,size> cofMatrix = cof(m);
+Matrix<T, size, size> adjugate(const Matrix<T, size, size> &m) {
+  Matrix<T,size,size> cofMatrix = cof(m);
   return transpose(cofMatrix);
 }
 
@@ -229,8 +229,8 @@ inline matrix3 inverse(const matrix3 &m) {
 // }
 
 template<typename T, int size>
-matrix<T,size,size> inverse(const matrix<T,size,size> &m) {
-  matrix<T,size,size> result;
+Matrix<T,size,size> inverse(const Matrix<T,size,size> &m) {
+  Matrix<T,size,size> result;
   result = (1/det(m))*adjugate(m);
 
   return result;
@@ -252,8 +252,8 @@ inline matrix3 rotationMatrix(float x, float y, float z) {
 
 // TODO: optimize
 template<typename T, int rows, int cols>
-vector<T,rows> getColumnVector(const matrix<T, rows, cols> &m, int c) {
-  vector<T,rows> result;
+Vector<T,rows> getColumnVector(const Matrix<T, rows, cols> &m, int c) {
+  Vector<T,rows> result;
   for (int i = 0; i < rows; i++) {
     result[i] = m(i,c);
   }

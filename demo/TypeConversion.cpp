@@ -6,7 +6,7 @@
 using namespace bm;
 
 int main() {
-  vector<int, 3> intVec3 (1,2,3);
+  Vector<int, 3> intVec3 (1,2,3);
   // vector<int, 2> intVec2 = intVec3;
   // std::cout << intVec2 << "\n";
 }
