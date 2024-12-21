@@ -34,7 +34,7 @@ template <typename T, int rows, int cols> struct Matrix {
   }
 
   template<int Mrows, int Mcols>
-  Matrix<T, rows, Mcols> operator*(Matrix<T, Mrows, Mcols> &m) const {
+  Matrix<T, rows, Mcols> operator*(const Matrix<T, Mrows, Mcols> &m) const {
     Matrix<T, rows, Mcols> result;
     for (int i = 0; i < rows; i++) {
       for (int j = 0; j < Mcols; j++) {
