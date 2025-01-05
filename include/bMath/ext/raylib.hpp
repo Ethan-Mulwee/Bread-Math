@@ -18,6 +18,10 @@ inline Matrix toRay(const bMath::matrix4 &m) {
   };
 }
 
+inline Ray toRay(const bMath::Ray &ray) {
+  return Ray{toRay(ray.p), toRay(ray.d)};
+}
+
 inline bMath::float2 toBread(const Vector2 &v) {
   return bMath::float2(v.x,v.y);
 }
@@ -33,6 +37,10 @@ inline bMath::matrix4 toBread(const Matrix &m) {
     m.m2, m.m6, m.m10, m.m14,
     m.m3, m.m7, m.m11, m.m15
   );
+}
+
+inline bMath::Ray toBread(const Ray &ray) {
+  return bMath::Ray(toBread(ray.position), toBread(ray.direction));
 }
 
 inline void drawVector(const bMath::float3 &v) {
