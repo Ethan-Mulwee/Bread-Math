@@ -47,6 +47,14 @@ template <typename T, int rows, int cols> struct Matrix {
     }
     return result;
   }
+
+  static Matrix<T, rows, cols> identity() {
+    Matrix<T, rows, cols> m;
+    for (int i = 0; i < cols; i++) {
+      m.data[i][i] = 1;
+    }
+    return m;
+  }
 };
 
 typedef Matrix<float, 2, 2> matrix2;

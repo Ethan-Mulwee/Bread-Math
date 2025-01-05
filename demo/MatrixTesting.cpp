@@ -15,7 +15,9 @@ int main() {
     1,2,3,4
   );
 
-  std::cout << m;
+  matrix4 m2 = matrix4::identity();
+
+  std::cout << m2;
 
   float4 test = getColumnVector(m,2);
 
