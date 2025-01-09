@@ -12,8 +12,9 @@ int main() {
   float3 v1(4,5,6);
   float3 v2(4,-5,6);
   float4 v3(1,2,3,4);
+  float3 v4;
 
-  std::cout << v1.xy << "\n";
+  std::cout << v4 << "\n";
   std::cout << v3.xyz << "\n";
   std::cout << abs(v2) << "\n";
 

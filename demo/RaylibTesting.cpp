@@ -26,7 +26,9 @@ int main() {
   camera.projection = CAMERA_PERSPECTIVE;
 
   bMath::float3 a(1,1,1);
-  bMath::quaternion q(M_PI, bMath::float3(0,1,0));
+  bMath::quaternion q(M_PI/4.0f, bMath::float3(1,1,0));
+  bMath::matrix3 m = bMath::matrix3::identity();
+  m = m*bMath::quaternionToMatrix(q);
 
   while(!WindowShouldClose()) {
     UpdateCamera(&camera, CAMERA_ORBITAL);
@@ -35,8 +37,9 @@ int main() {
     ClearBackground(Color{35,35,35,255});
       BeginMode3D(camera);
         DrawAxes();
-        drawVector(a, ORANGE);
-        drawVector(rotate(a,q), PURPLE);
+        // drawVector(a, ORANGE);
+        // drawVector(rotate(a,q), PURPLE);
+        drawBasis(m, 2);
       EndMode3D();
     EndDrawing();
   }

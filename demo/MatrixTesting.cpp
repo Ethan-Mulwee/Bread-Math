@@ -23,6 +23,8 @@ int main() {
 
   std::cout << test << "\n";
 
+  std::cout << m.col(3) << "\n";
+
   // std::cout << det(m) << "\n";
 
   // Matrix<float,5,5> m5(

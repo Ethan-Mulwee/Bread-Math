@@ -59,4 +59,16 @@ inline void drawVector(const bMath::float3 &start, const bMath::float3 &v, Color
   DrawLine3D(toRay(start), toRay(v), color);
 }
 
+inline void drawBasis(const bMath::matrix3 &m) {
+  drawVector(m.col(0), RED);
+  drawVector(m.col(1), GREEN);
+  drawVector(m.col(2), BLUE);
+}
+
+inline void drawBasis(const bMath::matrix3 &m, float scale) {
+  drawVector(m.col(0)*scale, RED);
+  drawVector(m.col(1)*scale, GREEN);
+  drawVector(m.col(2)*scale, BLUE);
+}
+
 #endif

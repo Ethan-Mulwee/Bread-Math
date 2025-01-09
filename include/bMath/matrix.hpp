@@ -48,6 +48,15 @@ template <typename T, int rows, int cols> struct Matrix {
     return result;
   }
 
+  // TODO: static_Assert j < cols?
+  Vector<T, rows> col(const int j) const {
+    Vector<T, rows> result;
+    for (int i = 0; i < rows; i++) {
+      result[i] = data[i][j];
+    }
+    return result;
+  }
+
   static Matrix<T, rows, cols> identity() {
     Matrix<T, rows, cols> m;
     for (int i = 0; i < cols; i++) {
