@@ -49,6 +49,16 @@ namespace bMath {
   };
 
   typedef Quaternion<float> quaternion;
+
+  template<typename T>
+  Quaternion<T> operator*(const Quaternion<T> &q, const Quaternion<T> &p) {
+    return Quaternion<T>(
+      q.w*p.w-q.x*p.x-q.y*p.y-q.z*p.z,
+      q.w*p.x+q.x*p.w+q.y*p.z-q.z*p.y,
+      q.w*p.y-q.x*p.z+q.y*p.w+q.z*p.x,
+      q.w*p.z+q.x*p.y-q.y*p.x+q.z*p.w
+    );
+  }
 }
 
 #endif

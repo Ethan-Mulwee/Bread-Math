@@ -58,6 +58,7 @@ namespace bMath {
   }
 
   // TODO: testing
+  // TODO: dfjfdkghdsjio8eruert uhewrjn w!
   // Rotate a quaternion by a vector (result = q + (1/2)*float4(0,v.x,v.y,v.z)*q)
   inline quaternion rotate(const quaternion &q, const float3 &v) {
     quaternion result(
