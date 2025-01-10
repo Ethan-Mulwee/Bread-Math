@@ -36,6 +36,16 @@ namespace bMath {
     );
   }
 
+    // Transform a vector by a quaternion
+  template <typename T>
+  Vector<T,3> rotate(const Vector<T,3> &v, const quaternion &q) {
+    return Vector<T,3>(
+      v.x*(q.x*q.x-q.y*q.y-q.z*q.z+q.w*q.w)+v.y*(2*q.x*q.y-2*q.w*q.z)+v.z*(2*q.x*q.z+2*q.w*q.y),
+      v.x*(2*q.w*q.z+2*q.x*q.y)+v.y*(q.w*q.w-q.x*q.x+q.y*q.y-q.z*q.z)+v.z*(2*q.y*q.z-2*q.w*q.x),
+      v.x*(2*q.x*q.z-2*q.w*q.y)+v.y*(2*q.w*q.x+2*q.y*q.z)+v.z*(q.w*q.w-q.x*q.x-q.y*q.y+q.z*q.z)
+    );
+  }
+
 
   // Transform a vector by a quaternion
   template <typename T>
