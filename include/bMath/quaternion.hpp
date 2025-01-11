@@ -46,6 +46,10 @@ namespace bMath {
     void normalize() {
       vec.normalize();
     }
+
+    static Quaternion<T> identity() {
+      return Quaternion<T>(1,0,0,0);
+    }
   };
 
   typedef Quaternion<float> quaternion;

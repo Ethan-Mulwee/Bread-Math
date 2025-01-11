@@ -10,7 +10,7 @@ int main() {
   quaternion b(0,1,2,3);
 
   std::cout << "q: " << q << "\n";
-  std::cout << "q rotated: " << rotate(q, float3(2,0,0)) << "\n";
+  std::cout << "q rotated: " << q*vectorToQuaternion(float3(1,0,0)) << "\n";
   std::cout << "Rotation angle: " << q.angle() << "\n";
   std::cout << "Rotation axis: " << q.axis() << "\n";
 
