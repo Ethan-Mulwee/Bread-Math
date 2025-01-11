@@ -60,7 +60,10 @@ namespace bMath {
   // Converts a scaled axis representation of rotation stored in a vec3 using itself as the axis and it's length as it's rotation in radians for angular velocity this is it's radians per second
   template <typename T>
   Quaternion<T> VectortoQuaternion(const Vector<T,3> &v) {
-    return Quaternion(v.length(), v);
+    if (v.length() == 0;) 
+      return Quaternion<T>(1,0,0,0);
+    else
+      return Quaternion<T>(v.length(), v);
   }
 
   // TODO: testing
