@@ -57,19 +57,25 @@ namespace bMath {
     );
   }
 
+  // Converts a scaled axis representation of rotation stored in a vec3 using itself as the axis and it's length as it's rotation in radians for angular velocity this is it's radians per second
+  template <typename T>
+  Quaternion<T> VectortoQuaternion(const Vector<T,3> &v) {
+    return Quaternion(v.length(), v);
+  }
+
   // TODO: testing
   // TODO: dfjfdkghdsjio8eruert uhewrjn w!
-  // Rotate a quaternion by a vector (result = q + (1/2)*float4(0,v.x,v.y,v.z)*q)
-  inline quaternion rotate(const quaternion &q, const float3 &v) {
-    quaternion result(
-      q.w + (0.5) * (-v.x * q.x - v.y * q.y - v.z * q.z),
-      q.x + (0.5) * (v.x * q.w + v.y * q.z - v.z * q.y),
-      q.y + (0.5) * (v.y * q.w + v.z * q.x - v.x * q.z),
-      q.z + (0.5) * (v.z * q.w + v.x * q.y - v.y * q.x)
-    );
-    result.normalize();
-    return result;
-  }
+  // Rotate a quaternion by a vector (result = q + float4(0,v.x,v.y,v.z)*q)
+  // inline quaternion rotate(const quaternion &q, const float3 &v) {
+  //   quaternion result(
+  //     q.w + (-v.x * q.x - v.y * q.y - v.z * q.z),
+  //     q.x + (v.x * q.w + v.y * q.z - v.z * q.y),
+  //     q.y + (v.y * q.w + v.z * q.x - v.x * q.z),
+  //     q.z + (v.z * q.w + v.x * q.y - v.y * q.x)
+  //   );
+  //   result.normalize();
+  //   return result;
+  // }
 
   template<typename T> matrix3 quaternionToMatrix(const Quaternion<T> &q) {
       matrix3 m;
