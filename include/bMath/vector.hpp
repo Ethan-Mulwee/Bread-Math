@@ -223,6 +223,14 @@ Vector<T, N> operator*=(Vector<T,N> &a, const Vector<T,N> &b) {
   }
 }
 
+// Multiples vector by a scalar
+template <typename T, std::size_t N>
+Vector<T, N> operator*=(Vector<T,N> &v, const T &s) {
+  for (int i = 0; i < N; i++) {
+    v[i] *= s;
+  }
+}
+
 // Transforms vector by a matrix (assuming column vector)
 template <typename T, std::size_t N, int rows>
 Vector<T, rows> operator*(const Vector<T,N> &v, const Matrix<T,rows,N> &m) {
