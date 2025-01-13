@@ -5,11 +5,11 @@
 #include "../vector.hpp"
 #include "../matrix.hpp"
 
-inline Vector3 toRay(const bMath::Vector<float,3> &v) {
+inline Vector3 ConvertRay(const bMath::Vector<float,3> &v) {
   return Vector3{v.x,v.y,v.z};
 }
 
-inline Matrix toRay(const bMath::matrix4 &m) {
+inline Matrix ConvertRay(const bMath::matrix4 &m) {
   return Matrix{
     m(0,0), m(0,1), m(0,2), m(0,3),
     m(1,0), m(1,1), m(1,2), m(1,3),
@@ -18,19 +18,19 @@ inline Matrix toRay(const bMath::matrix4 &m) {
   };
 }
 
-inline Ray toRay(const bMath::Ray &ray) {
-  return Ray{toRay(ray.p), toRay(ray.d)};
+inline Ray ConvertRay(const bMath::Ray &ray) {
+  return Ray{ConvertRay(ray.p), ConvertRay(ray.d)};
 }
 
-inline bMath::float2 toBread(const Vector2 &v) {
+inline bMath::float2 ConvertBread(const Vector2 &v) {
   return bMath::float2(v.x,v.y);
 }
 
-inline bMath::float3 toBread(const Vector3 &v) {
+inline bMath::float3 ConvertBread(const Vector3 &v) {
   return bMath::float3(v.x,v.y,v.z);
 }
 
-inline bMath::matrix4 toBread(const Matrix &m) {
+inline bMath::matrix4 ConvertBread(const Matrix &m) {
   return bMath::matrix4(
     m.m0, m.m4, m.m8, m.m12,
     m.m1, m.m5, m.m9, m.m13,
@@ -39,36 +39,65 @@ inline bMath::matrix4 toBread(const Matrix &m) {
   );
 }
 
-inline bMath::Ray toBread(const Ray &ray) {
-  return bMath::Ray(toBread(ray.position), toBread(ray.direction));
+inline bMath::Ray ConvertBread(const Ray &ray) {
+  return bMath::Ray(ConvertBread(ray.position), ConvertBread(ray.direction));
 }
 
-inline void drawVector(const bMath::float3 &v) {
-  DrawLine3D(Vector3{0,0,0}, toRay(v), WHITE);
+inline void DrawVector(const bMath::float3 &v) {
+  DrawLine3D(Vector3{0,0,0}, ConvertRay(v), WHITE);
 }
 
-inline void drawVector(const bMath::float3 &v, Color color) {
-  DrawLine3D(Vector3{0,0,0}, toRay(v), color);
+inline void DrawVector(const bMath::float3 &v, Color color) {
+  DrawLine3D(Vector3{0,0,0}, ConvertRay(v), color);
 }
 
-inline void drawVector(const bMath::float3 &start, const bMath::float3 &v) {
-  DrawLine3D(toRay(start), toRay(v), WHITE);
+inline void DrawVector(const bMath::float3 &start, const bMath::float3 &v) {
+  DrawLine3D(ConvertRay(start), ConvertRay(v), WHITE);
 }
 
-inline void drawVector(const bMath::float3 &start, const bMath::float3 &v, Color color) {
-  DrawLine3D(toRay(start), toRay(v), color);
+inline void DrawVector(const bMath::float3 &start, const bMath::float3 &v, Color color) {
+  DrawLine3D(ConvertRay(start), ConvertRay(v), color);
 }
 
-inline void drawBasis(const bMath::matrix3 &m) {
-  drawVector(m.col(0), RED);
-  drawVector(m.col(1), GREEN);
-  drawVector(m.col(2), BLUE);
+inline void DrawBasis(const bMath::matrix3 &m) {
+  DrawVector(m.col(0), RED);
+  DrawVector(m.col(1), GREEN);
+  DrawVector(m.col(2), BLUE);
 }
 
-inline void drawBasis(const bMath::matrix3 &m, float scale) {
-  drawVector(m.col(0)*scale, RED);
-  drawVector(m.col(1)*scale, GREEN);
-  drawVector(m.col(2)*scale, BLUE);
+inline void DrawBasis(const bMath::matrix3 &m, float scale) {
+  DrawVector(m.col(0)*scale, RED);
+  DrawVector(m.col(1)*scale, GREEN);
+  DrawVector(m.col(2)*scale, BLUE);
+}
+
+inline void DrawGraph(const float* points, unsigned pointCount, int positionX, int positionY) {
+  Vector2 vecPoints[pointCount];
+  for (int i = 0; i < pointCount; i++) {
+    vecPoints[i] = Vector2{(float)i+positionX,-points[i]+positionY};
+  }
+  DrawLineStrip(vecPoints, pointCount, WHITE);
+}
+
+inline void DrawGraph(const float* points, unsigned pointCount, int positionX, int positionY, float scaleX, float scaleY) {
+  Vector2 vecPoints[pointCount];
+  for (int i = 0; i < pointCount; i++) {
+    vecPoints[i] = Vector2{((float)i*scaleX)+positionX,(-points[i]*scaleY)+positionY};
+  }
+  DrawLineStrip(vecPoints, pointCount, WHITE);
+}
+
+inline void DrawGraph(const float* points, unsigned pointCount, int positionX, int positionY, int width, int height) {
+  Vector2 vecPoints[pointCount];
+  float maxX = pointCount;
+  float maxY = 0;
+  for (int i = 0; i < pointCount; i++) {
+    if (points[i] > maxY) maxY = points[i];
+  }
+  for (int i = 0; i < pointCount; i++) {
+    vecPoints[i] = Vector2{((float)i*(width/maxX))+positionX,(-points[i]*(height/maxY))+positionY};
+  }
+  DrawLineStrip(vecPoints, pointCount, WHITE);
 }
 
 #endif

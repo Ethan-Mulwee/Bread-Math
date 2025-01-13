@@ -30,16 +30,21 @@ int main() {
   bMath::matrix3 m = bMath::matrix3::identity();
   m = m*bMath::quaternionToMatrix(q);
 
+  float points[500];
+  for (int i = 0; i < 500; i++) {
+    points[i] = i*i;
+  }
+
   while(!WindowShouldClose()) {
     UpdateCamera(&camera, CAMERA_ORBITAL);
 
     BeginDrawing();
     ClearBackground(Color{35,35,35,255});
+    DrawGraph(points, 500, 0, 500, 700, 300);
       BeginMode3D(camera);
         DrawAxes();
         // drawVector(a, ORANGE);
         // drawVector(rotate(a,q), PURPLE);
-        drawBasis(m, 2);
       EndMode3D();
     EndDrawing();
   }
