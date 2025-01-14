@@ -66,7 +66,7 @@ namespace bMath {
 
     // Add a scaled vector representation of a rotation to a quaternion
     template<typename T>
-    Quaternion<T> operator+=(Quaternion<T> &q, const Vector<T,3> &v) {
+    void operator+=(Quaternion<T> &q, const Vector<T,3> &v) {
         q = bMath::quaternion(
             q.w + (0.5) * (-v.x * q.x - v.y * q.y - v.z * q.z),
             q.x + (0.5) * (v.x * q.w + v.y * q.z - v.z * q.y),
