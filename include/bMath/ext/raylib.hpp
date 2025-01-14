@@ -52,11 +52,11 @@ inline void DrawVector(const bMath::float3 &v, Color color) {
 }
 
 inline void DrawVector(const bMath::float3 &start, const bMath::float3 &v) {
-  DrawLine3D(ConvertRay(start), ConvertRay(v), WHITE);
+  DrawLine3D(ConvertRay(start), ConvertRay(start+v), WHITE);
 }
 
 inline void DrawVector(const bMath::float3 &start, const bMath::float3 &v, Color color) {
-  DrawLine3D(ConvertRay(start), ConvertRay(v), color);
+  DrawLine3D(ConvertRay(start), ConvertRay(start+v), color);
 }
 
 inline void DrawBasis(const bMath::matrix3 &m) {
