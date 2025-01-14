@@ -25,26 +25,31 @@ int main() {
   camera.fovy = 45;
   camera.projection = CAMERA_PERSPECTIVE;
 
-  bMath::float3 a(1,1,1);
-  bMath::quaternion q(M_PI/4.0f, bMath::float3(1,1,0));
-  bMath::matrix3 m = bMath::matrix3::identity();
-  m = m*bMath::quaternionToMatrix(q);
-
   float points[500];
-  for (int i = 0; i < 500; i++) {
-    points[i] = i*i;
-  }
+  bMath::float3 position(2,1,1);
+  bMath::float3 velocity(.1f,0,0.2f);
+  bMath::float3 acceleration;
+  bMath::float3 a;
+  float dt = 0.001f;
 
   while(!WindowShouldClose()) {
+    if ((a-position).length() > 0.2f) {
+      acceleration = bMath::normalized(a-position)*(1.0f/((a-position).length()*(a-position).length()));
+    }
+    else acceleration = bMath::float3();
+    velocity += acceleration*dt;
+    position += velocity*dt;
+
     UpdateCamera(&camera, CAMERA_ORBITAL);
 
     BeginDrawing();
     ClearBackground(Color{35,35,35,255});
-    DrawGraph(points, 500, 0, 500, 700, 300);
+    // DrawGraph(points, 500, 0, 500, 700, 300);
       BeginMode3D(camera);
         DrawAxes();
         // drawVector(a, ORANGE);
         // drawVector(rotate(a,q), PURPLE);
+        DrawSphere(ConvertRay(position), 0.3f, WHITE);
       EndMode3D();
     EndDrawing();
   }
