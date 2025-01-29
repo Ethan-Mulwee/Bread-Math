@@ -6,22 +6,13 @@ using namespace bMath;
 // g++ Quaternion.cpp -I../include
 
 int main() {
-    quaternion q((float)M_PI*0.5f, float3(0,1,0));
-    quaternion b(0,1,2,3);
-
-    std::cout << "q: " << q << "\n";
-    std::cout << "q rotated: " << q*vectorToQuaternion(float3(1,0,0)) << "\n";
-    std::cout << "Rotation angle: " << q.angle() << "\n";
-    std::cout << "Rotation axis: " << q.axis() << "\n";
-
-    float3 v(2,3,4);
-    std::cout << v*q << "\n";
-
-    std::cout << quaternionToMatrix(q) << "\n";
-    std::cout << v*quaternionToMatrix(q) << "\n";
+    quaternion from((float)M_PI*0.5f, float3(0,1,0));
+    quaternion to((float)M_PI*0.6f, float3(0,1,0));
+    quaternion rotation = to*from.inverse();
 
 
-    std::cout << q << "\n";
-    q += float3(1,2,3);
-    std::cout << q << "\n";
+    std::cout << "q: " << from*rotation << "\n";
+    std::cout << "rotation: " << rotation << "\n";
+    std::cout << "Target: " << to << "\n";
+    std::cout << "function's rotation output: " << rotationBetween(from, to) << "\n";
 }

@@ -29,17 +29,17 @@ namespace bMath {
         Quaternion(Vector<T,4> v) : vec(v) {}
 
         // Returns angle of rotation in radians
-        T angle() {
+        T angle() const {
             return std::acos(vec.w)*2;
         }
 
-        Vector<T,3> axis() {
+        Vector<T,3> axis() const {
             T angle = (*this).angle();
             T s = sin(angle/2);
             return Vector<T,3>(vec.x/s,vec.y/s,vec.z/s);
         }
 
-        T length() {
+        T length() const {
             return sqrt(x*x+y*y+z*z+w*w);
         }
 
@@ -49,6 +49,10 @@ namespace bMath {
 
         static Quaternion<T> identity() {
             return Quaternion<T>(1,0,0,0);
+        }
+
+        Quaternion inverse() const {
+            return Quaternion(w, -x, -y, -z);
         }
     };
 
@@ -74,6 +78,11 @@ namespace bMath {
             q.z + (0.5) * (v.z * q.w + v.x * q.y - v.y * q.x)
         );
         q.normalize();
+    }
+
+    template<typename T>
+    Quaternion<T> rotationBetween(const Quaternion<T> &from, const Quaternion<T> &to) {
+        return to*from.inverse();
     }
 }
 
