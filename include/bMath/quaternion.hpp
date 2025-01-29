@@ -68,6 +68,11 @@ namespace bMath {
         );
     }
 
+    template<typename T>
+    Quaternion<T> operator*(const Quaternion<T> &q, const float s) {
+        return Quaternion<T>(q.w*s, q.x*s, q.y*s, q.z*s);
+    }
+
     // Add a scaled vector representation of a rotation to a quaternion
     template<typename T>
     void operator+=(Quaternion<T> &q, const Vector<T,3> &v) {
@@ -80,9 +85,18 @@ namespace bMath {
         q.normalize();
     }
 
+    template <typename T>
+    T dot(const Quaternion<T> &q, const Quaternion<T> &p) {
+        return dot(q.vec, p.vec);
+    }
+
+    // Returns shortest rotation between two quaternions
     template<typename T>
     Quaternion<T> rotationBetween(const Quaternion<T> &from, const Quaternion<T> &to) {
-        return to*from.inverse();
+        if (dot(to,from) < 0)
+            return to*(from.inverse()*-1.0f);
+        else
+            return to*(from.inverse());
     }
 }
 
