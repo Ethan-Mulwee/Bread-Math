@@ -84,6 +84,20 @@ namespace bMath {
 
       return m;
   }
+
+  template<typename T> 
+  Quaternion<T> matrixToQuaternion(const Matrix<T,3,3> &m) {
+    T qw = sqrt(1+m(0,0) + m(1,1) + m(2,2))/(T)2;
+    T qx = (m(2,1)-m(1,2))/(4*qw);
+    T qy = (m(0,2)-m(2,0))/(4*qw);
+    T qz = (m(1,0)-m(0,1))/(4*qw);
+    return Quaternion<T>(qw,qx,qy,qz);
+  } 
+
+  template<typename T>
+  Quaternion<T> basisToQuaternion(const Vector<T,3> &i, const Vector<T,3> &j, const Vector<T,3> &k) {
+
+  }
 }
 
 #endif
