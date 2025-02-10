@@ -46,10 +46,11 @@ int main() {
     ClearBackground(Color{35,35,35,255});
     // DrawGraph(points, 500, 0, 500, 700, 300);
       BeginMode3D(camera);
-        DrawAxes();
+        // DrawAxes();
         // drawVector(a, ORANGE);
         // drawVector(rotate(a,q), PURPLE);
         DrawSphere(ConvertRay(position), 0.3f, WHITE);
+        DrawVector(bMath::float3(1,1,1), PURPLE, 3.0f);
       EndMode3D();
     EndDrawing();
   }
