@@ -148,6 +148,10 @@ template <typename T> struct Vector<T, 4> {
     }
 };
 
+typedef Vector<float, 2> vector2;
+typedef Vector<float, 3> vector3;
+typedef Vector<float, 4> vector4;
+
 typedef Vector<double, 2> double2;
 typedef Vector<double, 3> double3;
 typedef Vector<double, 4> double4;
