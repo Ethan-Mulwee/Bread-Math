@@ -131,4 +131,12 @@ inline void DrawGraph(const float* points, unsigned pointCount, int positionX, i
     DrawLineStrip(vecPoints, pointCount, WHITE);
 }
 
+inline void DrawViewport3D(float axisLength, int gridSlices, float gridSpacing, float lineThickness) {
+    rlSetLineWidth(lineThickness);
+    DrawGrid(gridSlices,gridSpacing);
+    DrawLine3D(Vector3{-axisLength,0,0}, Vector3{axisLength,0,0}, RED);
+    DrawLine3D(Vector3{0,-axisLength,0}, Vector3{0,axisLength,0}, GREEN);
+    DrawLine3D(Vector3{0,0,-axisLength}, Vector3{0,0,axisLength}, BLUE);
+}
+
 #endif
