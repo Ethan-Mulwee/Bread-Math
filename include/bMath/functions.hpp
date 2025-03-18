@@ -102,6 +102,30 @@ namespace bMath {
     T qz = (j.x-i.y)/(4*qw);
     return Quaternion<T>(qw,qx,qy,qz);
   }
+
+  // Create a 3x3 basis matrix with the inptu vector as the x basis
+  template<typename T>
+  Matrix<T,3,3> basisFromVector(const Vector<T,3> &vec) {
+    float3 tagentY, tagentZ;
+
+    float3 v = normalized(vec);
+
+    if (abs(v.y) < abs(v.z)) {
+        tagentZ = float3(-v.z, 0, v.x);
+        tagentY = cross(v, tagentZ);
+    }
+    else {
+        tagentY = float3(-v.y, v.x, 0);
+        tagentZ = cross(v, tagentY);
+    }
+
+
+    return Matrix<T,3,3>(
+        v.x, tagentY.x, tagentZ.x,
+        v.y, tagentY.y, tagentZ.y,
+        v.z, tagentY.z, tagentZ.z
+    );
+  }
 }
 
 #endif

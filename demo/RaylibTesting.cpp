@@ -52,6 +52,7 @@ int main() {
         DrawSphere(ConvertRay(position), 0.3f, WHITE);
         DrawVector(bMath::float3(1,1,1), PURPLE, 3.0f);
         DrawViewport3D(10.0f, 10, 1.0f, 2.0f);
+        DrawBasis(bMath::basisFromVector(bMath::float3(1,1,1)));
       EndMode3D();
     EndDrawing();
   }

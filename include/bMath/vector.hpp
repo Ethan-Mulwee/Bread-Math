@@ -365,14 +365,14 @@ Vector<T, N> min(const Vector<T, N> &a, const Vector<T, N> &b) {
     return result;
 }
 
-template <typename T, std::size_t N>
-Vector<T, N> abs(const Vector<T, N> &v) {
-    Vector<T, N> result;
-    for (int i = 0; i < N; i++) {
-        result[i] = std::abs(v[i]);
-    }
-    return result;
-}
+// template <typename T, std::size_t N>
+// Vector<T, N> abs(const Vector<T, N> &v) {
+//     Vector<T, N> result;
+//     for (int i = 0; i < N; i++) {
+//         result[i] = std::abs(v[i]);
+//     }
+//     return result;
+// }
 
 template <typename T, std::size_t N>
 Vector<T, N> lerp(const Vector<T, N> &a, const Vector<T, N> &b, const float t) {
