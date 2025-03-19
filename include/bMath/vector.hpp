@@ -103,8 +103,8 @@ template <typename T> struct Vector<T, 3> {
         T total = 0;
         for (int i = 0; i < 3; i++) {
             total += data[i]*data[i];
-            return (T)total;
         }
+        return (T)total;
     }
 
     // Normalize the vector
