@@ -102,6 +102,12 @@ inline void DrawBasis(const bMath::matrix3 &m, float scale) {
     DrawVector(m.col(2)*scale, BLUE);
 }
 
+inline void DrawBasis(const bMath::matrix3 &m, bMath::float3 &position, float scale) {
+    DrawVector(position, m.col(0)*scale, RED);
+    DrawVector(position, m.col(1)*scale, GREEN);
+    DrawVector(position, m.col(2)*scale, BLUE);
+}
+
 inline void DrawGraph(const float* points, unsigned pointCount, int positionX, int positionY) {
     Vector2 vecPoints[pointCount];
     for (int i = 0; i < pointCount; i++) {
