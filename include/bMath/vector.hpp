@@ -245,7 +245,7 @@ void operator*=(Vector<T,N> &a, const Vector<T,N> &b) {
 
 // Multiples vector by a scalar
 template <typename T, std::size_t N>
-Vector<T, N> operator*=(Vector<T,N> &v, const T &s) {
+void operator*=(Vector<T,N> &v, const T &s) {
     for (int i = 0; i < N; i++) {
         v[i] *= s;
     }
