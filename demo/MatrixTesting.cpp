@@ -17,15 +17,17 @@ int main() {
 
   matrix4 m2 = matrix4::identity();
 
-  std::cout << m2;
+  // std::cout << m2;
 
   float4 test = getColumnVector(m,2);
 
-  std::cout << test << "\n";
+  // std::cout << test << "\n";
 
-  std::cout << m.col(3) << "\n";
+  // std::cout << m.col(3) << "\n";
 
   // std::cout << det(m) << "\n";
+
+  std::cout << perspectiveMatrix(45.0f, 1.0f, 0.1f, 100.0f) << "\n";
 
   // Matrix<float,5,5> m5(
   //   5,4,3,2,34,

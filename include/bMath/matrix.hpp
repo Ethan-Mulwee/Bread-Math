@@ -278,6 +278,21 @@ Vector<T,rows> getColumnVector(const Matrix<T, rows, cols> &m, int c) {
 }
 
 
+template<typename T>
+Matrix<T,4,4> perspectiveMatrix(T fovy, T aspect, T zNear, T zFar) {
+
+  T const tanHalfFovy = tan(fovy / static_cast<T>(2));
+
+  Matrix<T, 4, 4> Result;
+  Result(0,0) = static_cast<T>(1) / (aspect * tanHalfFovy);
+  Result(1,1) = static_cast<T>(1) / (tanHalfFovy);
+  Result(2,2) = - (zFar + zNear) / (zFar - zNear);
+  Result(2,3) = - static_cast<T>(1);
+  Result(3,2) = - (static_cast<T>(2) * zFar * zNear) / (zFar - zNear);
+  return Result;
+}
+
+
 
 } // namespace bMath
 
