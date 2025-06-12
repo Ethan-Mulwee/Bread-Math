@@ -29,6 +29,8 @@ int main() {
 
   std::cout << perspectiveMatrix(45.0f, 1.0f, 0.1f, 100.0f) << "\n";
 
+  std::cout << translationMatrix(bMath::float3(1,2,3)) << "\n";
+
   // Matrix<float,5,5> m5(
   //   5,4,3,2,34,
   //   4,34,5,8,9,

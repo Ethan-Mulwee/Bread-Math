@@ -292,6 +292,15 @@ Matrix<T,4,4> perspectiveMatrix(T fovy, T aspect, T zNear, T zFar) {
   return Result;
 }
 
+template<typename T>
+Matrix<T,4,4> translationMatrix(Vector<T,3> translation) {
+  Matrix<T,4,4> matrix = Matrix<T,4,4>::identity();
+  matrix(0,3) = translation.x;
+  matrix(1,3) = translation.y;
+  matrix(2,3) = translation.z;
+  return matrix;
+}
+
 
 
 } // namespace bMath
