@@ -287,6 +287,16 @@ inline float3x3 inverse(const float3x3 &m) {
   return inverse;
 }
 
+inline float det(const float4x4 &m) {
+  return 
+    -m[2][0]*m[1][1]*m[0][2]+
+    m[1][0]*m[2][1]*m[0][2]+
+    m[2][0]*m[0][1]*m[1][2]-
+    m[0][0]*m[2][1]*m[1][2]-
+    m[1][0]*m[0][1]*m[2][2]+
+    m[0][0]*m[1][1]*m[2][2];
+} 
+
 // TODO: assumes bottom row is 0,0,0,1
 inline float4x4 inverse(const float4x4 &m) {
   float factor = 1.0f / det(m);

@@ -16,6 +16,7 @@ int main() {
   );
 
   std::cout << inverse(m1) << "\n";
+  std::cout << det(m1) << "\n";
 
   matrix3 m2(
     1,2,3,
@@ -24,6 +25,7 @@ int main() {
   );
 
   std::cout << inverse(m2) << "\n";
+
 
   // matrix4 m2 = matrix4::identity();
 
