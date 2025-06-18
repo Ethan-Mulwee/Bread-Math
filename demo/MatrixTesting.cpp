@@ -8,18 +8,28 @@
 using namespace bMath;
 
 int main() {
-  matrix4 m(
+  matrix4 m1(
     5,4,3,1,
     2,6,2,4,
     7,8,9,10,
-    1,2,3,4
+    0,0,0,1
   );
 
-  matrix4 m2 = matrix4::identity();
+  std::cout << inverse(m1) << "\n";
+
+  matrix3 m2(
+    1,2,3,
+    4,0,6,
+    7,8,10
+  );
+
+  std::cout << inverse(m2) << "\n";
+
+  // matrix4 m2 = matrix4::identity();
 
   // std::cout << m2;
 
-  float4 test = getColumnVector(m,2);
+  // float4 test = getColumnVector(m,2);
 
   // std::cout << test << "\n";
 
@@ -27,9 +37,9 @@ int main() {
 
   // std::cout << det(m) << "\n";
 
-  std::cout << perspectiveMatrix(45.0f, 1.0f, 0.1f, 100.0f) << "\n";
+  // std::cout << perspectiveMatrix(45.0f, 1.0f, 0.1f, 100.0f) << "\n";
 
-  std::cout << translationMatrix(bMath::float3(1,2,3)) << "\n";
+  // std::cout << translationMatrix(bMath::float3(1,2,3)) << "\n";
 
   // Matrix<float,5,5> m5(
   //   5,4,3,2,34,

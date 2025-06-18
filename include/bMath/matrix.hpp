@@ -16,7 +16,9 @@ template <typename T, int rows, int cols> struct Matrix {
 
   template <typename... Args> Matrix(Args... args) : data{(T)args...} {}
 
-  T* operator[](const int i) const { return data[i]; }
+  T* operator[](const int i) {return data[i];}
+
+  const T* operator[](const int i) const {return data[i];}
 
   T& operator() (const int i, const int j) {return data[i][j];}
 
@@ -94,6 +96,15 @@ Matrix<T,rows,cols> operator*(const Matrix<T,rows,cols> &m, const float s) {
     }
   }
   return result;
+}
+
+template<typename T, int rows, int cols>
+void operator*=(Matrix<T,rows,cols> &m, const float s) {
+  for (int j = 0; j < cols; j++) {
+    for (int i = 0; i < rows; i++) {
+      m[i][j] *= s;
+    }
+  }
 }
 
 template<typename T, int rows, int cols>
@@ -232,12 +243,12 @@ inline matrix3 adjoint(const matrix3 &m) {
 
 // TODO: add inverse functions
 // NOTE: this function does not work probably at the moment, something is off with the cofactor matrix
-inline matrix3 inverse(const matrix3 &m) {
-  // taken from https://www.youtube.com/watch?v=srnaDoIKA-E 
-  matrix3 cofactor = cof(m);
-  cofactor = transpose(cofactor);
-  return (1/det(m))*cofactor;
-}
+// inline matrix3 inverse(const matrix3 &m) {
+//   // taken from https://www.youtube.com/watch?v=srnaDoIKA-E 
+//   matrix3 cofactor = cof(m);
+//   cofactor = transpose(cofactor);
+//   return (1/det(m))*cofactor;
+// }
 
 // inline Matrix4 inverse(const Matrix4 &m) {
 //   Matrix4 cofactor = cof(m);
@@ -245,12 +256,92 @@ inline matrix3 inverse(const matrix3 &m) {
 //   return (1/det(m))*cofactor;
 // }
 
-template<typename T, int size>
-Matrix<T,size,size> inverse(const Matrix<T,size,size> &m) {
-  Matrix<T,size,size> result;
-  result = (1/det(m))*adjugate(m);
+// template<typename T, int size>
+// Matrix<T,size,size> inverse(const Matrix<T,size,size> &m) {
+//   Matrix<T,size,size> result;
+//   result = (1/det(m))*adjugate(m);
 
-  return result;
+//   return result;
+// }
+
+inline float3x3 inverse(const float3x3 &m) {
+  // took this from glm
+  float OneOverDeterminant = 1.0f / (
+    +m[0][0] * (m[1][1] * m[2][2] - m[2][1] * m[1][2])
+    - m[1][0] * (m[0][1] * m[2][2] - m[2][1] * m[0][2])
+    + m[2][0] * (m[0][1] * m[1][2] - m[1][1] * m[0][2])
+  );
+      
+  float3x3 inverse;
+  inverse[0][0] = +(m[1][1] * m[2][2] - m[2][1] * m[1][2]);
+  inverse[1][0] = -(m[1][0] * m[2][2] - m[2][0] * m[1][2]);
+  inverse[2][0] = +(m[1][0] * m[2][1] - m[2][0] * m[1][1]);
+  inverse[0][1] = -(m[0][1] * m[2][2] - m[2][1] * m[0][2]);
+  inverse[1][1] = +(m[0][0] * m[2][2] - m[2][0] * m[0][2]);
+  inverse[2][1] = -(m[0][0] * m[2][1] - m[2][0] * m[0][1]);
+  inverse[0][2] = +(m[0][1] * m[1][2] - m[1][1] * m[0][2]);
+  inverse[1][2] = -(m[0][0] * m[1][2] - m[1][0] * m[0][2]);
+  inverse[2][2] = +(m[0][0] * m[1][1] - m[1][0] * m[0][1]);
+  
+  inverse *= OneOverDeterminant;
+  return inverse;
+}
+
+// TODO: assumes bottom row is 0,0,0,1
+inline float4x4 inverse(const float4x4 &m) {
+  float factor = 1.0f / det(m);
+
+  float4 x;
+  x.x = (-m[2][1]*m[1][2]+m[1][1]*m[2][2])*factor;
+  x.y = (m[2][1]*m[1][2]-m[1][0]*m[2][2])*factor;
+  x.z = (-m[2][1]*m[1][1]+m[1][0]*m[2][1])*factor;
+  x.w = 0;
+
+  float4 y;
+  y.x = (m[2][1]*m[0][2]-m[0][1]*m[2][2])*factor;
+  y.y = (-m[2][0]*m[0][2]+m[0][0]*m[2][2])*factor;
+  y.z = (m[2][0]*m[0][1]-m[0][0]*m[2][1])*factor;
+  y.w = 0;
+
+  float4 z;
+  z.x = (-m[1][1]*m[0][2]+m[0][1]*m[1][2])*factor;
+  z.y = (m[1][0]*m[0][2]-m[0][0]*m[1][2])*factor;
+  z.z = (-m[1][0]*m[0][1]+m[0][0]*m[1][1])*factor;
+  z.w = 0;
+
+  float4 w;
+  w.x = (
+    m[2][1]*m[1][2]*m[0][3] -
+    m[1][1]*m[2][2]*m[0][3] -
+    m[2][1]*m[0][2]*m[1][3] +
+    m[0][1]*m[2][2]*m[1][3] +
+    m[1][1]*m[0][2]*m[2][3] -
+    m[0][1]*m[1][2]*m[2][3]
+  ) * factor;
+  w.y = (
+    -m[2][0]*m[1][2]*m[0][3]
+    +m[1][0]*m[2][2]*m[0][3]
+    +m[2][0]*m[0][2]*m[1][3]
+    -m[0][0]*m[2][2]*m[1][3]
+    -m[1][0]*m[0][2]*m[2][3]
+    +m[0][0]*m[1][2]*m[2][3]
+  ) * factor;
+  w.z = (
+    m[2][0]*m[1][1]*m[0][3] -
+    m[1][0]*m[2][1]*m[0][3] -
+    m[2][0]*m[0][1]*m[1][3] +
+    m[0][0]*m[2][1]*m[1][3] +
+    m[1][0]*m[0][1]*m[2][3] -
+    m[0][0]*m[1][1]*m[2][3]
+  ) * factor;
+  w.w = 1;
+
+  return float4x4(
+    x.x, y.x, z.x, w.x,
+    x.y, y.y, z.y, w.y,
+    x.z, y.z, z.z, w.z,
+    x.w, y.w, z.w, w.w
+  );
 }
 
 // TODO:

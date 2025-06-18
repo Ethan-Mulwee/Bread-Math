@@ -51,6 +51,7 @@ int main() {
         // drawVector(rotate(a,q), PURPLE);
         DrawSphere(ConvertRay(position), 0.3f, WHITE);
         DrawVector(bMath::float3(0,0,1)*bMath::quaternion(M_PI/2, 0.2f, 0), PURPLE, 3.0f);
+        // std::cout << bMath::float3(1,2,3)+(bMath::float3)bMath::int3(1,2,3) << "\n";
         DrawViewport3D(10.0f, 10, 1.0f, 2.0f);
         DrawBasis(bMath::basisFromVector(bMath::float3(1,1,1)));
       EndMode3D();
