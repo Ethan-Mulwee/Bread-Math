@@ -388,8 +388,8 @@ Matrix<T,4,4> perspectiveMatrix(T fovy, T aspect, T zNear, T zFar) {
   Result(0,0) = static_cast<T>(1) / (aspect * tanHalfFovy);
   Result(1,1) = static_cast<T>(1) / (tanHalfFovy);
   Result(2,2) = - (zFar + zNear) / (zFar - zNear);
-  Result(2,3) = - static_cast<T>(1);
-  Result(3,2) = - (static_cast<T>(2) * zFar * zNear) / (zFar - zNear);
+  Result(3,2) = - static_cast<T>(1);
+  Result(2,3) = - (static_cast<T>(2) * zFar * zNear) / (zFar - zNear);
   return Result;
 }
 
